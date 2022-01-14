@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "ddbe5f51-44ac-4539-8d53-3c055d4ada14": {
+      "ProjectGuid": "ddbe5f51-44ac-4539-8d53-3c055d4ada14",
+      "DisplayName": "MedicalStore",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}

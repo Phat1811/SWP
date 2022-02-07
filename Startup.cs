@@ -11,6 +11,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MedicalStore.DAO.Interface;
+using MedicalStore.DAO;
+using MedicalStore.Service.Interface;
+using MedicalStore.Service;
 
 namespace MedicalStore
 {
@@ -29,6 +33,12 @@ namespace MedicalStore
             services.AddControllersWithViews();
             services.AddScoped<DBContext, DBContext>();
             services.AddScoped<IConfig, Config>();
+
+            services.AddScoped<IJwtService, JwtService>();
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IUserService, UserService>();
+
+            services.AddScoped<IUserRepository, UserRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -3,6 +3,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MedicalStore.Models
 {
+    public enum UserRole
+    {
+        MANAGER = 0,
+        CUSTOMER = 1,
+        SELLER = 2,
+        GUEST = 3
+    }
+
     public enum UserStatus
     {
         ACTIVE = 1,

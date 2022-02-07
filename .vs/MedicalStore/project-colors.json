@@ -5,6 +5,11 @@
       "ProjectGuid": "ddbe5f51-44ac-4539-8d53-3c055d4ada14",
       "DisplayName": "MedicalStore",
       "ColorIndex": 0
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
     }
   },
   "NextColorIndex": 1

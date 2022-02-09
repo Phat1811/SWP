@@ -13,6 +13,7 @@ namespace MedicalStore.DAO
             this.DBContext = dBContext;
         }
 
+       
         public User GetUserByUsername(string username)
         {
             User user = this.DBContext.User.FirstOrDefault(item => item.Username == username);
@@ -43,5 +44,6 @@ namespace MedicalStore.DAO
             return true;
         }
 
+       
     }
 }

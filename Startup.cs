@@ -15,6 +15,8 @@ using MedicalStore.DAO.Interface;
 using MedicalStore.DAO;
 using MedicalStore.Service.Interface;
 using MedicalStore.Service;
+using FluentValidation;
+using System.Globalization;
 
 namespace MedicalStore
 {
@@ -37,7 +39,7 @@ namespace MedicalStore
             services.AddScoped<IJwtService, JwtService>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IUserService, UserService>();
-
+            services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
         }
 
@@ -56,9 +58,8 @@ namespace MedicalStore
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
-
+         
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

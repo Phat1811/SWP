@@ -66,7 +66,7 @@ namespace MedicalStore.Auth
                 if (context.ActionArguments.TryGetValue("roles", out _))
                 {
                     UserRole[] roles = context.ActionArguments["roles"] as UserRole[];
-                    if (!roles.Contains(user.Role))
+                    //if (!roles.Contains(user.Role))
                     {
                         return false;
                     }

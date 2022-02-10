@@ -96,7 +96,7 @@ namespace MedicalStore.Controllers
             user.CreateDate = DateTime.Now.ToShortDateString();
             user.Status = UserStatus.ACTIVE;
             user.RoleId = "1";
-            user.Password = this.AuthService.HashingPassword(body.Password);
+            user.Password = body.Password;
 
 
             this.AuthService.RegisterHandler(user);

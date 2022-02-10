@@ -37,7 +37,7 @@ namespace MedicalStore.DAO
 
         public bool ComparePassword(string inputPassword, string encryptedPassword)
         {
-            return BCrypt.Net.BCrypt.Verify(inputPassword, encryptedPassword);
+            return inputPassword.Equals(encryptedPassword);
         }
 
     }

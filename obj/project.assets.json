@@ -7709,19 +7709,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\LENOVO-PC\\.nuget\\packages\\": {}
+    "C:\\Users\\Sai\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\LENOVO-PC\\source\\repos\\MedicalStore\\MedicalStore.csproj",
+      "projectUniqueName": "F:\\Trả Nợ\\SWP391\\Code\\CodeSWP\\MedicalStore.csproj",
       "projectName": "MedicalStore",
-      "projectPath": "C:\\Users\\LENOVO-PC\\source\\repos\\MedicalStore\\MedicalStore.csproj",
-      "packagesPath": "C:\\Users\\LENOVO-PC\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\LENOVO-PC\\source\\repos\\MedicalStore\\obj\\",
+      "projectPath": "F:\\Trả Nợ\\SWP391\\Code\\CodeSWP\\MedicalStore.csproj",
+      "packagesPath": "C:\\Users\\Sai\\.nuget\\packages\\",
+      "outputPath": "F:\\Trả Nợ\\SWP391\\Code\\CodeSWP\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\LENOVO-PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Sai\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -7806,7 +7806,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.404\\RuntimeIdentifierGraph.json"
       }
     }
   }

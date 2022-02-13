@@ -73,9 +73,14 @@ namespace MedicalStore.Controllers
                 return new BadRequestObjectResult(res.getResponse());
             }
             var category = CategoryRepository.GetCategoryByID(body.CategoryId);
-            category.Name = body.Name;
-            category.Description = body.Description;
-
+            if(body.Name != null)
+            {
+                category.Name = body.Name;
+            }
+            if(body.Description != null)
+            {
+                category.Description = body.Description;
+            }
             this.CategoryService.UpdateCategoryInfoHandler(category);
 
             res.setMessage(CustomLanguageValidator.MessageKey.MESSAGE_ADD_SUCCESS);

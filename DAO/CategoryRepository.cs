@@ -1,6 +1,7 @@
 ﻿using MedicalStore.DAO.Interface;
 using MedicalStore.Models;
 using MedicalStore.Utils;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace MedicalStore.DAO
@@ -34,6 +35,20 @@ namespace MedicalStore.DAO
         {
             Category category = this.DBContext.Category.FirstOrDefault(item => item.CategoryId == categoryId);
             return category;
+        }
+
+        public List<Product> GetProductByCategoryID(string categoryID)
+        {
+            List<Product> list = this.DBContext.Product.Where<Product>(item => item.CategoryId == categoryID).ToList<Product>();
+            return list;
+        }
+
+        public bool DisableProductByID(string productID)
+        {
+            Product product = this.DBContext.Product.FirstOrDefault(item => item.ProductId == productID);
+            product.Status = ProductStatus.INACTIVE;
+            this.DBContext.Product.Update(product);
+            return this.DBContext.SaveChanges() > 0;
         }
 
         public bool UpdateCategoryInfoHandler(Category category)

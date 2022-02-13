@@ -4,7 +4,7 @@ using MedicalStore.DAO.Interface;
 using MedicalStore.Models;
 using MedicalStore.Utils.Common;
 using MedicalStore.Utils.Locale;
-using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
@@ -81,5 +81,26 @@ namespace MedicalStore.Controllers
             res.setMessage(CustomLanguageValidator.MessageKey.MESSAGE_ADD_SUCCESS);
             return new ObjectResult(res.getResponse());
         }
+
+        [HttpPost("delete")]
+        public IActionResult HandlerDelete([FromBody] CreateCategoryDTO body)
+        {
+            var res = new ServerApiResponse<string>();
+
+            var category = CategoryRepository.GetCategoryByID(body.CategoryId);
+            category.Status = CategoryStatus.INACTIVE;
+
+            this.CategoryService.DeleteCategoryHandler(category);
+
+            List<Product> list = CategoryRepository.GetProductByCategoryID(body.CategoryId);
+            foreach(Product p in list)
+            {
+                CategoryRepository.DisableProductByID(p.ProductId);
+            }
+
+            res.setMessage(CustomLanguageValidator.MessageKey.MESSAGE_ADD_SUCCESS);
+            return new ObjectResult(res.getResponse());
+        }
+
     }
 }

@@ -2,21 +2,14 @@ using MedicalStore.Utils;
 using MedicalStore.Utils.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using MedicalStore.DAO.Interface;
 using MedicalStore.DAO;
 using MedicalStore.Service.Interface;
 using MedicalStore.Service;
-using FluentValidation;
-using System.Globalization;
+using MedicalStore.Auth;
 
 namespace MedicalStore
 {
@@ -44,6 +37,9 @@ namespace MedicalStore
             services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
+
+            services.AddScoped<AuthGuard>();
+            services.AddScoped<UserFilter>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,7 +58,7 @@ namespace MedicalStore
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
-         
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

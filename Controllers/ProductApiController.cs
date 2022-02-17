@@ -42,7 +42,7 @@ namespace MedicalStore.Controllers
             product.Quantity = body.Quantity;
             product.ImageUrl = body.ImageUrl;
             product.CategoryId = body.CategoryId;
-            product.ShopId = "U1";
+            product.ShopId = "61411b9f-30b4-4e98-a4db-6d79820da60f";
             product.CreateDate = DateTime.Now.ToShortDateString();
             product.Status = ProductStatus.ACTIVE;
 
@@ -62,7 +62,7 @@ namespace MedicalStore.Controllers
                 res.mapDetails(result);
                 return new BadRequestObjectResult(res.getResponse());
             }
-             var product = this.ProductRepository.GetProductById(body.ProductName);
+             var product = this.ProductRepository.GetProductById(body.ProductId);
             if(body.ProductName != null)
             {
                 product.Name = body.ProductName;

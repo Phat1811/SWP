@@ -95,7 +95,7 @@ namespace MedicalStore.Controllers
             user.Email = body.Email;
             user.CreateDate = DateTime.Now.ToShortDateString();
             user.Status = UserStatus.ACTIVE;
-            user.RoleId = "1";
+            user.RoleId = "2";
             user.Password = body.Password;
 
 

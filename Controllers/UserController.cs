@@ -3,6 +3,7 @@ using MedicalStore.Controllers.DTO;
 using MedicalStore.DAO;
 using MedicalStore.DAO.Interface;
 using MedicalStore.Models;
+using MedicalStore.Auth;
 using MedicalStore.Utils.Common;
 using MedicalStore.Utils.Locale;
 using Microsoft.AspNetCore.Http;
@@ -16,11 +17,12 @@ using System.Threading.Tasks;
 namespace MedicalStore.Controllers
 {
     [Route("/api/user")]
+    [ServiceFilter(typeof(AuthGuard))]
     public class UserController : Controller
     {
         private readonly IUserRepository UserRepository;
         private readonly IAuthService AuthService;
-        public UserController(IUserRepository userRepository , IAuthService AuthService)
+        public UserController(IUserRepository userRepository, IAuthService AuthService)
         {
             this.UserRepository = userRepository;
             this.AuthService = AuthService;
@@ -66,18 +68,18 @@ namespace MedicalStore.Controllers
 
             User user = (User)this.ViewData["user"];
             bool checkPassword = AuthService.ComparePassword(body.Password, user.Password);
-            if(!checkPassword)
+            if (!checkPassword)
             {
                 res.setErrorMessage(CustomLanguageValidator.ErrorMessageKey.ERROR_OLD_PASSWORD_NOT_CORRECT);
                 return new BadRequestObjectResult(res.getResponse());
             }
-            if(!(body.NewPassword==body.ConfirmNewPassword))
+            if (!(body.NewPassword == body.ConfirmNewPassword))
             {
                 res.setErrorMessage(CustomLanguageValidator.ErrorMessageKey.ERROR_OLD_PASSWORD_NOT_CORRECT);
                 return new BadRequestObjectResult(res.getResponse());
             }
             user.Password = body.NewPassword;
-            
+
 
 
             this.UserRepository.UpdatePasswordHandler(user);

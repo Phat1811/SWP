@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\LENOVO-PC\\Desktop\\SWP\\ViewRegister\\SWP\\MedicalStore.csproj": {}
+    "D:\\view_SWP\\MedicalStore.csproj": {}
   },
   "projects": {
-    "C:\\Users\\LENOVO-PC\\Desktop\\SWP\\ViewRegister\\SWP\\MedicalStore.csproj": {
+    "D:\\view_SWP\\MedicalStore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\LENOVO-PC\\Desktop\\SWP\\ViewRegister\\SWP\\MedicalStore.csproj",
+        "projectUniqueName": "D:\\view_SWP\\MedicalStore.csproj",
         "projectName": "MedicalStore",
-        "projectPath": "C:\\Users\\LENOVO-PC\\Desktop\\SWP\\ViewRegister\\SWP\\MedicalStore.csproj",
-        "packagesPath": "C:\\Users\\LENOVO-PC\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\LENOVO-PC\\Desktop\\SWP\\ViewRegister\\SWP\\obj\\",
+        "projectPath": "D:\\view_SWP\\MedicalStore.csproj",
+        "packagesPath": "C:\\Users\\khuup\\.nuget\\packages\\",
+        "outputPath": "D:\\view_SWP\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\LENOVO-PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\khuup\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

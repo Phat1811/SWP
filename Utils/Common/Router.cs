@@ -30,6 +30,11 @@
         public static readonly RouterItem AuthPostLogin = new RouterItem() { Page = "/Views/Containers/Auth/Login.cshtml", Title = "Login", Link = "/auth/login" };
         public static readonly RouterItem AuthGetLogout = new RouterItem() { Page = "/Views/Containers/Auth/Login.cshtml", Title = "Logout", Link = "/auth/logout" };
 
+        //Product
+        public static readonly RouterItem CreateProduct = new RouterItem() { Page = "/Views/Containers/Product/Create.cshtml", Title = "Create", Link = "/product/create" };
+        public static readonly RouterItem UpdateProduct = new RouterItem() { Page = "/Views/Containers/Product/Update.cshtml", Title = "Update", Link = "/product/update" };
+        public static readonly RouterItem DeleteProduct = new RouterItem() { Page = "/Views/Containers/Product/Delete.cshtml", Title = "Delete", Link = "/product/delete" };
+
         // Post
         public static readonly RouterItem PostGetDraftList = new RouterItem() { Page = "/Views/Containers/Post/DraftList.cshtml", Title = "My Draft", Link = "/post/me" };
         public static readonly RouterItem PostGetSearch = new RouterItem() { Page = "/Views/Containers/Post/Search.cshtml", Title = "Search Post", Link = "/post/search" };

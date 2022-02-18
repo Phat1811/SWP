@@ -19,49 +19,29 @@
     public class Routers
     {
 
-        public static readonly RouterItem ServerURL = new RouterItem() { Page = "", Title = "", Link = "https://medical.store.com" };
+        public static readonly RouterItem Register = new RouterItem() { Page = "/Views/Containers/Auth/Register.cshtml", Title = "Register", Link = "/auth/register" };
+        public static readonly RouterItem Login = new RouterItem() { Page = "/Views/Containers/Auth/Login.cshtml", Title = "Login", Link = "/auth/login" };
 
+        //User Controller
+        public static readonly RouterItem User = new RouterItem() { Page = "/Views/Containers/User/User.cshtml", Title = "User", Link = "/user" };
+        public static readonly RouterItem UpdatePassword = new RouterItem() { Page = "/Views/Containers/User/UpdatePassword.cshtml", Title = "Update Password", Link = "/user/password" };
+        public static readonly RouterItem UpdateUserInfo = new RouterItem() { Page = "/Views/Containers/User/UpdateUserInfo.cshtml", Title = "Update User Info", Link = "/user/info" };
+        //------------------------------------
 
-        // Home
-        public static readonly RouterItem CommonGetHome = new RouterItem() { Page = "/Views/Containers/Home/Home.cshtml", Title = "Home", Link = "/" };
-
-        // Auth
-        public static readonly RouterItem AuthPostRegister = new RouterItem() { Page = "/Views/Containers/Auth/Register.cshtml", Title = "Register", Link = "/auth/register" };
-        public static readonly RouterItem AuthPostLogin = new RouterItem() { Page = "/Views/Containers/Auth/Login.cshtml", Title = "Login", Link = "/auth/login" };
-        public static readonly RouterItem AuthGetLogout = new RouterItem() { Page = "/Views/Containers/Auth/Login.cshtml", Title = "Logout", Link = "/auth/logout" };
-
-        //Product
-        public static readonly RouterItem CreateProduct = new RouterItem() { Page = "/Views/Containers/Product/Create.cshtml", Title = "Create", Link = "/product/create" };
-        public static readonly RouterItem UpdateProduct = new RouterItem() { Page = "/Views/Containers/Product/Update.cshtml", Title = "Update", Link = "/product/update" };
-        public static readonly RouterItem DeleteProduct = new RouterItem() { Page = "/Views/Containers/Product/Delete.cshtml", Title = "Delete", Link = "/product/delete" };
-
-        // Post
-        public static readonly RouterItem PostGetDraftList = new RouterItem() { Page = "/Views/Containers/Post/DraftList.cshtml", Title = "My Draft", Link = "/post/me" };
-        public static readonly RouterItem PostGetSearch = new RouterItem() { Page = "/Views/Containers/Post/Search.cshtml", Title = "Search Post", Link = "/post/search" };
-        public static readonly RouterItem PostGetPreview = new RouterItem() { Page = "/Views/Containers/Post/Preview.cshtml", Title = "Review", Link = "/post/preview" };
-
-        public static readonly RouterItem PostGetEditor = new RouterItem() { Page = "/Views/Containers/Post/Editor.cshtml", Title = "Write Your Post", Link = "/post/editor" };
-        public static readonly RouterItem PostGetPost = new RouterItem() { Page = "/Views/Containers/Post/Post.cshtml", Title = "Write Your Post", Link = "/post" };
-
-        // User
-
-        //Comment
-        public static readonly RouterItem AddComment = new RouterItem() { Page = "/Views/Containers/Comment/AddComment.cshtml", Link = "/comment/add" };
-        public static readonly RouterItem GetComment = new RouterItem() { Page = "/Views/Containers/Comment/GetComment.cshtml", Link = "/comment/get" };
-        public static readonly RouterItem UpdateComment = new RouterItem() { Page = "/Views/Containers/Comment/UpdateComment.cshtml", Link = "comment/update" };
-        public static readonly RouterItem UserGetProfile = new RouterItem() { Page = "/Views/Containers/User/Profile.cshtml", Title = "User", Link = "/user/profile" };
-        public static readonly RouterItem UserGetMyProfile = new RouterItem() { Page = "/Views/Containers/User/MyProfile.cshtml", Title = "User", Link = "/user/me" };
-        public static readonly RouterItem UserGetFollower = new RouterItem() { Page = "/Views/Containers/User/Follower.cshtml", Title = "User", Link = "/user/follower" };
-        public static readonly RouterItem UserGetFollowing = new RouterItem() { Page = "/Views/Containers/User/Following.cshtml", Title = "User", Link = "/user/following" };
-        public static readonly RouterItem UserPutUser = new RouterItem() { Page = "/Views/Containers/User/UpdateProfile.cshtml", Title = "Update User", Link = "/user/update" };
-        public static readonly RouterItem UserPutPassword = new RouterItem() { Page = "/Views/Containers/User/ChangePassword.cshtml", Title = "Change Password", Link = "/user/change-password" };
-
-
-        // Notification
-        public static readonly RouterItem NotificationMe = new RouterItem() { Page = "/Views/Containers/Notification/Notification.cshtml", Title = "My Notification", Link = "/notification/me" };
-
-        //Common
-        public static readonly RouterItem NotFoundPage = new RouterItem() { Page = "/Views/Containers/Error/404.cshtml", Title = "", Link = "" };
-        public static readonly RouterItem ErrorPage = new RouterItem() { Page = "/Views/Containers/Error/500.cshtml", Title = "", Link = "" };
+        public static readonly RouterItem Home = new RouterItem() { Page = "/Views/Containers/Home.cshtml", Title = "Home", Link = "/" };
+        public static readonly RouterItem Category = new RouterItem() { Page = "/Views/Containers/Category/Category.cshtml", Title = "All Category", Link = "/category" };
+        public static readonly RouterItem CreateCategory = new RouterItem() { Page = "/Views/Containers/Category/CreateCategory.cshtml", Title = "Create Category", Link = "/category/create" };
+        public static readonly RouterItem UpdateCategory = new RouterItem() { Page = "/Views/Containers/Category/UpdateCategory.cshtml", Title = "Update Category", Link = "/category/update" };
+        public static readonly RouterItem DeleteCategory = new RouterItem() { Page = "/Views/Containers/DeleteCategory.cshtml", Title = "Delete Category", Link = "/category/delete" };
+        public static readonly RouterItem Product = new RouterItem() { Page = "/Views/Containers/Product/Product.cshtml", Title = "All Product", Link = "/product" };
+        public static readonly RouterItem CreateProduct = new RouterItem() { Page = "/Views/Containers/Product/CreateProduct.cshtml", Title = "Create Product", Link = "/product/create" };
+        public static readonly RouterItem UpdateProduct = new RouterItem() { Page = "/Views/Containers/Product/UpdateProduct.cshtml", Title = "Update Product", Link = "/product/update" };
+        public static readonly RouterItem Logout = new RouterItem() { Page = "/Views/Containers/CreateProduct.cshtml", Title = "Create Product", Link = "/auth/logout" };
+        public static readonly RouterItem Order = new RouterItem() { Page = "/Views/Containers/order/Order.cshtml", Title = "Your Order", Link = "/order" };
+        public static readonly RouterItem OrderDetail = new RouterItem() { Page = "/Views/Containers/order/OrderDetail.cshtml", Title = "Order Detail", Link = "/order/detail" };
+        public static readonly RouterItem Manager = new RouterItem() { Page = "/Views/Containers/order/Manager.cshtml", Title = "Users Order", Link = "/order/manager" };
+        public static readonly RouterItem SearchOrders = new RouterItem() { Page = "/Views/Containers/order/Manager.cshtml", Title = "Users Order", Link = "/order/manager" };
+        public static readonly RouterItem Cart = new RouterItem() { Page = "/Views/Containers/Cart/Cart.cshtml", Title = "Cart", Link = "/cart" };
+        public static readonly RouterItem RemoveCart = new RouterItem() { Page = "/Views/Containers/Cart/Cart.cshtml", Title = "Cart", Link = "/cart/remove" };
     }
 }

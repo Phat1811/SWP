@@ -27,7 +27,7 @@ namespace MedicalStore.Controllers
             var product = (Product)this.ViewData["product"];
             if (product != null)
             {
-                return Redirect(Routers.CommonGetHome.Link);
+                return Redirect(Routers.Home.Link);
             }
             return View(Routers.CreateProduct.Page);
         }
@@ -38,7 +38,7 @@ namespace MedicalStore.Controllers
             var product = (Product)this.ViewData["product"];
             if (product != null)
             {
-                return Redirect(Routers.CommonGetHome.Link);
+                return Redirect(Routers.Home.Link);
             }
             return View(Routers.UpdateProduct.Page);
         }
@@ -49,9 +49,9 @@ namespace MedicalStore.Controllers
             var product = (Product)this.ViewData["product"];
             if (product != null)
             {
-                return Redirect(Routers.CommonGetHome.Link);
+                return Redirect(Routers.Home.Link);
             }
-            return View(Routers.DeleteProduct.Page);
+            return View(Routers.Product.Page);
         }
     }
 }

@@ -1,16 +1,13 @@
-﻿using FluentValidation.Results;
-using MedicalStore.Controllers.DTO;
+﻿using Microsoft.AspNetCore.Mvc;
 using MedicalStore.DAO.Interface;
 using MedicalStore.Models;
 using MedicalStore.Utils.Common;
-using MedicalStore.Utils.Locale;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
-using System;
+using MedicalStore.Controllers.DTO;
 
 namespace MedicalStore.Controllers
 {
-    [Route("/api/category")]
+    [Route("category")]
     public class CategoryController : Controller
     {
         private readonly ICategoryService CategoryService;
@@ -20,91 +17,29 @@ namespace MedicalStore.Controllers
         {
             this.CategoryService = categoryService;
             this.CategoryRepository = categoryRepository;
+        } 
+
+        [HttpGet("")]
+        public IActionResult GetAllCategory()
+        {
+            var listCategory = (List<Category>)CategoryRepository.GetAllCategories();
+            this.ViewData["listCategory"] = listCategory;
+
+            return View(Routers.Category.Page);
         }
 
-        [HttpPost("create")]
-        public IActionResult HandlerCreate([FromBody] CreateCategoryDTO body)
+        [HttpGet("update")]
+        public IActionResult CategoryProfile(string categoryId)
         {
-            var res = new ServerApiResponse<string>();
-
-            ValidationResult result = new CategoryDTOValidator().Validate(body);
-            if (!result.IsValid)
-            {
-                res.mapDetails(result);
-                return new BadRequestObjectResult(res.getResponse());
-            }
-
-            var isExitCategory = this.CategoryRepository.GetCategortByName(body.Name);
-            if(isExitCategory != null)
-            {
-                res.setErrorMessage(CustomLanguageValidator.ErrorMessageKey.ERROR_EXISTED, "name");
-                return new BadRequestObjectResult(res.getResponse());
-            }
-
-            var category = new Category();
-            category.CategoryId = Guid.NewGuid().ToString();
-            category.Name = body.Name;
-            category.Description = body.Description;
-            category.Status = CategoryStatus.ACTIVE;
-            category.CreateDate = DateTime.Now.ToShortDateString();
-
-            this.CategoryService.CreateCategoryHandler(category);
-
-            res.setMessage(CustomLanguageValidator.MessageKey.MESSAGE_ADD_SUCCESS);
-            return new ObjectResult(res.getResponse());
+            var category = CategoryRepository.GetCategoryByID(categoryId);
+            this.ViewData["category"] = category;
+            return View(Routers.CategoryProfile.Page);
         }
 
-        [HttpPost("update")]
-        public IActionResult HandlerUpdate([FromBody] CreateCategoryDTO body)
+        [HttpGet("create")]
+        public IActionResult CreateCategory()
         {
-            var res = new ServerApiResponse<string>();
-
-            ValidationResult result = new CategoryDTOValidator().Validate(body);
-            if (!result.IsValid)
-            {
-                res.mapDetails(result);
-                return new BadRequestObjectResult(res.getResponse());
-            }
-
-            var isExitCategory = this.CategoryRepository.GetCategortByName(body.Name);
-            if (isExitCategory != null)
-            {
-                res.setErrorMessage(CustomLanguageValidator.ErrorMessageKey.ERROR_EXISTED, "name");
-                return new BadRequestObjectResult(res.getResponse());
-            }
-            var category = CategoryRepository.GetCategoryByID(body.CategoryId);
-            if(body.Name != null)
-            {
-                category.Name = body.Name;
-            }
-            if(body.Description != null)
-            {
-                category.Description = body.Description;
-            }
-            this.CategoryService.UpdateCategoryInfoHandler(category);
-
-            res.setMessage(CustomLanguageValidator.MessageKey.MESSAGE_ADD_SUCCESS);
-            return new ObjectResult(res.getResponse());
-        }
-
-        [HttpPost("delete")]
-        public IActionResult HandlerDelete([FromBody] CreateCategoryDTO body)
-        {
-            var res = new ServerApiResponse<string>();
-
-            var category = CategoryRepository.GetCategoryByID(body.CategoryId);
-            category.Status = CategoryStatus.INACTIVE;
-
-            this.CategoryService.DeleteCategoryHandler(category);
-
-            List<Product> list = CategoryRepository.GetProductByCategoryID(body.CategoryId);
-            foreach(Product p in list)
-            {
-                CategoryRepository.DisableProductByID(p.ProductId);
-            }
-
-            res.setMessage(CustomLanguageValidator.MessageKey.MESSAGE_ADD_SUCCESS);
-            return new ObjectResult(res.getResponse());
+            return View(Routers.CreateCategory.Page);
         }
 
     }

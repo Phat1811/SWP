@@ -29,9 +29,7 @@
         //------------------------------------
 
         public static readonly RouterItem Home = new RouterItem() { Page = "/Views/Containers/Home.cshtml", Title = "Home", Link = "/" };
-        public static readonly RouterItem Category = new RouterItem() { Page = "/Views/Containers/Category/Category.cshtml", Title = "All Category", Link = "/category" };
-        public static readonly RouterItem CreateCategory = new RouterItem() { Page = "/Views/Containers/Category/CreateCategory.cshtml", Title = "Create Category", Link = "/category/create" };
-        public static readonly RouterItem UpdateCategory = new RouterItem() { Page = "/Views/Containers/Category/UpdateCategory.cshtml", Title = "Update Category", Link = "/category/update" };
+      
         public static readonly RouterItem DeleteCategory = new RouterItem() { Page = "/Views/Containers/DeleteCategory.cshtml", Title = "Delete Category", Link = "/category/delete" };
         public static readonly RouterItem Product = new RouterItem() { Page = "/Views/Containers/Product/Product.cshtml", Title = "All Product", Link = "/product" };
         public static readonly RouterItem CreateProduct = new RouterItem() { Page = "/Views/Containers/Product/CreateProduct.cshtml", Title = "Create Product", Link = "/product/create" };
@@ -43,5 +41,12 @@
         public static readonly RouterItem SearchOrders = new RouterItem() { Page = "/Views/Containers/order/Manager.cshtml", Title = "Users Order", Link = "/order/manager" };
         public static readonly RouterItem Cart = new RouterItem() { Page = "/Views/Containers/Cart/Cart.cshtml", Title = "Cart", Link = "/cart" };
         public static readonly RouterItem RemoveCart = new RouterItem() { Page = "/Views/Containers/Cart/Cart.cshtml", Title = "Cart", Link = "/cart/remove" };
+
+        //Category Controller
+        public static readonly RouterItem Category = new RouterItem() { Page = "/Views/Containers/Category/Category.cshtml", Title = "All Category", Link = "/category" };
+        public static readonly RouterItem CreateCategory = new RouterItem() { Page = "/Views/Containers/Category/CreateCategory.cshtml", Title = "Create Category", Link = "/category/create" };
+        public static readonly RouterItem CategoryProfile = new RouterItem() { Page = "/Views/Containers/Category/CategoryProfile.cshtml", Title = "Category Profile", Link = "/category/update" };
+        //------------------------------------
+
     }
 }

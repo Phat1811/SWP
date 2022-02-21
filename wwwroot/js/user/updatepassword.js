@@ -1,20 +1,19 @@
-const formUpdatePassword = document.getElementById("formPassword");
+const formUpdatePassword = document.getElementById("formUpdatePassword");
 formUpdatePassword?.addEventListener("submit", function (event) {
         event.preventDefault();
     const password = document.getElementById("password");
-    const newPassword = document.getElementById("newPassword");
-    const confirmNewPassword = document.getElementById("confirmNewPPassword");
-    
+    const newpassword = document.getElementById("newPassword");
+    const confirmnewpassword = document.getElementById("confirmNewPassword");
 
     if (
         password !== null &&
-        newPassword !== null &&
-        confirmNewPassword !== null    
+        newpassword !== null &&
+        confirmnewpassword !== null
         ) {
                 let input = {
                     password: password.value,
-                    newPassword: newPassword.value,
-                    confirmNewPassword: confirmNewPassword.value
+                    newpassword: newpassword.value,
+                    confirmnewpassword: confirmnewpassword.value
                     
                 };
 

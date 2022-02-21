@@ -13,5 +13,6 @@ namespace MedicalStore.DAO.Interface
         public bool CreateCategoryHandler(Category category);
         public bool UpdateCategoryInfoHandler(Category Category);
         public bool DeleteCategoryHandler(Category Category);
+        public List<Category> GetAllCategories();
     }
 }

@@ -56,5 +56,11 @@ namespace MedicalStore.DAO
             this.DBContext.Category.Update(category);
             return this.DBContext.SaveChanges() > 0;
         }
+
+        public List<Category> GetAllCategories()
+        {
+            List<Category> listCategory = this.DBContext.Set<Category>().ToList<Category>();
+            return listCategory;
+        }
     }
 }

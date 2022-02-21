@@ -29,8 +29,7 @@ namespace MedicalStore.Controllers
         }
 
         [HttpGet("info")]
-        public IActionResult UpdateInfo()
-        {
+        public IActionResult UpdateInfo() {
             User user = (User)this.ViewData["user"];
             return View(Routers.UpdateUserInfo.Page);
         }
@@ -39,7 +38,7 @@ namespace MedicalStore.Controllers
         [HttpGet("password")]
         public IActionResult UpdatePassword()
         {
-
+            Console.WriteLine("asdasd");
             return View(Routers.UpdatePassword.Page);
         }
     }

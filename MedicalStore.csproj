@@ -27,4 +27,9 @@
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\js\user\updateinfo.js" />
+    <None Include="wwwroot\js\user\updatepassword.js" />
+  </ItemGroup>
+
 </Project>

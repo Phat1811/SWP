@@ -10,9 +10,8 @@ formUpdateUser?.addEventListener("submit", function (event) {
             name !== null &&
             phone !== null &&
             address !== null &&
-            email !== null
-        ) 
-        {
+            email !== null &&
+        ) {
                 let input = {
                     name: name.value,
                     phone: phone.value,

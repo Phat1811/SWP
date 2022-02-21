@@ -3118,3 +3118,5 @@ C:\Users\LENOVO-PC\Desktop\SWP\passDTO\SWP\obj\Debug\net5.0\Razor\Views\Componen
 C:\Users\LENOVO-PC\Desktop\SWP\passDTO\SWP\obj\Debug\net5.0\Razor\Views\Components\Form\SelectList.cshtml.g.cs
 C:\Users\LENOVO-PC\Desktop\SWP\passDTO\SWP\obj\Debug\net5.0\Razor\Views\Components\Form\TextFieldNumber.cshtml.g.cs
 C:\Users\LENOVO-PC\Desktop\SWP\passDTO\SWP\obj\Debug\net5.0\Razor\Views\Components\Navbar\NavbarSide.cshtml.g.cs
+C:\Users\LENOVO-PC\Desktop\SWP\passDTO\SWP\obj\Debug\net5.0\Razor\Views\Containers\User\UpdatePassword.cshtml.g.cs
+C:\Users\LENOVO-PC\Desktop\SWP\passDTO\SWP\obj\Debug\net5.0\Razor\Views\Containers\User\UpdateUserInfo.cshtml.g.cs

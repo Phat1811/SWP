@@ -1,7 +1,6 @@
 {
   "ExpandedNodes": [
     "",
-    "\\config",
     "\\Controllers",
     "\\Controllers\\DTO",
     "\\DAO",
@@ -9,8 +8,9 @@
     "\\Service",
     "\\Service\\Interface",
     "\\Utils",
+    "\\Utils\\Common",
     "\\Utils\\Validator"
   ],
-  "SelectedNode": "\\Controllers",
+  "SelectedNode": "\\Utils\\Common\\Router.cs",
   "PreviewInSolutionExplorer": false
 }

@@ -42,8 +42,6 @@ namespace MedicalStore.DAO
             this.DBContext.User.Update(user);
             this.DBContext.SaveChanges();
             return true;
-        }
-
-       
+        }  
     }
 }

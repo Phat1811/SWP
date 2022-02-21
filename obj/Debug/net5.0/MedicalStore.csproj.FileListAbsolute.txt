@@ -3114,3 +3114,7 @@ C:\Users\LENOVO-PC\Desktop\SWP\passDTO\SWP\obj\Debug\net5.0\Razor\Views\Componen
 C:\Users\LENOVO-PC\Desktop\SWP\passDTO\SWP\obj\Debug\net5.0\Razor\Views\Components\Form\FormMessage.cshtml.g.cs
 C:\Users\LENOVO-PC\Desktop\SWP\passDTO\SWP\obj\Debug\net5.0\Razor\Views\Components\Form\TextField.cshtml.g.cs
 C:\Users\LENOVO-PC\Desktop\SWP\passDTO\SWP\obj\Debug\net5.0\staticwebassets\MedicalStore.StaticWebAssets.xml
+C:\Users\LENOVO-PC\Desktop\SWP\passDTO\SWP\obj\Debug\net5.0\Razor\Views\Components\Form\FormHidden.cshtml.g.cs
+C:\Users\LENOVO-PC\Desktop\SWP\passDTO\SWP\obj\Debug\net5.0\Razor\Views\Components\Form\SelectList.cshtml.g.cs
+C:\Users\LENOVO-PC\Desktop\SWP\passDTO\SWP\obj\Debug\net5.0\Razor\Views\Components\Form\TextFieldNumber.cshtml.g.cs
+C:\Users\LENOVO-PC\Desktop\SWP\passDTO\SWP\obj\Debug\net5.0\Razor\Views\Components\Navbar\NavbarSide.cshtml.g.cs

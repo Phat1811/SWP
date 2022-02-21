@@ -15619,8 +15619,18 @@
   "RootNamespace": "MedicalStore",
   "Documents": [
     {
+      "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\passDTO\\SWP\\Views\\Components\\Form\\TextFieldNumber.cshtml",
+      "TargetPath": "Views\\Components\\Form\\TextFieldNumber.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\passDTO\\SWP\\Views\\Containers\\Auth\\Login.cshtml",
       "TargetPath": "Views\\Containers\\Auth\\Login.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\passDTO\\SWP\\Views\\Components\\Form\\SelectList.cshtml",
+      "TargetPath": "Views\\Components\\Form\\SelectList.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -15636,6 +15646,11 @@
     {
       "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\passDTO\\SWP\\Views\\Shared\\_Layout.cshtml",
       "TargetPath": "Views\\Shared\\_Layout.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\passDTO\\SWP\\Views\\Components\\Navbar\\NavbarSide.cshtml",
+      "TargetPath": "Views\\Components\\Navbar\\NavbarSide.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -15676,6 +15691,11 @@
     {
       "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\passDTO\\SWP\\Views\\Home\\Privacy.cshtml",
       "TargetPath": "Views\\Home\\Privacy.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\passDTO\\SWP\\Views\\Components\\Form\\FormHidden.cshtml",
+      "TargetPath": "Views\\Components\\Form\\FormHidden.cshtml",
       "FileKind": "mvc"
     }
   ],

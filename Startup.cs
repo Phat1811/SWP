@@ -34,7 +34,7 @@ namespace MedicalStore
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ICategoryService, CategoryService>();
 
-            
+
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IProductRepository, ProductRepository>();
 
@@ -44,6 +44,9 @@ namespace MedicalStore
 
             services.AddScoped<AuthGuard>();
             services.AddScoped<UserFilter>();
+
+            services.AddSession();
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,7 +65,7 @@ namespace MedicalStore
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
-
+            app.UseSession();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

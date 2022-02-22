@@ -3535,7 +3535,6 @@ F:\Trả Nợ\SWP391\Code\Thuan2\bin\Debug\net5.0\runtimes\unix\lib\netcoreapp2.
 F:\Trả Nợ\SWP391\Code\Thuan2\bin\Debug\net5.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 F:\Trả Nợ\SWP391\Code\Thuan2\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 F:\Trả Nợ\SWP391\Code\Thuan2\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-F:\Trả Nợ\SWP391\Code\Thuan2\obj\Debug\net5.0\MedicalStore.csproj.AssemblyReference.cache
 F:\Trả Nợ\SWP391\Code\Thuan2\obj\Debug\net5.0\MedicalStore.GeneratedMSBuildEditorConfig.editorconfig
 F:\Trả Nợ\SWP391\Code\Thuan2\obj\Debug\net5.0\MedicalStore.AssemblyInfoInputs.cache
 F:\Trả Nợ\SWP391\Code\Thuan2\obj\Debug\net5.0\MedicalStore.AssemblyInfo.cs
@@ -3559,7 +3558,13 @@ F:\Trả Nợ\SWP391\Code\Thuan2\obj\Debug\net5.0\Razor\Views\Components\Form\Te
 F:\Trả Nợ\SWP391\Code\Thuan2\obj\Debug\net5.0\Razor\Views\Components\Navbar\NavbarSide.cshtml.g.cs
 F:\Trả Nợ\SWP391\Code\Thuan2\obj\Debug\net5.0\Razor\Views\Containers\Auth\Login.cshtml.g.cs
 F:\Trả Nợ\SWP391\Code\Thuan2\obj\Debug\net5.0\Razor\Views\Containers\Auth\Register.cshtml.g.cs
+F:\Trả Nợ\SWP391\Code\Thuan2\obj\Debug\net5.0\Razor\Views\Containers\Category\Category.cshtml.g.cs
+F:\Trả Nợ\SWP391\Code\Thuan2\obj\Debug\net5.0\Razor\Views\Containers\Category\CategoryProfile.cshtml.g.cs
+F:\Trả Nợ\SWP391\Code\Thuan2\obj\Debug\net5.0\Razor\Views\Containers\Category\CreateCategory.cshtml.g.cs
 F:\Trả Nợ\SWP391\Code\Thuan2\obj\Debug\net5.0\Razor\Views\Containers\Product\Create.cshtml.g.cs
+F:\Trả Nợ\SWP391\Code\Thuan2\obj\Debug\net5.0\Razor\Views\Containers\Product\CreateProduct.cshtml.g.cs
+F:\Trả Nợ\SWP391\Code\Thuan2\obj\Debug\net5.0\Razor\Views\Containers\Product\Index.cshtml.g.cs
+F:\Trả Nợ\SWP391\Code\Thuan2\obj\Debug\net5.0\Razor\Views\Containers\Product\UpdateProduct.cshtml.g.cs
 F:\Trả Nợ\SWP391\Code\Thuan2\obj\Debug\net5.0\Razor\Views\Containers\User\UpdatePassword.cshtml.g.cs
 F:\Trả Nợ\SWP391\Code\Thuan2\obj\Debug\net5.0\Razor\Views\Containers\User\UpdateUserInfo.cshtml.g.cs
 F:\Trả Nợ\SWP391\Code\Thuan2\obj\Debug\net5.0\Razor\Views\Home\Index.cshtml.g.cs
@@ -3576,6 +3581,3 @@ F:\Trả Nợ\SWP391\Code\Thuan2\obj\Debug\net5.0\MedicalStore.dll
 F:\Trả Nợ\SWP391\Code\Thuan2\obj\Debug\net5.0\ref\MedicalStore.dll
 F:\Trả Nợ\SWP391\Code\Thuan2\obj\Debug\net5.0\MedicalStore.pdb
 F:\Trả Nợ\SWP391\Code\Thuan2\obj\Debug\net5.0\MedicalStore.genruntimeconfig.cache
-F:\Trả Nợ\SWP391\Code\Thuan2\obj\Debug\net5.0\Razor\Views\Containers\Category\Category.cshtml.g.cs
-F:\Trả Nợ\SWP391\Code\Thuan2\obj\Debug\net5.0\Razor\Views\Containers\Category\CategoryProfile.cshtml.g.cs
-F:\Trả Nợ\SWP391\Code\Thuan2\obj\Debug\net5.0\Razor\Views\Containers\Category\CreateCategory.cshtml.g.cs

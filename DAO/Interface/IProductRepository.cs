@@ -1,4 +1,5 @@
 ﻿using MedicalStore.Models;
+using System.Collections.Generic;
 
 namespace MedicalStore.DAO.Interface
 {
@@ -9,6 +10,6 @@ namespace MedicalStore.DAO.Interface
         public bool InsertHandler(Product product);
         public bool UpdateHandler(Product product);
         public bool DeleteHandler(Product product);
-
+        List<Product> GetAllProduct();
     }
 }

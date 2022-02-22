@@ -1,0 +1,98 @@
+﻿@using MedicalStore.Utils.Common
+@model IEnumerable<MedicalStore.Models.Product>
+    @{
+        var product = (Product)this.ViewData["product"];
+    this.ViewData["Title"] = Routers.UpdateProduct.Title;
+    }
+<h1>Product detail</h1>
+
+
+<div class="min-h-full flex ">
+    <div class="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
+        <div class="mx-auto w-full max-w-sm lg:w-96">
+            <div>
+                <img class="h-12 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+                    alt="Workflow" />
+                <h2 class="mt-6 text-3xl font-extrabold text-gray-900">Update product</h2>
+            </div>
+
+            <div class="mt-8">
+
+                <div class="mt-6 relative">
+                    <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                        <div class="w-full border-t border-gray-300 mb-2" />
+                    </div>
+                </div>
+            </div>
+            <div class="mt-6 relative">
+                    <form id="updateForm" class="space-y-6">
+
+                    <div class="space-y-1">
+                        @await Html.PartialAsync("../../Components/Form/FormMessage.cshtml")
+                       <div class="space-y-2 ">
+                                <input class="block px-4 py-3 w-full border-gray-300 intro-x login__input form-control"
+                                       type="text" name="productId" id="productId" value="@product.ProductId" placeholder="ProductID" readonly/>
+                                <div id="NAMERROR" data-label="ProductID" class="text-red-500 "></div>
+                            </div>
+                        <div class="space-y-2 ">
+                                <input class="block px-4 py-3 w-full border-gray-300 intro-x login__input form-control"
+                                       type="text" name="productName" id="productName" value="@product.Name" placeholder="Name" />
+                                <div id="NAMERROR" data-label="Name" class="text-red-500 "></div>
+                            </div>
+                            <div class="space-y-2 ">
+                                <input class="block px-4 py-3 w-full border-gray-300 intro-x login__input form-control"
+                                       type="text" name="productDescription" id="productDescription" value="@product.Description" placeholder="Description" />
+                                <div id="DESCRIPTIONERROR" data-label="Description" class="text-red-500 "></div>
+                            </div>
+                            <div class="space-y-2 ">
+                                <input class="block px-4 py-3 w-full border-gray-300 intro-x login__input form-control"
+                                       type="text" name="originalprice" id="originalPrice" value="@product.OriginalPrice" placeholder="OriginalPrice" />
+                                <div id="ORIGINALPRICEERROR" data-label="OriginalPrice" class="text-red-500 "></div>
+                            </div>
+                            <div class="space-y-2 ">
+                                <input class="block px-4 py-3 w-full border-gray-300 intro-x login__input form-control"
+                                       type="text" name="retailprice" id="retailPrice" value="@product.RetailPrice" placeholder="RetailPrice" />
+                                <div id="RETAILPRICEERROR" data-label="RetailPrice" class="text-red-500 "></div>
+                            </div>
+
+                            <div class="space-y-2 ">
+                                <input class="block px-4 py-3 w-full border-gray-300 intro-x login__input form-control"
+                                       type="text" name="quantity" id="quantity" value="@product.Quantity" placeholder="Quantity" />
+                                <div id="QUANTITYERROR" data-label="Quantity" class="text-red-500 "></div>
+                            </div>
+                            <div class="space-y-2 ">
+                                <input class="block px-4 py-3 w-full border-gray-300 intro-x login__input form-control"
+                                       type="text" name="imageurl" id="imageUrl" value="@product.ImageUrl" placeholder="ImageUrl" />
+                                <div id="IMAGEURLERROR" data-label="ImageUrl" class="text-red-500 "></div>
+                            </div>
+                            <div class="space-y-2 ">
+                                <input class="block px-4 py-3 w-full border-gray-300 intro-x login__input form-control"
+                                       type="text" name="category" id="categoryId" value="@product.CategoryId" placeholder="Category" readonly />
+                                <div id="CATEGORYERROR" data-label="Category" class="text-red-500 "></div>
+                            </div>
+                    <div>
+                        <button type="submit"
+                            class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            Update
+                        </button>
+                        
+                    </div>
+                </form>
+             </div>
+            
+      
+        </div>
+    </div>
+</div>
+
+</div>
+<div class="hidden lg:block relative w-0 flex-1">
+    <img class="absolute inset-0 h-screen w-full object-cover"
+        src="https://images.unsplash.com/photo-1505904267569-f02eaeb45a4c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1908&q=80"
+        alt="">
+</div>
+
+    @section Scripts {
+        
+        <script src="/js/product/update.js"></script>
+    }

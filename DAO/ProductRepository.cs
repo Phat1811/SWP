@@ -1,6 +1,7 @@
 ﻿using MedicalStore.DAO.Interface;
 using MedicalStore.Models;
 using MedicalStore.Utils;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace MedicalStore.DAO
@@ -18,6 +19,12 @@ namespace MedicalStore.DAO
         {
             this.DBContext.Product.Update(product);
             return this.DBContext.SaveChanges() > 0;
+        }
+
+        public List<Product> GetAllProduct()
+        {
+            List<Product> listProducts = this.DBContext.Set<Product>().ToList<Product>();
+            return listProducts;
         }
 
         public Product GetProductById(string id)

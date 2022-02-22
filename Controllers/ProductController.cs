@@ -4,6 +4,7 @@ using MedicalStore.Models;
 using MedicalStore.Service.Interface;
 using MedicalStore.Utils.Common;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace MedicalStore.Controllers
 {
@@ -33,13 +34,10 @@ namespace MedicalStore.Controllers
         }
 
         [HttpGet("update")]
-        public IActionResult UpdateProduct()
+        public IActionResult UpdateProduct(string productId)
         {
-            var product = (Product)this.ViewData["product"];
-            if (product != null)
-            {
-                return Redirect(Routers.Home.Link);
-            }
+            var product = ProductRepository.GetProductById(productId);
+            this.ViewData["product"] = product;
             return View(Routers.UpdateProduct.Page);
         }
 
@@ -51,6 +49,14 @@ namespace MedicalStore.Controllers
             {
                 return Redirect(Routers.Home.Link);
             }
+            return View(Routers.Product.Page);
+        }
+
+        [HttpGet("")]
+        public IActionResult GetAllProducts()
+        {
+            var listProduct = (List<Product>)ProductRepository.GetAllProduct();
+            this.ViewData["listProduct"] = listProduct;
             return View(Routers.Product.Page);
         }
     }

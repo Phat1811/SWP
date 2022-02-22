@@ -15,12 +15,12 @@ namespace MedicalStore.Controllers
     {
         private readonly IProductService ProductService;
         private readonly IProductRepository ProductRepository;
-
-        public ProductApiController(IProductRepository productRepository, IProductService productService)
+        private readonly ICategoryRepository CategoryRepository;
+        public ProductApiController(IProductRepository productRepository, IProductService productService, ICategoryRepository categoryRepository)
         {
             this.ProductService = productService;
             this.ProductRepository = productRepository;
-
+            this.CategoryRepository = categoryRepository;
         }
 
         [HttpPost("create")]
@@ -42,7 +42,7 @@ namespace MedicalStore.Controllers
             product.Quantity = body.Quantity;
             product.ImageUrl = body.ImageUrl;
             product.CategoryId = body.CategoryId;
-            product.ShopId = "61411b9f-30b4-4e98-a4db-6d79820da60f";
+            product.ShopId = "2";
             product.CreateDate = DateTime.Now.ToShortDateString();
             product.Status = ProductStatus.ACTIVE;
 
@@ -63,35 +63,38 @@ namespace MedicalStore.Controllers
                 return new BadRequestObjectResult(res.getResponse());
             }
              var product = this.ProductRepository.GetProductById(body.ProductId);
-            if(body.ProductName != null)
+            if(product == null)
             {
-                product.Name = body.ProductName;
+                res.setErrorMessage(CustomLanguageValidator.ErrorMessageKey.ERROR_NOT_FOUND, "ProductID");
+                return new NotFoundObjectResult(res.getResponse());
             }
-            if(body.ProductDescription != null)
+
+            var isExistCategory = this.CategoryRepository.GetCategoryByID(body.CategoryId);
+            if (isExistCategory == null)
             {
-                product.Description = body.ProductDescription;
+                res.setErrorMessage(CustomLanguageValidator.ErrorMessageKey.ERROR_NOT_FOUND, "CategoryID");
+                return new NotFoundObjectResult(res.getResponse());
             }
-            if(body.OriginalPrice != null)
+
+            if (product.Name != body.ProductName)
             {
-                product.OriginalPrice = body.OriginalPrice;
+                var isExistProduct = this.ProductRepository.GetProductByName(body.ProductName);
+                if (isExistProduct != null)
+                {
+                    res.setErrorMessage(CustomLanguageValidator.ErrorMessageKey.ERROR_EXISTED, "Name");
+                    return new BadRequestObjectResult(res.getResponse());
+                }
             }
-            if(body.RetailPrice != null)
-            {
-                product.RetailPrice = body.RetailPrice;
-            }
-            if(body.Quantity != null)
-            {
-                product.Quantity = body.Quantity;
-            }
-            if(body.ImageUrl != null)
-            {
-                product.ImageUrl = body.ImageUrl;
-            }
-            if(body.CategoryId != null)
-            {
-                product.CategoryId = body.CategoryId;  
-            }
+
+            product.Name = body.ProductName;
+            product.Description = body.ProductDescription;
+            product.OriginalPrice = body.OriginalPrice;
+            product.RetailPrice = body.RetailPrice;
+            product.Quantity = body.Quantity;
+            product.ImageUrl = body.ImageUrl;
+
             this.ProductService.UpdateProductHandler(product);
+
 
             res.setMessage(CustomLanguageValidator.MessageKey.MESSAGE_ADD_SUCCESS);
             return new ObjectResult(res.getResponse());

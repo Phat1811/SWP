@@ -28,10 +28,8 @@ registerForm?.addEventListener("submit", function (event) {
                         address: address.value,
                 };
 
-                axios.post('/api/auth/register', input)
-                .then(function () {
-                    window.location.assign("/auth/login");
-                })
+                http.post('/api/auth/register', input)
+                .then(() => window.location.assign("/auth/login"))
                 .catch(function (error) {
                     console.log(error);
                 });

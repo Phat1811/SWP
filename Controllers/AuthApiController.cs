@@ -105,4 +105,4 @@ namespace MedicalStore.Controllers
             return new ObjectResult(res.getResponse());
         }
     }
-    }
+}

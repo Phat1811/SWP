@@ -1,5 +1,5 @@
 {
-  "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\passDTO\\SWP\\MedicalStore.csproj",
+  "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\message\\SWP\\MedicalStore.csproj",
   "Configuration": {
     "ConfigurationName": "MVC-3.0",
     "LanguageVersion": "5.0",
@@ -15619,93 +15619,123 @@
   "RootNamespace": "MedicalStore",
   "Documents": [
     {
-      "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\passDTO\\SWP\\Views\\Components\\Form\\TextFieldNumber.cshtml",
-      "TargetPath": "Views\\Components\\Form\\TextFieldNumber.cshtml",
+      "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\message\\SWP\\Views\\Containers\\Category\\CategoryProfile.cshtml",
+      "TargetPath": "Views\\Containers\\Category\\CategoryProfile.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\passDTO\\SWP\\Views\\Containers\\User\\UpdateUserInfo.cshtml",
-      "TargetPath": "Views\\Containers\\User\\UpdateUserInfo.cshtml",
+      "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\message\\SWP\\Views\\Containers\\User\\UpdatePassword.cshtml",
+      "TargetPath": "Views\\Containers\\User\\UpdatePassword.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\passDTO\\SWP\\Views\\Containers\\Auth\\Login.cshtml",
-      "TargetPath": "Views\\Containers\\Auth\\Login.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\passDTO\\SWP\\Views\\Components\\Form\\SelectList.cshtml",
-      "TargetPath": "Views\\Components\\Form\\SelectList.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\passDTO\\SWP\\Views\\Components\\Form\\TextField.cshtml",
-      "TargetPath": "Views\\Components\\Form\\TextField.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\passDTO\\SWP\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
-      "TargetPath": "Views\\Shared\\_ValidationScriptsPartial.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\passDTO\\SWP\\Views\\Shared\\_Layout.cshtml",
-      "TargetPath": "Views\\Shared\\_Layout.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\passDTO\\SWP\\Views\\Components\\Navbar\\NavbarSide.cshtml",
-      "TargetPath": "Views\\Components\\Navbar\\NavbarSide.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\passDTO\\SWP\\Views\\Containers\\Product\\Create.cshtml",
-      "TargetPath": "Views\\Containers\\Product\\Create.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\passDTO\\SWP\\Views\\_ViewStart.cshtml",
-      "TargetPath": "Views\\_ViewStart.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\passDTO\\SWP\\Views\\Components\\Form\\FormBtn.cshtml",
-      "TargetPath": "Views\\Components\\Form\\FormBtn.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\passDTO\\SWP\\Views\\_ViewImports.cshtml",
-      "TargetPath": "Views\\_ViewImports.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\passDTO\\SWP\\Views\\Components\\Form\\FormMessage.cshtml",
-      "TargetPath": "Views\\Components\\Form\\FormMessage.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\passDTO\\SWP\\Views\\Containers\\Auth\\Register.cshtml",
-      "TargetPath": "Views\\Containers\\Auth\\Register.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\passDTO\\SWP\\Views\\Home\\Index.cshtml",
+      "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\message\\SWP\\Views\\Home\\Index.cshtml",
       "TargetPath": "Views\\Home\\Index.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\passDTO\\SWP\\Views\\Home\\Privacy.cshtml",
-      "TargetPath": "Views\\Home\\Privacy.cshtml",
+      "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\message\\SWP\\Views\\Containers\\Product\\Create.cshtml",
+      "TargetPath": "Views\\Containers\\Product\\Create.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\passDTO\\SWP\\Views\\Components\\Form\\FormHidden.cshtml",
+      "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\message\\SWP\\Views\\_ViewImports.cshtml",
+      "TargetPath": "Views\\_ViewImports.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\message\\SWP\\Views\\Containers\\User\\UpdateUserInfo.cshtml",
+      "TargetPath": "Views\\Containers\\User\\UpdateUserInfo.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\message\\SWP\\Views\\Components\\Form\\SelectList.cshtml",
+      "TargetPath": "Views\\Components\\Form\\SelectList.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\message\\SWP\\Views\\Containers\\Auth\\Login.cshtml",
+      "TargetPath": "Views\\Containers\\Auth\\Login.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\message\\SWP\\Views\\Containers\\Product\\CreateProduct.cshtml",
+      "TargetPath": "Views\\Containers\\Product\\CreateProduct.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\message\\SWP\\Views\\Containers\\Auth\\Register.cshtml",
+      "TargetPath": "Views\\Containers\\Auth\\Register.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\message\\SWP\\Views\\Components\\Form\\TextField.cshtml",
+      "TargetPath": "Views\\Components\\Form\\TextField.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\message\\SWP\\Views\\Containers\\Category\\Category.cshtml",
+      "TargetPath": "Views\\Containers\\Category\\Category.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\message\\SWP\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+      "TargetPath": "Views\\Shared\\_ValidationScriptsPartial.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\message\\SWP\\Views\\Components\\Form\\FormHidden.cshtml",
       "TargetPath": "Views\\Components\\Form\\FormHidden.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\passDTO\\SWP\\Views\\Containers\\User\\UpdatePassword.cshtml",
-      "TargetPath": "Views\\Containers\\User\\UpdatePassword.cshtml",
+      "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\message\\SWP\\Views\\Containers\\Product\\Index.cshtml",
+      "TargetPath": "Views\\Containers\\Product\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\message\\SWP\\Views\\Components\\Form\\FormBtn.cshtml",
+      "TargetPath": "Views\\Components\\Form\\FormBtn.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\message\\SWP\\Views\\Components\\Form\\FormMessage.cshtml",
+      "TargetPath": "Views\\Components\\Form\\FormMessage.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\message\\SWP\\Views\\Components\\Navbar\\NavbarSide.cshtml",
+      "TargetPath": "Views\\Components\\Navbar\\NavbarSide.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\message\\SWP\\Views\\Shared\\_Layout.cshtml",
+      "TargetPath": "Views\\Shared\\_Layout.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\message\\SWP\\Views\\_ViewStart.cshtml",
+      "TargetPath": "Views\\_ViewStart.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\message\\SWP\\Views\\Containers\\Category\\CreateCategory.cshtml",
+      "TargetPath": "Views\\Containers\\Category\\CreateCategory.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\message\\SWP\\Views\\Components\\Form\\TextFieldNumber.cshtml",
+      "TargetPath": "Views\\Components\\Form\\TextFieldNumber.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\message\\SWP\\Views\\Home\\Privacy.cshtml",
+      "TargetPath": "Views\\Home\\Privacy.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\LENOVO-PC\\Desktop\\SWP\\message\\SWP\\Views\\Containers\\Product\\UpdateProduct.cshtml",
+      "TargetPath": "Views\\Containers\\Product\\UpdateProduct.cshtml",
       "FileKind": "mvc"
     }
   ],

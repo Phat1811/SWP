@@ -1,5 +1,7 @@
 
+
 const loginForm = document.getElementById("loginForm");
+console.log(loginForm);
 loginForm?.addEventListener("submit", function (event) {
         event.preventDefault();
         const username = document.getElementById("username");
@@ -11,12 +13,10 @@ loginForm?.addEventListener("submit", function (event) {
                         password : password.value,
                 };
 
-                axios.post('/api/auth/login', input)
-                .then(function () {
-                    window.location.assign("/");
-                })
+                http.post('/api/auth/login', input)
+                .then(() => window.location.assign('/'))
                 .catch(function (error) {
-                    console.log(error);
+                        console.log(error);
                 });
         }
 });

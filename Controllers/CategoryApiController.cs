@@ -35,7 +35,7 @@ namespace MedicalStore.Controllers
                 return new BadRequestObjectResult(res.getResponse());
             }
 
-            var isExitCategory = this.CategoryRepository.GetCategortByName(body.Name);
+            var isExitCategory = this.CategoryRepository.GetCategortByName(body.Name.Trim());
             if (isExitCategory != null)
             {
                 res.setErrorMessage(CustomLanguageValidator.ErrorMessageKey.ERROR_EXISTED, "name");
@@ -44,8 +44,8 @@ namespace MedicalStore.Controllers
 
             var category = new Category();
             category.CategoryId = Guid.NewGuid().ToString();
-            category.Name = body.Name;
-            category.Description = body.Description;
+            category.Name = body.Name.Trim();
+            category.Description = body.Description.Trim();
             category.Status = CategoryStatus.ACTIVE;
             category.CreateDate = DateTime.Now.ToShortDateString();
 
@@ -67,20 +67,20 @@ namespace MedicalStore.Controllers
                 return new BadRequestObjectResult(res.getResponse());
             }
 
-            var isExitCategory = this.CategoryRepository.GetCategortByName(body.Name);
+            var isExitCategory = this.CategoryRepository.GetCategortByName(body.Name.Trim());
             if (isExitCategory != null)
             {
                 res.setErrorMessage(CustomLanguageValidator.ErrorMessageKey.ERROR_EXISTED, "name");
                 return new BadRequestObjectResult(res.getResponse());
             }
             var category = CategoryRepository.GetCategoryByID(body.CategoryId);
-            if (body.Name != null)
+            if (body.Name.Trim() != null)
             {
-                category.Name = body.Name;
+                category.Name = body.Name.Trim();
             }
-            if (body.Description != null)
+            if (body.Description.Trim() != null)
             {
-                category.Description = body.Description;
+                category.Description = body.Description.Trim();
             }
             this.CategoryService.UpdateCategoryInfoHandler(category);
 

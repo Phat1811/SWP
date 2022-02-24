@@ -13,10 +13,8 @@ createForm?.addEventListener("submit", function (event) {
                     description: description.value,                
                 };
 
-                axios.post('/api/category/create', input)
-                .then(function () {
-                    window.location.assign("/category");
-                })
+            http.post('/api/category/create', input)
+                .then(() => window.location.assign('/category'))
                 .catch(function (error) {
                     console.log(error);
                 });

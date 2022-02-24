@@ -8,10 +8,8 @@ deleteForm?.addEventListener("submit", function (event) {
             categoryId: categoryId.value,
         };
 
-        axios.post('/api/category/delete', input)
-            .then(function () {
-                window.location.assign("/category");
-            })
+        http.post('/api/category/delete', input)
+            .then(() => window.location.assign('/category'))
             .catch(function (error) {
                 console.log(error);
             });

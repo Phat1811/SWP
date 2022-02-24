@@ -10,21 +10,19 @@ formUpdateUser?.addEventListener("submit", function (event) {
             name !== null &&
             phone !== null &&
             address !== null &&
-            email !== null &&
+            email !== null
         ) {
                 let input = {
                     name: name.value,
                     phone: phone.value,
                     address: address.value,
-                    email: email.value,
+                    email: email.value
                 };
 
-                axios.post('/api/user/info', input)
-                .then(function () {
-                    window.location.assign("/");
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-        }
+        http.post('/api/user/info', input)
+            .then(() => window.location.assign("/"))
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
 });

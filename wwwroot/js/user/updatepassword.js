@@ -1,5 +1,5 @@
-const formUpdatePassword = document.getElementById("formUpdatePassword");
-formUpdatePassword?.addEventListener("submit", function (event) {
+const formPassword = document.getElementById("formPassword");
+formPassword?.addEventListener("submit", function (event) {
         event.preventDefault();
     const password = document.getElementById("password");
     const newpassword = document.getElementById("newPassword");
@@ -17,12 +17,10 @@ formUpdatePassword?.addEventListener("submit", function (event) {
                     
                 };
 
-                axios.post('/api/user/password', input)
-                .then(function () {
-                    window.location.assign("/auth/login");
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-        }
+        http.post('/api/user/password', input)
+            .then(() => window.location.assign("/auth/login"))
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
 });

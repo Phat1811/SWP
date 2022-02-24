@@ -1,18 +1,19 @@
 ﻿@using MedicalStore.Utils.Common
 @{
-    this.ViewData["Title"] = Routers.CategoryProfile.Title;
+    this.ViewData["Title"] = Routers.CategoryUpdate.Title;
     var category = (Category)this.ViewData["category"];
-}
+    var listProduct = (List<Product>)this.ViewData["listProductByCategoryId"];
 
+    
+}
 <div class="min-h-full flex ">
     <div class="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
         <div class="mx-auto w-full max-w-sm lg:w-96">
             <div>
                 <img class="h-12 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
                      alt="Workflow" width="250" height="200" />
-                <h2 class="mt-6 text-3xl font-extrabold text-gray-900">Category Profile</h2>
+                <h2 class="mt-6 text-3xl font-extrabold text-gray-900">Update Category</h2>
             </div>
-
             <div class="mt-8">
                 <div class="mt-6 relative">
                     <div class="absolute inset-0 flex items-center" aria-hidden="true">
@@ -20,62 +21,58 @@
                     </div>
                 </div>
             </div>
-
             <div class="mt-6">
-                <form id="updateForm" class="space-y-6">
-                    <div class="space-y-1">
-                        <div class="space-y-2">
-                            Id: <input class="block px-4 py-3 w-full border-gray-300 intro-x login__input form-control"
-                                       type="text" name="categoryId" id="categoryId" value="@category.CategoryId" placeholder="CategoryId" readonly />
-                        </div>
-                        <div class="space-y-2">
-                            Name: <input class="block px-4 py-3 w-full border-gray-300 intro-x login__input form-control"
-                                         type="text" name="name" id="name" value="@category.Name" placeholder="Name" />
-                            <div id="NAMEERROR" class="text-red-500 "></div>
-                        </div>
-                        <div class="space-y-2 ">
-                            Description: <input class="block px-4 py-3 w-full border-gray-300 intro-x login__input form-control"
-                                                type="text" name="description" id="description" value="@category.Description" placeholder="Description" />
-                            <div id="DESCRIPTIONERROR" class="text-red-500 "></div>
-                        </div>
-                        <div class="space-y-2 ">
-                            Create Date: <input class="block px-4 py-3 w-full border-gray-300 intro-x login__input form-control"
-                                                type="text" name="createDate" id="createDate" value="@category.CreateDate" placeholder="CreateDate" readonly />
-                        </div>
-                        <div class="space-y-2 ">
-                            Status: <input class="block px-4 py-3 w-full border-gray-300 intro-x login__input form-control"
-                                   type="text" name="status" id="status" value="@category.Status" placeholder="Status" readonly />
-                        </div>
-                    </div>
-                    <div>
-                        <button type="submit"
-                                class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                            Update Category
-                        </button>
-                    </div>
-                </form>
-                <div>
-                    <form id="deleteForm" class="space-y-6">
-                        <input type="hidden" name="categoryId" id="categoryId" value="@category.CategoryId" />
-                        <button type="submit"
-                                class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                            Delete
-                        </button>
-                    </form>
+                <div class="border-t border-gray-200 px-4 py-5 sm:p-0">
+                    <dl class="sm:divide-y sm:divide-gray-200">
+                        <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">Category ID</dt>
+                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">@category.CategoryId</dd>
                 </div>
+                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500">Category Name</dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">@category.Name</dd>
+                </div>
+                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500">Description</dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">@category.Description</dd>
+                </div>
+                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500">Create Date</dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">@category.CreateDate</dd>
+                </div>
+                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500">Status</dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">@category.Status</dd>
+                </div>
+                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500">Number of Product</dt>
+                    <a href=""> <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"> @listProduct.Count.ToString() Products</dd></a>
+                </div>
+                </dl>
             </div>
-
+            <div>
+                <a href="/category/update?categoryId=@category.CategoryId" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Edit Category
+                </a>
+            </div>
+            <div>
+                <form id="deleteForm" class="space-y-6">
+                    <input type="hidden" name="categoryId" id="categoryId" value="@category.CategoryId" />
+                    <button type="submit" onclick="return confirm('Are you sura you want to delete Category @category.Name')"
+                            class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        Delete Category
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
+</div>
 </div>
 <div class="hidden lg:block relative w-0 flex-1">
     <img class="absolute inset-0 h-screen w-full object-cover"
          src="https://images.unsplash.com/photo-1505904267569-f02eaeb45a4c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1908&q=80"
          alt="">
 </div>
-
 @section Scripts {
-
-    <script src="~/js/category/update.js"></script>
     <script src="~/js/category/delete.js"></script>
 }

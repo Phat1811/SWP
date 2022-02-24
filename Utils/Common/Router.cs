@@ -42,7 +42,8 @@
         //Category Controller
         public static readonly RouterItem Category = new RouterItem() { Page = "/Views/Containers/Category/Category.cshtml", Title = "All Category", Link = "/category" };
         public static readonly RouterItem CreateCategory = new RouterItem() { Page = "/Views/Containers/Category/CreateCategory.cshtml", Title = "Create Category", Link = "/category/create" };
-        public static readonly RouterItem CategoryProfile = new RouterItem() { Page = "/Views/Containers/Category/CategoryProfile.cshtml", Title = "Category Profile", Link = "/category/update" };
+        public static readonly RouterItem CategoryUpdate = new RouterItem() { Page = "/Views/Containers/Category/CategoryUpdate.cshtml", Title = "Update Category", Link = "/category/update" };
+        public static readonly RouterItem CategoryProfile = new RouterItem() { Page = "/Views/Containers/Category/CategoryProfile.cshtml", Title = "Category Profile", Link = "/category/profile" };
         //------------------------------------
 
         //Rroduct

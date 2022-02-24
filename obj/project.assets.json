@@ -7714,11 +7714,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\Trả Nợ\\SWP391\\Code\\Tho2\\MedicalStore.csproj",
+      "projectUniqueName": "F:\\Trả Nợ\\SWP391\\Code\\binh\\MedicalStore.csproj",
       "projectName": "MedicalStore",
-      "projectPath": "F:\\Trả Nợ\\SWP391\\Code\\Tho2\\MedicalStore.csproj",
+      "projectPath": "F:\\Trả Nợ\\SWP391\\Code\\binh\\MedicalStore.csproj",
       "packagesPath": "C:\\Users\\Sai\\.nuget\\packages\\",
-      "outputPath": "F:\\Trả Nợ\\SWP391\\Code\\Tho2\\obj\\",
+      "outputPath": "F:\\Trả Nợ\\SWP391\\Code\\binh\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Sai\\AppData\\Roaming\\NuGet\\NuGet.Config",

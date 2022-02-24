@@ -47,7 +47,7 @@ namespace MedicalStore.Controllers
             category.Name = body.Name.Trim();
             category.Description = body.Description.Trim();
             category.Status = CategoryStatus.ACTIVE;
-            category.CreateDate = DateTime.Now.ToShortDateString();
+            category.CreateDate = DateTime.Now.ToUniversalTime().ToString();
 
             this.CategoryService.CreateCategoryHandler(category);
 
@@ -66,14 +66,15 @@ namespace MedicalStore.Controllers
                 res.mapDetails(result);
                 return new BadRequestObjectResult(res.getResponse());
             }
-
+            var category = CategoryRepository.GetCategoryByID(body.CategoryId);
+            if (body.Name.Trim() != category.Name) {
             var isExitCategory = this.CategoryRepository.GetCategortByName(body.Name.Trim());
             if (isExitCategory != null)
             {
                 res.setErrorMessage(CustomLanguageValidator.ErrorMessageKey.ERROR_EXISTED, "name");
                 return new BadRequestObjectResult(res.getResponse());
             }
-            var category = CategoryRepository.GetCategoryByID(body.CategoryId);
+            }
             if (body.Name.Trim() != null)
             {
                 category.Name = body.Name.Trim();

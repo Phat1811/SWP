@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "v7LzSD69AOsanecO/T7tXcJ+YQ02BjTuXBgJStF7225V0zyBsnD3nrMLAeURG9wdq0imbcioPD4bzSulJp/pAA==",
+  "dgSpecHash": "zNBEwhDSplfSoj0i2WtACIINCqm8oOXA8cCQTYs0aDKzHMKk0hJ2BBRxVMjhwZX/+5PWhY5zP6JTx402OZGFTA==",
   "success": true,
-  "projectFilePath": "F:\\Trả Nợ\\SWP391\\Code\\Tho2\\MedicalStore.csproj",
+  "projectFilePath": "F:\\Trả Nợ\\SWP391\\Code\\binh\\MedicalStore.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Sai\\.nuget\\packages\\bcrypt.net-next\\4.0.2\\bcrypt.net-next.4.0.2.nupkg.sha512",
     "C:\\Users\\Sai\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",

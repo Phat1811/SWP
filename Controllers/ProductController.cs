@@ -52,6 +52,14 @@ namespace MedicalStore.Controllers
             return View(Routers.Product.Page);
         }
 
+        [HttpGet("search")]
+        public IActionResult SearchProduct(string name)
+        {
+            var product = ProductRepository.GetProductByName(name);
+            this.ViewData["product"] = product;
+            return View(Routers.UpdateProduct.Page);
+        }
+
         [HttpGet("")]
         public IActionResult GetAllProducts()
         {

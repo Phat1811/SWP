@@ -19,7 +19,7 @@ formUpdateUser?.addEventListener("submit", function (event) {
                     email: email.value
                 };
 
-        http.post('/api/user/info', input)
+        http.post('/api/user/updateinfo', input)
             .then(() => window.location.assign("/"))
             .catch(function (error) {
                 console.log(error);

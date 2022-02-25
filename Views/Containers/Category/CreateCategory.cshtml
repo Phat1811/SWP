@@ -27,8 +27,8 @@
                         @await Html.PartialAsync("../../Components/Form/FormMessage.cshtml")
                         <div class="space-y-2">
                             <input class="block px-4 py-3 w-full border-gray-300 intro-x login__input form-control"
-                                   type="text" name="name" id="name" value="" placeholder="Name" />
-                            <div id="NAMEERROR" class="text-red-500 "></div>
+                                   type="text" name="name" id="name" value="" required placeholder="Name" />
+                            <div id="NAMEERROR" data-label="Name" class="text-red-500 "></div>
                         </div>
                         <div class="space-y-2 ">
                             <input class="block px-4 py-3 w-full border-gray-300 intro-x login__input form-control"

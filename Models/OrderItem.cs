@@ -34,4 +34,5 @@ namespace MedicalStore.Models
 
         public virtual Product Product { set; get; }
     }
+    
 }

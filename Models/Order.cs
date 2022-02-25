@@ -14,8 +14,6 @@ namespace MedicalStore.Models
         [Table("tblOrder")]
         public class Order
         {
-
-
             [Required]
             [StringLength(50)]
             [Key]
@@ -38,5 +36,4 @@ namespace MedicalStore.Models
 
             public virtual User Customer { set; get; }
         }
-    
 }

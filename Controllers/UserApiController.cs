@@ -27,7 +27,7 @@ namespace MedicalStore.Controllers
             this.UserRepository = userRepository;
             this.AuthService = AuthService;
         }
-        [HttpPost("info")]
+        [HttpPost("updateinfo")]
         public IActionResult HandleUpdateUserInfo([FromBody] UpdateUserDTO body)
         {
             var res = new ServerApiResponse<string>();

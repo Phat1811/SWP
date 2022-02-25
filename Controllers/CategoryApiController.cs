@@ -38,7 +38,7 @@ namespace MedicalStore.Controllers
             var isExitCategory = this.CategoryRepository.GetCategortByName(body.Name.Trim());
             if (isExitCategory != null)
             {
-                res.setErrorMessage(CustomLanguageValidator.ErrorMessageKey.ERROR_EXISTED, "name");
+                res.setErrorMessage(CustomLanguageValidator.ErrorMessageKey.ERROR_EXISTED, "Name");
                 return new BadRequestObjectResult(res.getResponse());
             }
 
@@ -71,18 +71,12 @@ namespace MedicalStore.Controllers
             var isExitCategory = this.CategoryRepository.GetCategortByName(body.Name.Trim());
             if (isExitCategory != null)
             {
-                res.setErrorMessage(CustomLanguageValidator.ErrorMessageKey.ERROR_EXISTED, "name");
+                res.setErrorMessage(CustomLanguageValidator.ErrorMessageKey.ERROR_EXISTED, "Name");
                 return new BadRequestObjectResult(res.getResponse());
             }
             }
-            if (body.Name.Trim() != null)
-            {
-                category.Name = body.Name.Trim();
-            }
-            if (body.Description.Trim() != null)
-            {
-                category.Description = body.Description.Trim();
-            }
+            category.Name = body.Name.Trim();
+            category.Description = body.Description.Trim();
             this.CategoryService.UpdateCategoryInfoHandler(category);
 
             res.setMessage(CustomLanguageValidator.MessageKey.MESSAGE_ADD_SUCCESS);

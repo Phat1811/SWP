@@ -29,6 +29,8 @@
 
   <ItemGroup>
     <None Include="Views\Containers\Product\Create.cshtml" />
+    <None Include="Views\Containers\User\UpdatePassword.cshtml" />
+    <None Include="Views\Containers\User\UpdateUserInfo.cshtml" />
     <None Include="wwwroot\js\user\updateinfo.js" />
     <None Include="wwwroot\js\user\updatepassword.js" />
   </ItemGroup>

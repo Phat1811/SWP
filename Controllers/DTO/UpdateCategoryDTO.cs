@@ -15,7 +15,7 @@ namespace MedicalStore.Controllers.DTO
         {
 
             RuleFor(x => x.CategoryId).NotEmpty().Length(CategoryValidator.ID_MIN, CategoryValidator.ID_MAX);
-            RuleFor(x => x.Name).Length(CategoryValidator.NAME_MIN, CategoryValidator.NAME_MAX);
+            RuleFor(x => x.Name).NotEmpty().Length(CategoryValidator.NAME_MIN, CategoryValidator.NAME_MAX);
             RuleFor(x => x.Description).Length(CategoryValidator.DESCRIPTION_MIN, CategoryValidator.DESCRIPTION_MAX);
         }
     }

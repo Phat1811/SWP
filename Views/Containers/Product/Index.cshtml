@@ -2,7 +2,9 @@
 @{
     this.ViewData["Title"] = Routers.Product.Title;
     var listProduct = (List<Product>)this.ViewData["listProduct"];
+    
 }
+
 <div class="min-h-full flex ">
     <div class="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
         <div class="mx-auto w-full max-w-sm lg:w-96">
@@ -37,7 +39,7 @@
                     <tr class="bg-white">
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">@product.ProductId</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">@product.Name</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">@product.Description</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">@product.Description.Substring(0,30)</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">@product.OriginalPrice</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">@product.RetailPrice</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">@product.Quantity</td>
@@ -45,21 +47,21 @@
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">@product.CreateDate</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">@product.Status</td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                <a href="/product/update?productId=@product.ProductId" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        Edit
-                                    </a>
-                            
+                            <a href="/product/update?productId=@product.ProductId" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                Edit
+                            </a>
+
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                         
-                    <form id="deleteForm" class="space-y-6">
-                            <input type="hidden" name="productId" id="productId" value="@product.ProductId" />
-                            <button type="submit"
-                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                Delete
-                            </button>
-                        </form>
-           
+
+                            <form id="deleteForm" class="space-y-6">
+                                <input type="hidden" name="productId" id="productId" value="@product.ProductId" />
+                                <button type="submit"
+                                        class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    Delete
+                                </button>
+                            </form>
+
                         </td>
 
                     </tr>
@@ -73,5 +75,5 @@
 
 @section Scripts {
     <script src="/js/product/delete.js"></script>
-
+    
 }

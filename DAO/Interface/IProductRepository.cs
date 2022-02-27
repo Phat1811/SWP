@@ -10,6 +10,7 @@ namespace MedicalStore.DAO.Interface
         public bool InsertHandler(Product product);
         public bool UpdateHandler(Product product);
         public bool DeleteHandler(Product product);
-        List<Product> GetAllProduct();
+        public List<Product> GetAllProduct();
+        public List<Product> GetListProductByShopId(string shopId);
     }
 }

@@ -7709,26 +7709,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Sai\\.nuget\\packages\\": {}
+    "C:\\Users\\LENOVO-PC\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\Trả Nợ\\SWP391\\Code\\binh\\MedicalStore.csproj",
+      "projectUniqueName": "C:\\Users\\LENOVO-PC\\Desktop\\SWP\\order\\SWP\\MedicalStore.csproj",
       "projectName": "MedicalStore",
-      "projectPath": "F:\\Trả Nợ\\SWP391\\Code\\binh\\MedicalStore.csproj",
-      "packagesPath": "C:\\Users\\Sai\\.nuget\\packages\\",
-      "outputPath": "F:\\Trả Nợ\\SWP391\\Code\\binh\\obj\\",
+      "projectPath": "C:\\Users\\LENOVO-PC\\Desktop\\SWP\\order\\SWP\\MedicalStore.csproj",
+      "packagesPath": "C:\\Users\\LENOVO-PC\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\LENOVO-PC\\Desktop\\SWP\\order\\SWP\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Sai\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\LENOVO-PC\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

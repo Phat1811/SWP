@@ -2,6 +2,7 @@
 using MedicalStore.Models;
 using MedicalStore.Service.Interface;
 using MedicalStore.Utils;
+using System.Collections.Generic;
 using MedicalStore.Utils.Interface;
 
 namespace MedicalStore.Service
@@ -16,6 +17,12 @@ namespace MedicalStore.Service
             this.DBContext = dBContext;
             ProductRepository = productRepository;
         }
+        public Product GetProductById(string productId)
+        {
+            return this.ProductRepository.GetProductById(productId);
+        }
+
+
         public bool CreateProductHandler(Product product)
         {
             return this.ProductRepository.InsertHandler(product);
@@ -29,6 +36,16 @@ namespace MedicalStore.Service
         public bool UpdateProductHandler(Product product)
         {
             return this.ProductRepository.UpdateHandler(product);
+        }
+
+        public List<Product> GetProducts()
+        {
+            return this.ProductRepository.GetAllProduct();
+        }
+
+        public List<Product> GetListProductByShopId(string shopId)
+        {
+            return this.ProductRepository.GetListProductByShopId(shopId);
         }
     }
 }

@@ -31,7 +31,7 @@
         //------------------------------------
 
         public static readonly RouterItem Home = new RouterItem() { Page = "/Views/Containers/Home.cshtml", Title = "Home", Link = "/" };
-      
+
         public static readonly RouterItem Logout = new RouterItem() { Page = "/Views/Containers/CreateProduct.cshtml", Title = "Create Product", Link = "/auth/logout" };
         public static readonly RouterItem Cart = new RouterItem() { Page = "/Views/Containers/Cart/Cart.cshtml", Title = "Cart", Link = "/cart" };
         public static readonly RouterItem RemoveCart = new RouterItem() { Page = "/Views/Containers/Cart/Cart.cshtml", Title = "Cart", Link = "/cart/remove" };

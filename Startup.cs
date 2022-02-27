@@ -33,6 +33,7 @@ namespace MedicalStore
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<ICartService, CartService>();
             services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<IOrderItemService, OrderItemService>();
 
@@ -47,6 +48,7 @@ namespace MedicalStore
             services.AddScoped<IOrderItemRepository, OrderItemRepository>();
 
             services.AddScoped<AuthGuard>();
+            services.AddScoped<AuthGuardGuest>();
             services.AddScoped<UserFilter>();
 
             services.AddSession();

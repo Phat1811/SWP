@@ -49,7 +49,13 @@ namespace MedicalStore.DAO
         {
             this.DBContext.Product.Update(product);
             this.DBContext.SaveChanges();
-            return true; 
+            return true;
+        }
+
+        public List<Product> GetListProductByShopId(string shopId)
+        {
+            List<Product> listProducts = this.DBContext.Set<Product>().Where(item => item.ShopId == shopId).ToList<Product>();
+            return listProducts;
         }
     }
 }

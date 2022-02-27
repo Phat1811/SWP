@@ -5,6 +5,8 @@ const btnList = store?.querySelectorAll('button[type="button"]');
 let total = 0;
 
 const update = (data) => {
+        console.log(store);
+        console.log(btnList);
         const wrapper = document.createElement("div");
         total = 0;
         data.forEach((item) => {
@@ -31,13 +33,13 @@ const createEntity = (name, quantity, price, id) => {
         minus.innerHTML = "-";
 
         plus.addEventListener("click", function () {
-                http.post(routers.order.addToCart, { productId: id, quantity: 1 }).then((res) => {
+                http.post("/api/cart/add", { productId: id, quantity: 1 }).then((res) => {
                         update(res.data.data);
                 });
         });
 
         minus.addEventListener("click", function () {
-                http.post(routers.order.addToCart, { productId: id, quantity: -1 }).then((res) => {
+                http.post("/api/cart/add", { productId: id, quantity: -1 }).then((res) => {
                         update(res.data.data);
                 });
         });
@@ -80,14 +82,14 @@ const createEntity = (name, quantity, price, id) => {
         wrapper.append(bottom);
         return wrapper;
 };
-http.get(routers.order.getCart).then((res) => {
+http.get("/api/cart").then((res) => {
         update(res.data.data);
 });
 
 btnList?.forEach((btn) => {
         btn.addEventListener("click", function (event) {
                 const id = btn.getAttribute("data-id") || "";
-                http.post(routers.order.addToCart, { productId: id, quantity: 1 }).then((res) => {
+                http.post("/api/cart/add", { productId: id, quantity: 1 }).then((res) => {
                         update(res.data.data);
                 });
         });

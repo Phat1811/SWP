@@ -32,6 +32,7 @@ namespace MedicalStore.Controllers
         public IActionResult Index()
         {
             var user = (User)this.ViewData["user"];
+            if(user != null) {
             if (user.RoleId == "0")
             {
                 return Redirect(Routers.Product.Link);
@@ -40,7 +41,7 @@ namespace MedicalStore.Controllers
             {
                 return Redirect(Routers.Product.Link);
             }
-
+            }
             var cart = this.HttpContext.Session.GetString(CartSession) ?? "";
 
             var list = this.CartService.convertStringToCartItem(cart);

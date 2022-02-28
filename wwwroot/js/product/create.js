@@ -29,10 +29,8 @@ createForm?.addEventListener("submit", function (event) {
             categoryId: categoryId.value,
         };
 
-        axios.post('/api/product/create', input)
-            .then(function () {
-                window.location.assign("/product/");
-            })
+        http.post('/api/product/create', input)
+            .then(() => window.location.assign("/product/"))
             .catch(function (error) {
                 console.log(error);
             });

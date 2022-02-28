@@ -2,6 +2,7 @@
 @model IEnumerable<MedicalStore.Models.Product>
     @{
     this.ViewData["Title"] = Routers.CreateProduct.Title;
+    var listCategory = (SelectList)this.ViewData["listCategory"];
     }
 <h1>Product detail</h1>
 
@@ -30,40 +31,45 @@
                     <div class="space-y-1">
                         @await Html.PartialAsync("../../Components/Form/FormMessage.cshtml")
                         <div class="space-y-2 ">
+                                <label for="name" class="block text-sm font-medium text-gray-700">Product Name</label>
                                 <input class="block px-4 py-3 w-full border-gray-300 intro-x login__input form-control"
                                        type="text" name="name" id="name" value="" placeholder="Name" />
-                                <div id="NAMERROR" data-label="Name" class="text-red-500 "></div>
+                                <div id="NAMEERROR" data-label="Name" class="text-red-500 "></div>
                             </div>
                             <div class="space-y-2 ">
-                                <input class="block px-4 py-3 w-full border-gray-300 intro-x login__input form-control"
-                                       type="text" name="description" id="description" value="" placeholder="Description" />
+                                <label for="name" class="block text-sm font-medium text-gray-700">Description</label>
+                                <textarea rows="4" name="description" id="description" class="block px-4 py-3 w-full border-gray-300 intro-x login__input form-control" placeholder="Description"></textarea>
                                 <div id="DESCRIPTIONERROR" data-label="Description" class="text-red-500 "></div>
                             </div>
                             <div class="space-y-2 ">
+                                <label for="originalprice" class="block text-sm font-medium text-gray-700">Original Price</label>
                                 <input class="block px-4 py-3 w-full border-gray-300 intro-x login__input form-control"
-                                       type="text" name="originalprice" id="originalPrice" value="" placeholder="OriginalPrice" />
+                                       type="number" name="originalprice" id="originalPrice" value="" placeholder="OriginalPrice" />
                                 <div id="ORIGINALPRICEERROR" data-label="OriginalPrice" class="text-red-500 "></div>
                             </div>
                             <div class="space-y-2 ">
+                                <label for="retailprice" class="block text-sm font-medium text-gray-700">Retail Price</label>
                                 <input class="block px-4 py-3 w-full border-gray-300 intro-x login__input form-control"
-                                       type="text" name="retailprice" id="retailPrice" value="" placeholder="RetailPrice" />
+                                       type="number" name="retailprice" id="retailPrice" value="" placeholder="RetailPrice" />
                                 <div id="RETAILPRICEERROR" data-label="RetailPrice" class="text-red-500 "></div>
                             </div>
 
                             <div class="space-y-2 ">
+                                 <label for="quantity" class="block text-sm font-medium text-gray-700">Quantity</label>
                                 <input class="block px-4 py-3 w-full border-gray-300 intro-x login__input form-control"
-                                       type="text" name="quantity" id="quantity" value="" placeholder="Quantity" />
+                                       type="number" name="quantity" id="quantity" value="" placeholder="Quantity" />
                                 <div id="QUANTITYERROR" data-label="Quantity" class="text-red-500 "></div>
                             </div>
                             <div class="space-y-2 ">
+                                <label for="imageurl" class="block text-sm font-medium text-gray-700">ImageUrl</label>
                                 <input class="block px-4 py-3 w-full border-gray-300 intro-x login__input form-control"
                                        type="text" name="imageurl" id="imageUrl" value="" placeholder="ImageUrl" />
                                 <div id="IMAGEURLERROR" data-label="ImageUrl" class="text-red-500 "></div>
                             </div>
                             <div class="space-y-2 ">
-                                <input class="block px-4 py-3 w-full border-gray-300 intro-x login__input form-control"
-                                       type="text" name="category" id="categoryId" value="" placeholder="Category" />
-                                <div id="CATEGORYERROR" data-label="Category" class="text-red-500 "></div>
+                                <label class="block text-sm font-medium text-gray-700">Category</label>
+                                @await Html.PartialAsync("../../Components/Form/SelectList.cshtml", new{ Label="Category",
+                            Values=listCategory, Value="", Field="categoryId"})
                             </div>
                     <div>
                         <button type="submit"

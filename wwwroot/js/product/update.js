@@ -32,10 +32,8 @@ updateForm?.addEventListener("submit", function (event) {
             categoryId: categoryId.value,
         };
 
-        axios.post('/api/product/update', input)
-            .then(function () {
-                window.location.assign("/product/");
-            })
+        http.post('/api/product/update', input)
+            .then(() => window.location.assign("/product/"))
             .catch(function (error) {
                 console.log(error);
             });

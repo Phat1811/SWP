@@ -1,4 +1,5 @@
 ﻿using FluentValidation.Results;
+using MedicalStore.Auth;
 using MedicalStore.Controllers.DTO;
 using MedicalStore.DAO.Interface;
 using MedicalStore.Models;
@@ -11,6 +12,7 @@ using System;
 namespace MedicalStore.Controllers
 {
     [Route("/api/product")]
+    [ServiceFilter(typeof(AuthGuard))]
     public class ProductApiController : Controller
     {
         private readonly IProductService ProductService;
@@ -25,24 +27,31 @@ namespace MedicalStore.Controllers
 
         [HttpPost("create")]
         public IActionResult HandleCreateProduct([FromBody] CreateProductDTO body)
+        
         {
+            if(body == null)
+            {
+                body = new CreateProductDTO();
+            }
             var res = new ServerApiResponse<string>();
             ValidationResult result = new CreateProductDTOValidator().Validate(body);
+            
             if(!result.IsValid)
             {
                 res.mapDetails(result);
                 return new BadRequestObjectResult(res.getResponse());
             }
+            User user = (User)this.ViewData["user"];
             var product = new Product();
             product.ProductId = Guid.NewGuid().ToString();
-            product.Name = body.Name;
-            product.Description = body.Description;
+            product.Name = body.Name.Trim();
+            product.Description = body.Description.Trim();
             product.OriginalPrice = body.OriginalPrice;
             product.RetailPrice = body.RetailPrice;
             product.Quantity = body.Quantity;
-            product.ImageUrl = body.ImageUrl;
+            product.ImageUrl = body.ImageUrl.Trim();
             product.CategoryId = body.CategoryId;
-            product.ShopId = "2";
+            product.ShopId = user.UserId;
             product.CreateDate = DateTime.Now.ToShortDateString();
             product.Status = ProductStatus.ACTIVE;
 
@@ -62,7 +71,7 @@ namespace MedicalStore.Controllers
                 res.mapDetails(result);
                 return new BadRequestObjectResult(res.getResponse());
             }
-             var product = this.ProductRepository.GetProductById(body.ProductId);
+            var product = this.ProductRepository.GetProductById(body.ProductId);
             if(product == null)
             {
                 res.setErrorMessage(CustomLanguageValidator.ErrorMessageKey.ERROR_NOT_FOUND, "ProductID");
@@ -86,12 +95,12 @@ namespace MedicalStore.Controllers
                 }
             }
 
-            product.Name = body.ProductName;
-            product.Description = body.ProductDescription;
+            product.Name = body.ProductName.Trim();
+            product.Description = body.ProductDescription.Trim();
             product.OriginalPrice = body.OriginalPrice;
             product.RetailPrice = body.RetailPrice;
             product.Quantity = body.Quantity;
-            product.ImageUrl = body.ImageUrl;
+            product.ImageUrl = body.ImageUrl.Trim();
 
             this.ProductService.UpdateProductHandler(product);
 

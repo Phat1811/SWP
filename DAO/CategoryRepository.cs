@@ -1,6 +1,7 @@
 ﻿using MedicalStore.DAO.Interface;
 using MedicalStore.Models;
 using MedicalStore.Utils;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -61,6 +62,29 @@ namespace MedicalStore.DAO
         {
             List<Category> listCategory = this.DBContext.Set<Category>().ToList<Category>();
             return listCategory;
+        }
+
+        public List<SelectListItem> GetListCategoriesByStatus(CategoryStatus categoryStatus)
+        {
+            var categories = new List<SelectListItem>();
+            IEnumerable<Category> listCategories;
+            if (categoryStatus == CategoryStatus.ACTIVE)
+            {
+                listCategories = this.GetAllCategories().Where(item => item.Status == CategoryStatus.ACTIVE);
+            }
+            else
+            {
+                listCategories = this.GetAllCategories();
+            }
+            foreach (var item in listCategories)
+            {
+                categories.Add(new SelectListItem()
+                {
+                    Value = item.CategoryId,
+                    Text = item.Name,
+                });
+            }
+            return categories;
         }
     }
 }

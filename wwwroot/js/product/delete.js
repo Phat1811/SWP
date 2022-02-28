@@ -9,10 +9,8 @@ deleteForm?.addEventListener("submit", function (event) {
             productId: productId.value,
         };
 
-        axios.post('/api/product/delete/', input)
-            .then(function () {
-                window.location.assign("/product/");
-            })
+        http.post('/api/product/delete/', input)
+            .then(() => window.location.assign("/product/"))
             .catch(function (error) {
                 console.log(error);
             });

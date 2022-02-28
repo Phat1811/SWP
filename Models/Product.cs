@@ -46,7 +46,6 @@ namespace MedicalStore.Models
         [StringLength(255)]
         public string ImageUrl { set; get; }
 
-
         [Required]
         [StringLength(50)]
         [ForeignKey("tblCategory")]
@@ -58,6 +57,7 @@ namespace MedicalStore.Models
         [StringLength(50)]
         [ForeignKey("tblUser")]
         public string ShopId { set; get; }
+        
         public virtual User Shop { set; get; }
     }
 }

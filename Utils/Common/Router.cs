@@ -47,6 +47,8 @@
         public static readonly RouterItem Product = new RouterItem() { Page = "/Views/Containers/Product/Index.cshtml", Title = "All Product", Link = "/product/" };
         public static readonly RouterItem CreateProduct = new RouterItem() { Page = "/Views/Containers/Product/CreateProduct.cshtml", Title = "Create Product", Link = "/product/create" };
         public static readonly RouterItem UpdateProduct = new RouterItem() { Page = "/Views/Containers/Product/UpdateProduct.cshtml", Title = "Update Product", Link = "/product/update" };
+        public static readonly RouterItem ProductProfile = new RouterItem() { Page = "/Views/Containers/Product/ProfileProduct.cshtml", Title = "Product Profile", Link = "/product/profile" };
+        public static readonly RouterItem SearchProduct = new RouterItem() { Page = "/Views/Containers/Product/SearchProduct.cshtml", Title = "Search Product", Link = "/product/search" };
         //------------------------------------
 
         //Order

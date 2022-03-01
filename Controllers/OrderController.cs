@@ -2,10 +2,9 @@
 using MedicalStore.DAO.Interface;
 using MedicalStore.Models;
 using MedicalStore.Utils.Common;
-using System.Collections.Generic;
-using MedicalStore.Controllers.DTO;
-using System.Linq;
+using MedicalStore.Service.Interface;
 using MedicalStore.Auth;
+using System;
 
 namespace MedicalStore.Controllers
 {
@@ -13,113 +12,69 @@ namespace MedicalStore.Controllers
     [ServiceFilter(typeof(AuthGuard))]
     public class OrderController : Controller
     {
-        private readonly IOrderRepository OrderRepository;
-        private readonly IOrderItemRepository OrderItemRepository;
-        private readonly IProductRepository ProductRepository;
-        private readonly IUserRepository UserRepository;
-
-        public OrderController(IOrderRepository orderRepository, IOrderItemRepository orderItemRepository, IProductRepository productRepository, IUserRepository UserRepository)
+        private readonly IOrderService OrderService;
+        private const string CartSession = "CartSession";
+        private readonly ICartService CartService;
+        private readonly IProductService ProductService;
+        public OrderController(IOrderService orderService, ICartService cartService, IProductService productService)
         {
-            this.OrderRepository = orderRepository;
-            this.OrderItemRepository = orderItemRepository;
-            this.ProductRepository = productRepository;
-            this.UserRepository = UserRepository;
+            this.OrderService = orderService;
+            this.CartService = cartService;
+            this.ProductService = productService;
         }
 
         [HttpGet("")]
-        public IActionResult GetAllUserOrder(string sortBy)
+        [RoleGuardAttribute("1")]
+        [ServiceFilter(typeof(AuthGuard))]
+        public IActionResult Order(int pageIndex = 0, int pageSize = 12)
         {
-            var user = (User)this.ViewData["user"];
-            if (user == null)
-            {
-                return Redirect(Routers.Login.Link);
-            }
-            List<Order> listOrder = new List<Order>();
-            if (user.RoleId == "1") 
-            {
-                List<Order> listOrder1 = OrderRepository.GetUserOrderHistory(user.UserId);
-                listOrder = listOrder1;
-            }
-            if(user.RoleId == "2")
-            {
-                List<Order> listOrder2 = OrderRepository.GetAllSoldOrder(user.UserId);
-                listOrder = listOrder2;
-            }
 
-            listOrder.Sort((x, y) => y.CreateDate.CompareTo(x.CreateDate));
-            if (sortBy == "priceIncreasing")
-            {
-                listOrder.Sort((x, y) => x.Total.CompareTo(y.Total));
-            }
-            if (sortBy == "priceDescending")
-            {
-                listOrder.Sort((x, y) => y.Total.CompareTo(x.Total));
-            }
-            if (sortBy == "createDateIncreasing")
-            {
-                listOrder.Sort((x, y) => x.CreateDate.CompareTo(y.CreateDate));
-            }
-            if (sortBy == "createDateDescending")
-            {
-                listOrder.Sort((x, y) => y.CreateDate.CompareTo(x.CreateDate));
-            }
-            this.ViewData["listOrder"] = listOrder;
+            var user = (User)this.ViewData["user"];
+            var (orders, total) = this.OrderService.GetOrders(user.UserId, pageIndex, pageSize);
+            this.ViewData["orders"] = orders;
+            this.ViewData["total"] = total;
             return View(Routers.Order.Page);
-        }
-        
-        [HttpGet("manager")]
-        public IActionResult GetAllOrder(string sortBy)
-        {
-            User user = (User)this.ViewData["user"];
-            if (user == null)
-            {
-                return Redirect(Routers.Login.Link);
-            }
-            List<Order> listOrder = OrderRepository.GetAllOrder();
-            listOrder.Sort((x, y) => y.CreateDate.CompareTo(x.CreateDate));
-            if (sortBy == "priceIncreasing")
-            {
-                listOrder.Sort((x, y) => x.Total.CompareTo(y.Total));
-            }
-            if (sortBy == "priceDescending")
-            {
-                listOrder.Sort((x, y) => y.Total.CompareTo(x.Total));
-            }
-            if (sortBy == "createDateIncreasing")
-            {
-                listOrder.Sort((x, y) => x.CreateDate.CompareTo(y.CreateDate));
-            }
-            if (sortBy == "createDateDescending")
-            {
-                listOrder.Sort((x, y) => y.CreateDate.CompareTo(x.CreateDate));
-            }
-            this.ViewData["listOrder"] = listOrder;
-            return View(Routers.OrderManager.Page);
         }
 
         [HttpGet("detail")]
-        public IActionResult GetOrderDetail(string orderId)
+        [ServiceFilter(typeof(AuthGuard))]
+        public IActionResult OrderDetail(string orderId, int pageIndex = 0, int pageSize = 1000)
         {
-            var order = OrderRepository.GetOrderByOrderId(orderId);
-            this.ViewData["order"] = order;
-            List<OrderItem> listOrderItem = OrderItemRepository.GetAllOrderItemByOrderId(orderId);
-            List<OrderItemDetail> listOrderItemDetail = new List<OrderItemDetail>();
-            foreach (OrderItem oi in listOrderItem)
-            {
-                OrderItemDetail oid = new OrderItemDetail();
-                Product p = ProductRepository.GetProductById(oi.ProductId);
-                oid.ProductName = p.Name;
-                oid.ProductImageUrl = p.ImageUrl;
-                oid.RetailPrice = p.RetailPrice;
-                oid.ShopName = UserRepository.GetUserById(p.ShopId).Name;
-                oid.SalePrice = oi.SalePrice;
-                oid.Quantity = oi.Quantity;
-                listOrderItemDetail.Add(oid);
-            }
-            string customerName = UserRepository.GetUserById(order.CustomerId).Name.ToString();
-            this.ViewData["customerName"] = customerName;
-            this.ViewData["listOrderItemDetail"] = listOrderItemDetail;
+            var (items, count) = this.OrderService.GetOrderDetail(orderId, pageIndex, pageSize);
+            this.ViewData["items"] = items;
+            this.ViewData["total"] = count;
             return View(Routers.OrderDetail.Page);
+        }
+
+
+        [HttpGet("manager")]
+        [RoleGuardAttribute("0")]
+        [ServiceFilter(typeof(AuthGuard))]
+        public IActionResult GetAllOrders(string startDate, string endDate, string search, int pageIndex = 0, int pageSize = 12)
+        {
+            var now = DateTime.Now;
+            string lastDate = now.AddDays(1).ToString("yyyy-MM-dd");
+            string firstDate = now.AddYears(-1).ToString("yyyy-MM-dd");
+
+            if (startDate == null || endDate == null)
+            {
+                var query = $"?startDate={firstDate}&endDate={lastDate}&search=";
+                return Redirect(Routers.OrderManager.Link + query);
+            }
+
+            try
+            {
+                var (orders, total) = this.OrderService.SearchOrders(startDate, endDate, search, pageIndex, pageSize);
+                this.ViewData["orders"] = orders;
+                this.ViewData["total"] = total;
+                return View(Routers.OrderManager.Page);
+            }
+            catch (System.Exception)
+            {
+
+                var query = $"?startDate={firstDate}&endDate={lastDate}&search=";
+                return Redirect(Routers.OrderManager.Link + query);
+            }
         }
     }
 }

@@ -20,6 +20,7 @@
     {
 
         public static readonly RouterItem Register = new RouterItem() { Page = "/Views/Containers/Auth/Register.cshtml", Title = "Register", Link = "/auth/register" };
+        public static readonly RouterItem RegisterShop = new RouterItem() { Page = "/Views/Containers/Auth/RegisterShop.cshtml", Title = "Register", Link = "/auth/register/shop" };
         public static readonly RouterItem Login = new RouterItem() { Page = "/Views/Containers/Auth/Login.cshtml", Title = "Login", Link = "/auth/login" };
 
         //User Controller

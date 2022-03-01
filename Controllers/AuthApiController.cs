@@ -38,13 +38,13 @@ namespace MedicalStore.Controllers
             var user = this.UserRepository.GetUserByUsername(body.Username);
             if (user == null)
             {
-                res.setErrorMessage(CustomLanguageValidator.ErrorMessageKey.ERROR_LOGIN_FAIL);
+                res.setErrorMessage("username or password is wrong");
                 return new BadRequestObjectResult(res.getResponse());
             }
 
             if (!this.AuthService.ComparePassword(body.Password, user.Password))
             {
-                res.setErrorMessage(CustomLanguageValidator.ErrorMessageKey.ERROR_LOGIN_FAIL);
+                res.setErrorMessage("username or password is wrong");
                 return new BadRequestObjectResult(res.getResponse());
             }
 
@@ -52,7 +52,7 @@ namespace MedicalStore.Controllers
 
             if (token == null)
             {
-                res.setErrorMessage(CustomLanguageValidator.ErrorMessageKey.ERROR_LOGIN_FAIL);
+                res.setErrorMessage("username or password is wrong");
                 return new BadRequestObjectResult(res.getResponse());
             }
 
@@ -63,9 +63,12 @@ namespace MedicalStore.Controllers
                 Secure = true
 
             });
-            res.setMessage(CustomLanguageValidator.MessageKey.MESSAGE_LOGIN_SUCCESS);
+            Console.WriteLine("--------------");
+            res.setMessage("login success");
+
             return new ObjectResult(res.getResponse());
         }
+
 
         [HttpPost("register")]
         public IActionResult HandleRegister([FromBody] RegisterDTO body)
@@ -82,7 +85,7 @@ namespace MedicalStore.Controllers
             var isExistUser = this.UserRepository.GetUserByUsername(body.Username);
             if (isExistUser != null)
             {
-                res.setErrorMessage(CustomLanguageValidator.ErrorMessageKey.ERROR_EXISTED, "username");
+                res.setErrorMessage("is already exist", "username");
                 return new BadRequestObjectResult(res.getResponse());
             }
 
@@ -101,7 +104,46 @@ namespace MedicalStore.Controllers
 
             this.AuthService.RegisterHandler(user);
 
-            res.setMessage(CustomLanguageValidator.MessageKey.MESSAGE_REGISTER_SUCCESS);
+            res.setMessage("register success");
+            return new ObjectResult(res.getResponse());
+        }
+
+
+        [HttpPost("register/shop")]
+        public IActionResult HandleRegisterShop([FromBody] RegisterDTO body)
+        {
+            var res = new ServerApiResponse<string>();
+
+            ValidationResult result = new RegisterDTOValidator().Validate(body);
+            if (!result.IsValid)
+            {
+                res.mapDetails(result);
+                return new BadRequestObjectResult(res.getResponse());
+            }
+
+            var isExistUser = this.UserRepository.GetUserByUsername(body.Username);
+            if (isExistUser != null)
+            {
+                res.setErrorMessage("is already exist", "shop name");
+                return new BadRequestObjectResult(res.getResponse());
+            }
+
+            var user = new User();
+            user.UserId = Guid.NewGuid().ToString();
+            user.Name = body.Name;
+            user.Username = body.Username;
+            user.Phone = body.Phone;
+            user.Address = body.Address;
+            user.Email = body.Email;
+            user.CreateDate = DateTime.Now.ToShortDateString();
+            user.Status = UserStatus.ACTIVE;
+            user.RoleId = "2";
+            user.Password = body.Password;
+
+
+            this.AuthService.RegisterHandler(user);
+
+            res.setMessage("register success");
             return new ObjectResult(res.getResponse());
         }
     }

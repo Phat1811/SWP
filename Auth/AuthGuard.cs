@@ -65,8 +65,8 @@ namespace MedicalStore.Auth
                 // check user's role
                 if (context.ActionArguments.TryGetValue("roles", out _))
                 {
-                    UserRole[] roles = context.ActionArguments["roles"] as UserRole[];
-                    //if (!roles.Contains(user.Role))
+                    string roles = context.ActionArguments["roles"] as String;
+                    if (!roles.Contains(user.RoleId))
                     {
                         return false;
                     }

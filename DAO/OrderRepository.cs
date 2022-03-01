@@ -1,6 +1,7 @@
 ﻿using MedicalStore.DAO.Interface;
 using MedicalStore.Models;
 using MedicalStore.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,60 +10,82 @@ namespace MedicalStore.DAO
     public class OrderRepository : IOrderRepository
     {
         private readonly DBContext DBContext;
-        private readonly IOrderItemRepository OrderItemRepository;
-        public OrderRepository(DBContext dBContext, IOrderItemRepository OrderItemRepository)
+        public OrderRepository(DBContext dBContext)
         {
             this.DBContext = dBContext;
-            this.OrderItemRepository = OrderItemRepository;
         }
 
-        public List<Order> GetAllActiveOrder()
+        public (List<Order>, int) GetOrders(string userId, int pageIndex, int pageSize)
         {
-            List<Order> list = this.DBContext.Order.Where<Order>(item => item.Status == OrderStatus.ACTIVE).ToList<Order>();
-            return list;
+
+            List<Order> orders = this.DBContext.Order.Where(o => o.CustomerId == userId).ToList();
+            var result = orders.Take((pageIndex + 1) * pageSize).Skip(pageIndex * pageSize).ToList();
+            return (result, orders.Count);
         }
 
-        public List<Order> GetAllOrder()
+        public (List<OrderItem>, int) GetOrderDetail(string orderId, int pageIndex, int pageSize)
         {
-            List<Order> listOrder = this.DBContext.Set<Order>().ToList<Order>();
-            return listOrder;
-        }
-
-        public List<Order> GetAllSoldOrder(string sellerId)
-        {
-            List<Product> listProduct = OrderItemRepository.getAllProductBySellerId(sellerId).ToList<Product>();
-            List<OrderItem> listOrderItem = new List<OrderItem>();
-            foreach(Product p in listProduct)
+            List<OrderItem> orderItems = this.DBContext.OrderItem.Where(x => x.OrderId == orderId).ToList();
+            foreach (var orderItem in orderItems)
             {
-                List<OrderItem> listOrderItemByProduct = OrderItemRepository.GetAllOrderItemByProductId(p.ProductId).ToList<OrderItem>();
-                listOrderItem.AddRange(listOrderItemByProduct);
+                this.DBContext.Entry(orderItem).Reference(item => item.Product).Load();
+                this.DBContext.Entry(orderItem.Product).Reference(item => item.Category).Load();
             }
-            List<Order> listOrder = new List<Order>();
-            foreach(OrderItem oi in listOrderItem)
+            var pagelist = (List<OrderItem>)orderItems.Take((pageIndex + 1) * pageSize).Skip(pageIndex * pageSize).ToList();
+            return (pagelist, orderItems.Count);
+        }
+
+        public List<Order> GetAllOrders()
+        {
+            List<Order> orders = this.DBContext.Order.ToList();
+            return orders;
+        }
+
+        public (List<Order>, int) SearchOrders(string startDate, string endDate, string search, int pageIndex, int pageSize)
+        {
+            if (search == null)
             {
-                List<Order> listOrderByOrderItem = this.DBContext.Order.Where<Order>(item => item.OrderId == oi.OrderId).ToList<Order>();
-                foreach(Order order in listOrderByOrderItem)
+                search = "";
+            }
+            search = search.ToLower();
+            List<string> stringDate = new List<string>();
+            stringDate = startDate.Split('-').ToList();
+            startDate = stringDate[1] + "/" + stringDate[2] + "/" + stringDate[0];
+            stringDate = endDate.Split('-').ToList();
+            endDate = stringDate[1] + "/" + stringDate[2] + "/" + stringDate[0];
+            DateTime sDate = Convert.ToDateTime(startDate);
+            DateTime eDate = Convert.ToDateTime(endDate);
+            List<Order> orders = this.DBContext.Order.ToList();
+            foreach (var order in orders)
+            {
+                this.DBContext.Entry(order).Reference(item => item.Customer).Load();
+            }
+
+            for (int i = orders.Count - 1; i >= 0; i--)
+            {
+                DateTime date = Convert.ToDateTime(orders[i].CreateDate);
+                if (DateTime.Compare(date, eDate) > 0 || DateTime.Compare(date, sDate) < 0 || (!orders[i].Customer.Name.ToLower().Contains(search) && !orders[i].Customer.Email.Contains(search) && !orders[i].Customer.Phone.Contains(search)))
                 {
-                    bool checkExistOrder = listOrder.Any(item => item.OrderId == order.OrderId);
-                    if(checkExistOrder != true)
-                    {
-                        listOrder.Add(order);
-                    }
+                    orders.RemoveAt(i);
                 }
             }
-            return listOrder;
+            var result = orders.Take((pageIndex + 1) * pageSize).Skip(pageIndex * pageSize).ToList();
+            return (result, orders.Count);
         }
 
-        public Order GetOrderByOrderId(string orderId)
+
+        public bool CreateOrderHandler(Order order)
         {
-            Order order = this.DBContext.Order.FirstOrDefault(item => item.OrderId == orderId);
-            return order;
+            this.DBContext.Order.Add(order);
+            this.DBContext.SaveChanges();
+            return true;
         }
 
-        public List<Order> GetUserOrderHistory(string customerId)
+        public bool CreateOrderItemHandler(OrderItem orderItem)
         {
-            List<Order> list = this.DBContext.Order.Where<Order>(item => item.CustomerId == customerId).ToList<Order>();
-            return list;
+            this.DBContext.OrderItem.Add(orderItem);
+            this.DBContext.SaveChanges();
+            return true;
         }
     }
 }

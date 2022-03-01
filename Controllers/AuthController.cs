@@ -44,6 +44,17 @@ namespace MedicalStore.Controllers
             return View(Routers.Register.Page);
         }
 
+        [HttpGet("register/shop")]
+        public IActionResult RegisterShop()
+        {
+            var user = (User)this.ViewData["user"];
+            if (user != null)
+            {
+                return Redirect(Routers.Home.Link);
+            }
+            return View(Routers.RegisterShop.Page);
+        }
+
         [HttpGet("logout")]
         public IActionResult Logout()
         {

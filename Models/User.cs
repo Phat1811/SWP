@@ -8,7 +8,6 @@ namespace MedicalStore.Models
         MANAGER = 0,
         CUSTOMER = 1,
         SELLER = 2,
-        GUEST = 3
     }
 
     public enum UserStatus

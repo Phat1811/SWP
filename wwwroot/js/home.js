@@ -107,8 +107,7 @@ paymentList.forEach((radio) => {
 const order = document.getElementById("order");
 order?.addEventListener("submit", function (event) {
         event.preventDefault();
-
-        http.post<ServerResponse<null>>(routers.order.create, { paymentMethod: payment }).then(() => {
+        http.post("/api/order", { paymentMethod: payment }).then(() => {
                 window.location.reload();
         });
 });

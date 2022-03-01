@@ -17,8 +17,8 @@ namespace MedicalStore.Utils.Common
 
         public void setMessage(string key)
         {
-            string value = ValidatorOptions.Global.LanguageManager.GetString(key);
-            this.details.Add("message", value);
+            Console.WriteLine("---------" + key);
+            this.details.Add("message", key);
         }
 
         public void setMessage(string key, string field)
@@ -30,8 +30,7 @@ namespace MedicalStore.Utils.Common
         public void setErrorMessage(string errorKey)
         {
             ValidationResult result = new ValidationResult();
-            string errorMessage = ValidatorOptions.Global.LanguageManager.GetString(errorKey);
-            var failure = new ValidationFailure("errorMessage", errorMessage);
+            var failure = new ValidationFailure("errorMessage", errorKey);
             failure.FormattedMessagePlaceholderValues = new Dictionary<string, object>();
             failure.FormattedMessagePlaceholderValues.Add("field", "errorMessage");
 
@@ -42,8 +41,7 @@ namespace MedicalStore.Utils.Common
         public void setErrorMessage(string errorKey, string field)
         {
             ValidationResult result = new ValidationResult();
-            string errorMessage = ValidatorOptions.Global.LanguageManager.GetString(errorKey);
-            var failure = new ValidationFailure(field, errorMessage);
+            var failure = new ValidationFailure(field, errorKey);
             failure.FormattedMessagePlaceholderValues = new Dictionary<string, object>();
             failure.FormattedMessagePlaceholderValues.Add("field", field);
 

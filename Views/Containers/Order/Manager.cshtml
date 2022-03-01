@@ -1,55 +1,136 @@
-﻿@using MedicalStore.Utils.Common
+﻿
+@using MedicalStore.Utils.Common;
 @{
-    var listOrder = (List<Order>)this.ViewData["listOrder"];
+    this.ViewData["Title"] = Routers.Category.Title;
+    var orders = (List<Order>)this.ViewData["orders"];
+    var total = (int)this.ViewData["total"];
+    var search = (string)this.Context.Request.Query["search"];
+    var endDate = (string)this.Context.Request.Query["endDate"];
+    var startDate = (string)this.Context.Request.Query["startDate"];
+    double totalOri = 0;
+    double totalPro = 0;
 
 }
 
+<div class="flex-1 min-h-screen px-2 py-2 xl:px-8 xl:py-6 ">
+    <div class="flex">
+        @await Html.PartialAsync("../../Components/Navbar/NavbarSide.cshtml")
+        <div class="content">
+            <div class="mt-5 intro-y box">
+                <div class="flex flex-col items-center p-5 border-b border-gray-200 sm:flex-row">
+                    <h2 class="mr-auto text-base font-medium">
+                        Order Management
+                    </h2>
+                </div>
+                <div class="flex flex-col items-center p-5 border-b border-gray-200 sm:flex-row">
 
-<div class="min-h-full flex ">
-    <div class="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
-        <div class="mx-auto w-full max-w-sm lg:w-96">
-            <div>
-                <a href="@Routers.Home.Link">
-                    <img class="h-12 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-                         alt="Workflow"/>
-                </a>
-                <h2 class="mt-6 text-3xl font-extrabold text-gray-900">All Order</h2>
+                    <form id="formFilter">
+                        <div class="flex items-end space-x-2">
+                            <div class="space-y-2">
+                                <label>Name</label>
+                                @await Html.PartialAsync("../../Components/Form/TextField.cshtml", new {Label="Name",
+                                Field="search",Type="text", Value=search})
+                            </div>
+
+                            <div class="space-y-2">
+                                <label>Start Date</label>
+                                @await Html.PartialAsync("../../Components/Form/TextField.cshtml", new {Label="Start Date",Field="startDate", Type="date", Value=startDate})
+                            </div>
+                            <div class="space-y-2">
+                                <label>End Date</label>
+                                @await Html.PartialAsync("../../Components/Form/TextField.cshtml", new {Label="End Date", Field="endDate",Type="date", Value=endDate})
+                            </div>
+                            <div class="flex items-end">
+                                <button class="mb-2 btn btn-primary">
+                                    <i data-feather="search" class="w-5 h-5"></i>
+                                </button>
+
+                            </div>
+                        </div>
+                        @await Html.PartialAsync("../../Components/Form/FormHidden.cshtml",
+                        new { Name = "pageSize", Value = (string) this.Context.Request.Query["pageSize"] ?? "12" })
+                        @await Html.PartialAsync("../../Components/Form/FormHidden.cshtml",
+                        new { Name = "pageIndex",Value = (string) this.Context.Request.Query["pageIndex"] ?? "0" })
+                    </form>
+                </div>
+
+                <div class="p-5" id="hoverable-table">
+                    <div class="preview">
+                        <div class="overflow-x-auto">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">#
+                                        </th>
+                                        <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Customer Name
+                                        </th>
+                                        <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Total
+                                        </th>
+                                        <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Profit
+                                        </th>
+                                        <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Create Date
+                                        </th>
+                                        <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Payment
+                                            Method
+                                        </th>
+                                        <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Stauts</th>
+                                        <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">View Detail</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for (int i = 0; i < orders.Count; i++)
+                                    {   
+                                        var item = orders[i];
+                                        var link = $"{Routers.OrderDetail.Link}?orderId={item.OrderId}";
+                                        totalOri += item.Total;
+                                        totalPro += item.Profit;
+                                        <tr class="hover:bg-gray-200">
+                                            <td class="border">@(i+1)</td>
+                                            <td class="border">@item.Customer.Name</td>
+                                            <td class="border">$@item.Total</td>
+                                            <td class="border">$@item.Profit</td>
+                                            <td class="border">@item.CreateDate</td>
+                                            <td class="border">@item.PaymentMethod</td>
+                                            <td class="border">
+                                                @await Html.PartialAsync("../../Components/Table/Status.cshtml", item.Status
+                                            == OrderStatus.ACTIVE )
+                                            </td>
+                                            <td class="border">
+                                                <a href="@link" class="mb-2 mr-1 btn btn-primary"> <i
+                                                    data-feather="shopping-bag" class="w-5 h-5"></i> </a>
+                                            </td>
+                                        </tr>
+                                    }
+
+
+
+                                      <tr class="hover:bg-gray-200">
+                                            <td class="border"></td>
+                                            <td class="border">Total</td>
+                                            <td class="border">$@totalOri</td>
+                                            <td class="border">$@totalPro</td>
+                                            <td class="border"></td>
+                                            <td class="border"></td>
+                                            <td class="border">
+                             
+                                            </td>
+                                            <td class="border">
+                                              
+                                            </td>
+                                        </tr>
+                                </tbody>
+                            </table>
+                              @await Html.PartialAsync("../../Components/Common/Pagination.cshtml",
+                            new { PageIndex = (string) this.Context.Request.Query["pageIndex"] ?? "0", PageSize =
+                            (string)
+                            this.Context.Request.Query["pageSize"]?? "12", Total = total })
+                        </div>
+                    </div>
+                </div>
             </div>
-            <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
-                    <tr>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Order Id
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total Price
-                            <a href="/order/manager?sortBy=priceIncreasing" title="Sort by increasing Price">▲</a>
-                            <a href="/order/manager?sortBy=priceDescending" title="Sort by descending Price">▼</a>
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Create Date
-                            <a href="/order/manager?sortBy=createDateIncreasing" title="Sort by increasing Create Date">▲</a>
-                            <a href="/order/manager?sortBy=createDateDescending" title="Sort by descending Create Date">▼</a>
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Customer ID</th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Detail</th>
-                    </tr>
-                </thead>
-                @foreach (var order in listOrder)
-                {
-                    <tr class="bg-white">
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">@order.OrderId</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">@order.Total.ToString()</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">@order.CreateDate</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">@order.CustomerId</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">@order.Status</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                            <a href="/order/detail?orderId=@order.OrderId" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                Detail
-                            </a>
-                        </td>
-                    </tr>
-                }
-            </table>
         </div>
     </div>
 </div>
+@section Scripts {
+<script src="/js/pagination.js"></script>
+}

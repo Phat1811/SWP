@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace MedicalStore.Auth
 {
-    public class RoleGuardAttribute: ActionFilterAttribute
+    public class RoleGuardAttribute : ActionFilterAttribute
     {
-        private readonly UserRole[] roles;
-        public RoleGuardAttribute(UserRole[] roles)
+        private readonly string roles;
+        public RoleGuardAttribute(string roles)
         {
             this.roles = roles;
         }

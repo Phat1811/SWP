@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\LENOVO-PC\\Desktop\\SWP\\iteration3\\SWP\\MedicalStore.csproj": {}
+    "F:\\Trả Nợ\\SWP391\\Code\\Dev1\\MedicalStore.csproj": {}
   },
   "projects": {
-    "C:\\Users\\LENOVO-PC\\Desktop\\SWP\\iteration3\\SWP\\MedicalStore.csproj": {
+    "F:\\Trả Nợ\\SWP391\\Code\\Dev1\\MedicalStore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\LENOVO-PC\\Desktop\\SWP\\iteration3\\SWP\\MedicalStore.csproj",
+        "projectUniqueName": "F:\\Trả Nợ\\SWP391\\Code\\Dev1\\MedicalStore.csproj",
         "projectName": "MedicalStore",
-        "projectPath": "C:\\Users\\LENOVO-PC\\Desktop\\SWP\\iteration3\\SWP\\MedicalStore.csproj",
-        "packagesPath": "C:\\Users\\LENOVO-PC\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\LENOVO-PC\\Desktop\\SWP\\iteration3\\SWP\\obj\\",
+        "projectPath": "F:\\Trả Nợ\\SWP391\\Code\\Dev1\\MedicalStore.csproj",
+        "packagesPath": "C:\\Users\\Sai\\.nuget\\packages\\",
+        "outputPath": "F:\\Trả Nợ\\SWP391\\Code\\Dev1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\LENOVO-PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Sai\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -99,7 +99,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.405\\RuntimeIdentifierGraph.json"
         }
       }
     }

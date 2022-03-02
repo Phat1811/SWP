@@ -6,12 +6,14 @@ namespace MedicalStore.Controllers.DTO
 {
     public class UpdateUserDTO
     {
+        public string UserId { set; get; }
         public string UserName{ set; get; }
         public string Name { set; get; }
 
         public string Email { set; get; }
         public string Phone { set; get; }
         public string Address { set; get; }
+        public string Status { set; get; }
     }
 
     public class UpdateUserDTOValidator : AbstractValidator<UpdateUserDTO>

@@ -1,6 +1,7 @@
 ﻿using MedicalStore.DAO.Interface;
 using MedicalStore.Models;
 using MedicalStore.Utils;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace MedicalStore.DAO
@@ -42,6 +43,24 @@ namespace MedicalStore.DAO
             this.DBContext.User.Update(user);
             this.DBContext.SaveChanges();
             return true;
-        }  
+        }
+
+        public bool ManageAccountHandler(User user)
+        {
+            this.DBContext.User.Update(user);
+            return this.DBContext.SaveChanges() > 0;
+        }
+        public List<User> GetAllUsers()
+        {
+            List<User> listUser = this.DBContext.Set<User>().ToList<User>();
+            return listUser;
+        }
+
+
+        public List<User> GetListUserToManager()
+        {
+            List<User> list = this.DBContext.User.Where<User>(item => item.RoleId != "0").ToList<User>();
+            return list;
+        }
     }
 }

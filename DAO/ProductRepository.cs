@@ -21,12 +21,6 @@ namespace MedicalStore.DAO
             return this.DBContext.SaveChanges() > 0;
         }
 
-        public List<Product> GetAllProduct()
-        {
-            List<Product> listProducts = this.DBContext.Set<Product>().ToList<Product>();
-            return listProducts;
-        }
-
         public Product GetProductById(string id)
         {
             Product product = this.DBContext.Product.FirstOrDefault(item => item.ProductId == id);
@@ -52,10 +46,16 @@ namespace MedicalStore.DAO
             return true;
         }
 
-        public List<Product> GetListProductByShopId(string shopId)
+        public (List<Product>, int) GetListProductByShopId(string shopId, int pageIndex, int pageSize)
         {
-            List<Product> listProducts = this.DBContext.Set<Product>().Where(item => item.ShopId == shopId).ToList<Product>();
-            return listProducts;
+            List<Product> products = this.DBContext.Product.Where(item => item.ShopId == shopId).ToList();
+            var result = products.Take((pageIndex + 1) * pageSize).Skip(pageIndex * pageSize).ToList();
+            return (result, products.Count);
+        }
+        public List<Product> GetAllProduct()
+        {
+            List<Product> products = this.DBContext.Product.ToList();
+            return products;
         }
     }
 }

@@ -21,28 +21,28 @@ namespace MedicalStore.Controllers
         } 
 
         [HttpGet("")]
-        public IActionResult GetAllCategory(string sortBy)
+        public IActionResult GetAllCategory(string sortBy, int pageIndex = 0, int pageSize = 12)
         {
-            var listCategory = (List<Category>)CategoryRepository.GetAllCategories();
-            listCategory.Sort((x, y) => y.CreateDate.CompareTo(x.CreateDate));
+            var (categories, total) = this.CategoryService.GetAllCategories(pageIndex, pageSize);
+            categories.Sort((x, y) => y.CreateDate.CompareTo(x.CreateDate));
             if (sortBy == "createDateIncreasing")
             {
-                listCategory.Sort((x, y) => x.CreateDate.CompareTo(y.CreateDate));
+                categories.Sort((x, y) => x.CreateDate.CompareTo(y.CreateDate));
             }
             if (sortBy == "createDateDescending")
             {
-                listCategory.Sort((x, y) => y.CreateDate.CompareTo(x.CreateDate));
+                categories.Sort((x, y) => y.CreateDate.CompareTo(x.CreateDate));
             }
             if (sortBy == "nameIncreasing")
             {
-                listCategory.Sort((x, y) => string.Compare(y.Name, x.Name));
+                categories.Sort((x, y) => string.Compare(y.Name, x.Name));
             }
             if (sortBy == "nameDescending")
             {
-                listCategory.Sort((x, y) => string.Compare(x.Name, y.Name));
+                categories.Sort((x, y) => string.Compare(x.Name, y.Name));
             }
-
-            this.ViewData["listCategory"] = listCategory;
+            this.ViewData["listCategory"] = categories;
+            this.ViewData["total"] = total;
             return View(Routers.Category.Page);
         }
 

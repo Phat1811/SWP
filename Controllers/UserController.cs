@@ -22,10 +22,12 @@ namespace MedicalStore.Controllers
     public class UserController : Controller
     {
         private readonly IUserService UserService;
+        private readonly IUserRepository UserRepository;
 
-        public UserController(IUserService userService)
+        public UserController(IUserService userService, IUserRepository userRepository)
         {
             this.UserService = userService;
+            this.UserRepository = userRepository;
         }
 
         [HttpGet("updateinfo")]
@@ -43,14 +45,46 @@ namespace MedicalStore.Controllers
         }
 
         [HttpGet("profile")]
-        public IActionResult UserProfile()
+        public IActionResult UserProfile(string userId)
         {
-            User user = (User)this.ViewData["user"];
-            if (user == null)
+            User userProdile = new User();
+            int check = 0;
+            if (userId == null)
             {
-                return Redirect(Routers.Home.Link);
+                User user = (User)this.ViewData["user"];
+                if (user == null)
+                {
+                    return Redirect(Routers.Home.Link);
+                }
+                userProdile = user;
+                check = 0;
             }
+            else
+            {
+                userProdile = UserRepository.GetUserById(userId);
+                check = 1;
+            }
+            this.ViewData["userProfile"] = userProdile;
+            this.ViewData["check"] = check;
             return View(Routers.UserProfile.Page);
+        }
+        [HttpGet("manage")]
+        public IActionResult GetAllUser(string sortBy)
+        {
+            var listUser = (List<User>)UserRepository.GetListUserToManager();
+
+
+            if (sortBy == "nameIncreasing")
+            {
+                listUser.Sort((x, y) => string.Compare(y.Name, x.Name));
+            }
+            if (sortBy == "nameDescending")
+            {
+                listUser.Sort((x, y) => string.Compare(x.Name, y.Name));
+            }
+
+            this.ViewData["listUser"] = listUser;
+            return View(Routers.ManageAccount.Page);
         }
     }
 }

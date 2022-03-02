@@ -14,7 +14,8 @@ namespace MedicalStore.DAO.Interface
         public bool CreateCategoryHandler(Category category);
         public bool UpdateCategoryInfoHandler(Category Category);
         public bool DeleteCategoryHandler(Category Category);
-        public List<Category> GetAllCategories();
         public List<SelectListItem> GetListCategoriesByStatus(CategoryStatus categoryStatus);
+        public (List<Category>, int) GetAllCategories(int pageIndex, int pageSize);
+        public List<Category> GetAllCategories();
     }
 }

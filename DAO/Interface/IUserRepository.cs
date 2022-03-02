@@ -1,4 +1,5 @@
 ﻿using MedicalStore.Models;
+using System.Collections.Generic;
 
 namespace MedicalStore.DAO.Interface
 {
@@ -9,5 +10,9 @@ namespace MedicalStore.DAO.Interface
         public bool RegisterHandler(User user);
         public bool UpdatePasswordHandler(User user);
         public bool UpdateUserInfoHandler(User user);
+        public List<User> GetAllUsers();
+        public List<User> GetListUserToManager();
+
+        public bool ManageAccountHandler(User user);
     }
 }

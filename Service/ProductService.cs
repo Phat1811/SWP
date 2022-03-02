@@ -38,14 +38,14 @@ namespace MedicalStore.Service
             return this.ProductRepository.UpdateHandler(product);
         }
 
-        public List<Product> GetProducts()
+        public (List<Product>, int) GetListProductByShopId(string shopId, int pageIndex, int pageSize)
         {
-            return this.ProductRepository.GetAllProduct();
+            return this.ProductRepository.GetListProductByShopId(shopId, pageIndex, pageSize);
         }
 
-        public List<Product> GetListProductByShopId(string shopId)
+        public List<Product> GetAllProduct()
         {
-            return this.ProductRepository.GetListProductByShopId(shopId);
+            return this.ProductRepository.GetAllProduct();
         }
     }
 }

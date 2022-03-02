@@ -6,5 +6,6 @@ namespace MedicalStore.Service.Interface
     {
         public bool UpdatePasswordHandler(User user);
         public bool UpdateUserInfoHandler(User user);
+        public User GetUserById(string id);
     }
 }

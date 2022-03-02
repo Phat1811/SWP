@@ -8,7 +8,8 @@ namespace MedicalStore.Service.Interface
         public bool CreateProductHandler(Product product);
         public bool UpdateProductHandler(Product product);
         public bool DeleteProductHandler(Product product);
-        public List<Product> GetProducts();
-        public List<Product> GetListProductByShopId(string shopId);
+        public (List<Product>, int) GetListProductByShopId(string shopId, int pageIndex, int pageSize);
+        public List<Product> GetAllProduct();
+
     }
 }

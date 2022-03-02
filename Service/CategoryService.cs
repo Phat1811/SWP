@@ -2,6 +2,7 @@
 using MedicalStore.Models;
 using MedicalStore.Utils;
 using MedicalStore.Utils.Interface;
+using System.Collections.Generic;
 
 namespace MedicalStore.DAO
 {
@@ -22,6 +23,11 @@ namespace MedicalStore.DAO
         public bool DeleteCategoryHandler(Category category)
         {
             return this.CategoryRepository.DeleteCategoryHandler(category);
+        }
+
+        public (List<Category>, int) GetAllCategories(int pageIndex, int pageSize)
+        {
+            return this.CategoryRepository.GetAllCategories(pageIndex, pageSize);
         }
 
         public bool UpdateCategoryInfoHandler(Category category)

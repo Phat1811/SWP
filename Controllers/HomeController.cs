@@ -50,7 +50,7 @@ namespace MedicalStore.Controllers
             this.ViewData["cartItems"] = getCart;
 
             Console.WriteLine(this.ViewData["user"]);
-            var products = this.ProductService.GetProducts();
+            var products = this.ProductService.GetAllProduct();
             this.ViewData["products"] = products;
             return View(Routers.Home.Page);
         }

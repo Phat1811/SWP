@@ -29,9 +29,9 @@ namespace MedicalStore.DAO
         {
             return this.OrderRepository.GetOrderDetail(orderId, pageIndex, pageSize);
         }
-        public List<Order> GetAllOrders()
+        public (List<Order>, int) GetAllOrders(int pageIndex, int pageSize)
         {
-            return this.OrderRepository.GetAllOrders();
+            return this.OrderRepository.GetAllOrders(pageIndex, pageSize);
         }
         public (List<Order>, int) SearchOrders(string startDate, string endDate, string search, int pageIndex, int pageSize)
         {
@@ -48,5 +48,9 @@ namespace MedicalStore.DAO
             return this.OrderRepository.CreateOrderItemHandler(orderItem);
         }
 
+        public Order GetOrderByOrderId(string orderId)
+        {
+            return this.OrderRepository.GetOrderByOrderId(orderId);
+        }
     }
 }

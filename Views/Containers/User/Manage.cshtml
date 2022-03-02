@@ -1,0 +1,76 @@
+﻿@using MedicalStore.Utils.Common
+@{
+    this.ViewData["Title"] = Routers.ManageAccount.Title;
+
+    var listUser = (List<User>)this.ViewData["listUser"];
+
+}
+
+<div class="flex-1 min-h-screen px-2 py-2 xl:px-8 xl:py-6">
+    <div class="flex">
+        @await Html.PartialAsync("../../Components/Navbar/NavbarSide.cshtml")
+        <div class="container">
+            <div class="mt-5 intro-y box">
+                <div class="flex flex-col items-center p-5 border-b border-gray-200 sm:flex-row">
+                    <h2 class="mr-auto text-base font-medium">
+                        All Categories
+                    </h2>
+                </div>
+                <form id="formFilter">
+                    @await Html.PartialAsync("../../Components/Form/FormHidden.cshtml",
+                    new { Name = "pageSize", Value = (string)this.Context.Request.Query["pageSize"] ?? "12" })
+                    @await Html.PartialAsync("../../Components/Form/FormHidden.cshtml",
+                    new { Name = "pageIndex", Value = (string)this.Context.Request.Query["pageIndex"] ?? "0" })
+                </form>
+                <div class="p-5" id="hoverable-table">
+                    <div class="preview">
+                        <div class="overflow-x-auto">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">#</th>
+                                        <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Name</th>
+                                        <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Phone</th>
+                                        <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Address</th>
+                                        <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Status</th>
+                                        <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Role</th>
+                                        <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Profile</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for (int i = 0; i < listUser.Count; i++)
+                                    {
+                                        var item = listUser[i];
+                                        var link = $"{Routers.UserProfile.Link}?userId={item.UserId}";
+                                        <tr class="hover:bg-gray-200">
+                                            <td class="border">@(i+1)</td>
+                                            <td class="border">@item.Name</td>
+                                            <td class="border">@item.Phone</td>
+                                            <td class="border">@item.Address</td>
+                                            <td class="border">@await Html.PartialAsync("../../Components/Table/Status.cshtml", item.Status == UserStatus.ACTIVE)</td>
+                                            <td class="border">@item.RoleId</td>
+                                            <td class="border">
+                                                <a href="@link" class="mb-2 mr-1 btn btn-primary">
+                                                    <i data-feather="shopping-bag" class="w-5 h-5"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            @await Html.PartialAsync("../../Components/Common/Pagination.cshtml",
+                            new
+                                 {
+                                     PageIndex = (string)this.Context.Request.Query["pageIndex"] ?? "0",
+                                     PageSize =
+                            (string)
+                            this.Context.Request.Query["pageSize"] ?? "12",
+                                     Total = listUser.Count
+                                 })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

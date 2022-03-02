@@ -13,6 +13,7 @@ using System.Collections.Generic;
 
 using System.Linq;
 using System.Threading.Tasks;
+using MedicalStore.Service.Interface;
 
 namespace MedicalStore.Controllers
 {
@@ -22,10 +23,12 @@ namespace MedicalStore.Controllers
     {
         private readonly IUserRepository UserRepository;
         private readonly IAuthService AuthService;
-        public UserApiController(IUserRepository userRepository, IAuthService AuthService)
+        private readonly IUserService UserService;
+        public UserApiController(IUserRepository userRepository, IAuthService AuthService, IUserService userService)
         {
             this.UserRepository = userRepository;
             this.AuthService = AuthService;
+            this.UserService = userService;
         }
         [HttpPost("updateinfo")]
         public IActionResult HandleUpdateUserInfo([FromBody] UpdateUserDTO body)
@@ -91,6 +94,26 @@ namespace MedicalStore.Controllers
 
             });
             res.setMessage(CustomLanguageValidator.MessageKey.MESSAGE_UPDATE_SUCCESS);
+            return new ObjectResult(res.getResponse());
+        }
+
+        [HttpPost("banUnban")]
+        public IActionResult HandleManageAccount([FromBody] UpdateUserDTO body)
+        {
+            var res = new ServerApiResponse<string>();
+
+            var user = UserRepository.GetUserById(body.UserId);
+            if (user.Status == UserStatus.ACTIVE)
+            {
+                user.Status = UserStatus.INACTIVE;
+            }
+            else
+            {
+                user.Status = UserStatus.ACTIVE;
+            }
+            this.UserService.UpdateUserInfoHandler(user);
+
+            res.setMessage(CustomLanguageValidator.MessageKey.MESSAGE_ADD_SUCCESS);
             return new ObjectResult(res.getResponse());
         }
     }

@@ -18,6 +18,11 @@ namespace MedicalStore.Service
             this.AuthService = authService;
         }
 
+        public User GetUserById(string id)
+        {
+            return this.UserRepository.GetUserById(id);
+        }
+
         public bool UpdatePasswordHandler(User user)
         {
             return this.UserRepository.UpdatePasswordHandler(user);

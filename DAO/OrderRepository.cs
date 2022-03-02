@@ -17,7 +17,6 @@ namespace MedicalStore.DAO
 
         public (List<Order>, int) GetOrders(string userId, int pageIndex, int pageSize)
         {
-
             List<Order> orders = this.DBContext.Order.Where(o => o.CustomerId == userId).ToList();
             var result = orders.Take((pageIndex + 1) * pageSize).Skip(pageIndex * pageSize).ToList();
             return (result, orders.Count);
@@ -35,11 +34,6 @@ namespace MedicalStore.DAO
             return (pagelist, orderItems.Count);
         }
 
-        public List<Order> GetAllOrders()
-        {
-            List<Order> orders = this.DBContext.Order.ToList();
-            return orders;
-        }
 
         public (List<Order>, int) SearchOrders(string startDate, string endDate, string search, int pageIndex, int pageSize)
         {
@@ -86,6 +80,19 @@ namespace MedicalStore.DAO
             this.DBContext.OrderItem.Add(orderItem);
             this.DBContext.SaveChanges();
             return true;
+        }
+
+        public (List<Order>, int) GetAllOrders(int pageIndex, int pageSize)
+        {
+            List<Order> orders = this.DBContext.Order.ToList();
+            var result = orders.Take((pageIndex + 1) * pageSize).Skip(pageIndex * pageSize).ToList();
+            return (result, orders.Count);
+        }
+
+        public Order GetOrderByOrderId(string orderId)
+        {
+            Order order = this.DBContext.Order.FirstOrDefault(item => item.OrderId == orderId);
+            return order;
         }
     }
 }

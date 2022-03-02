@@ -79,17 +79,20 @@ namespace MedicalStore.Controllers
         }
 
         [HttpGet("")]
-        public IActionResult GetProductsByUserRole()
+        public IActionResult GetProductsByUserRole(int pageIndex = 0, int pageSize = 12)
         {
             var user = (User)this.ViewData["user"];
             List<Product> listProduct = new List<Product>();
             List<string> listShopName = new List<string>();
+            int total = 0;
             if(user != null)
             {
                 if(user.RoleId == "2")
                 {
-                    var list = (List<Product>)ProductRepository.GetListProductByShopId(user.UserId);
-                    listProduct = list;
+                    var (products, t) = this.ProductService.GetListProductByShopId(user.UserId, pageIndex, pageSize);
+                    listProduct = products;
+                    listProduct.Sort((x, y) => x.CreateDate.CompareTo(y.CreateDate));
+                    total = t;
                 }
                 if(user.RoleId == "0")
                 {
@@ -100,10 +103,13 @@ namespace MedicalStore.Controllers
                         listShopName.Add(UserRepository.GetUserById(p.ShopId).Name);
                     }
                     listProduct = list;
+                    total = list.Count;
                 }
             }
+
             this.ViewData["listShopName"] = listShopName;
             this.ViewData["listProduct"] = listProduct;
+            this.ViewData["total"] = total;
             return View(Routers.Product.Page);
         }
     }

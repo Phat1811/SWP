@@ -35,10 +35,10 @@ namespace MedicalStore.Controllers
                 return new BadRequestObjectResult(res.getResponse());
             }
 
-            var isExitCategory = this.CategoryRepository.GetCategortByName(body.Name.Trim());
-            if (isExitCategory != null)
+            var isExistCategory = this.CategoryRepository.GetCategortByName(body.Name.Trim());
+            if (isExistCategory != null)
             {
-                res.setErrorMessage(CustomLanguageValidator.ErrorMessageKey.ERROR_EXISTED, "Name");
+                res.setErrorMessage("Category Name is already exist!!");
                 return new BadRequestObjectResult(res.getResponse());
             }
 
@@ -51,7 +51,7 @@ namespace MedicalStore.Controllers
 
             this.CategoryService.CreateCategoryHandler(category);
 
-            res.setMessage(CustomLanguageValidator.MessageKey.MESSAGE_ADD_SUCCESS);
+            res.setMessage("Create Category success");
             return new ObjectResult(res.getResponse());
         }
 
@@ -68,18 +68,18 @@ namespace MedicalStore.Controllers
             }
             var category = CategoryRepository.GetCategoryByID(body.CategoryId);
             if (body.Name.Trim() != category.Name) {
-            var isExitCategory = this.CategoryRepository.GetCategortByName(body.Name.Trim());
-            if (isExitCategory != null)
+            var isExistCategory = this.CategoryRepository.GetCategortByName(body.Name.Trim());
+            if (isExistCategory != null)
             {
-                res.setErrorMessage(CustomLanguageValidator.ErrorMessageKey.ERROR_EXISTED, "Name");
-                return new BadRequestObjectResult(res.getResponse());
+                    res.setErrorMessage("Category Name is already exist!!");
+                    return new BadRequestObjectResult(res.getResponse());
             }
             }
             category.Name = body.Name.Trim();
             category.Description = body.Description.Trim();
             this.CategoryService.UpdateCategoryInfoHandler(category);
 
-            res.setMessage(CustomLanguageValidator.MessageKey.MESSAGE_ADD_SUCCESS);
+            res.setMessage("Update Category success");
             return new ObjectResult(res.getResponse());
         }
 
@@ -98,7 +98,7 @@ namespace MedicalStore.Controllers
                 CategoryRepository.DisableProductByID(p.ProductId);
             }
 
-            res.setMessage(CustomLanguageValidator.MessageKey.MESSAGE_ADD_SUCCESS);
+            res.setMessage("Delete Category success");
             return new ObjectResult(res.getResponse());
         }
     }

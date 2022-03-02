@@ -86,5 +86,12 @@ namespace MedicalStore.DAO
             }
             return categories;
         }
+
+        public (List<Category>, int) GetAllCategories(int pageIndex, int pageSize)
+        {
+            List<Category> categories = this.DBContext.Category.ToList();
+            var result = categories.Take((pageIndex + 1) * pageSize).Skip(pageIndex * pageSize).ToList();
+            return (result, categories.Count);
+        }
     }
 }

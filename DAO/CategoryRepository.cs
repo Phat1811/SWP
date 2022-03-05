@@ -60,7 +60,7 @@ namespace MedicalStore.DAO
 
         public List<Category> GetAllCategories()
         {
-            List<Category> listCategory = this.DBContext.Set<Category>().ToList<Category>();
+            List<Category> listCategory = this.DBContext.Category.ToList();
             return listCategory;
         }
 

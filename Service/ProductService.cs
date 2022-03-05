@@ -43,9 +43,9 @@ namespace MedicalStore.Service
             return this.ProductRepository.GetListProductByShopId(shopId, pageIndex, pageSize);
         }
 
-        public List<Product> GetAllProduct()
+        public (List<Product>, int) GetProducts(int pageIndex, int pageSize, double min, double max, string name, string categoryId, CategoryStatus categoryStatus)
         {
-            return this.ProductRepository.GetAllProduct();
+            return this.ProductRepository.GetProducts(pageIndex, pageSize, min, max, name, categoryId, categoryStatus);
         }
     }
 }

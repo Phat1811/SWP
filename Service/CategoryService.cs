@@ -2,6 +2,7 @@
 using MedicalStore.Models;
 using MedicalStore.Utils;
 using MedicalStore.Utils.Interface;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 
 namespace MedicalStore.DAO
@@ -33,6 +34,11 @@ namespace MedicalStore.DAO
         public bool UpdateCategoryInfoHandler(Category category)
         {
             return this.CategoryRepository.UpdateCategoryInfoHandler(category);
+        }
+
+        public List<SelectListItem> GetCategoryDropListRender(CategoryStatus categoryStatus)
+        {
+            return this.CategoryRepository.GetListCategoriesByStatus(categoryStatus);
         }
     }
 }

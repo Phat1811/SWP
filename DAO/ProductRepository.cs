@@ -52,10 +52,27 @@ namespace MedicalStore.DAO
             var result = products.Take((pageIndex + 1) * pageSize).Skip(pageIndex * pageSize).ToList();
             return (result, products.Count);
         }
-        public List<Product> GetAllProduct()
+        public (List<Product>, int) GetProducts(int pageIndex, int pageSize, double min, double max, string name, string categoryId, CategoryStatus categoryStatus)
         {
-            List<Product> products = this.DBContext.Product.ToList();
-            return products;
+            List<Product> products = null;
+            if (categoryStatus == CategoryStatus.ACTIVE)
+            {
+                products = this.DBContext.Product.Where(item => item.RetailPrice >= min && item.RetailPrice <= max && item.Name.Contains(name) && item.CategoryId.Contains(categoryId) && item.Category.Status == CategoryStatus.ACTIVE).ToList();
+            }
+            else
+            {
+                products = this.DBContext.Product.Where(item => item.RetailPrice >= min && item.RetailPrice <= max && item.Name.Contains(name) && item.CategoryId.Contains(categoryId)).ToList();
+            }
+            foreach (Product product in products)
+            {
+                if (product != null)
+                {
+                    this.DBContext.Entry(product).Reference(item => item.Category).Load();
+                }
+            }
+
+            var pagelist = (List<Product>)products.Take((pageIndex + 1) * pageSize).Skip(pageIndex * pageSize).ToList();
+            return (pagelist, products.Count);
         }
     }
 }

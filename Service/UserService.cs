@@ -2,6 +2,7 @@
 using MedicalStore.Models;
 using MedicalStore.Service.Interface;
 using MedicalStore.Utils;
+using System.Collections.Generic;
 
 namespace MedicalStore.Service
 {
@@ -18,9 +19,34 @@ namespace MedicalStore.Service
             this.AuthService = authService;
         }
 
+        public List<User> GetAllUsers()
+        {
+            return this.UserRepository.GetAllUsers();
+        }
+
+        public List<User> GetListUserToManager()
+        {
+            return this.UserRepository.GetListUserToManager();
+        }
+
         public User GetUserById(string id)
         {
             return this.UserRepository.GetUserById(id);
+        }
+
+        public User GetUserByUsername(string username)
+        {
+            return this.UserRepository.GetUserByUsername(username);
+        }
+
+        public bool ManageAccountHandler(User user)
+        {
+            return this.UserRepository.ManageAccountHandler(user);
+        }
+
+        public bool RegisterHandler(User user)
+        {
+            return this.UserRepository.RegisterHandler(user);
         }
 
         public bool UpdatePasswordHandler(User user)

@@ -24,11 +24,13 @@ namespace MedicalStore.Controllers
         private readonly IUserRepository UserRepository;
         private readonly IAuthService AuthService;
         private readonly IUserService UserService;
-        public UserApiController(IUserRepository userRepository, IAuthService AuthService, IUserService userService)
+        private readonly IProductService ProductService;
+        public UserApiController(IUserRepository userRepository, IAuthService AuthService, IUserService userService, IProductService productService)
         {
             this.UserRepository = userRepository;
             this.AuthService = AuthService;
             this.UserService = userService;
+            this.ProductService = productService;
         }
         [HttpPost("updateinfo")]
         public IActionResult HandleUpdateUserInfo([FromBody] UpdateUserDTO body)
@@ -44,18 +46,14 @@ namespace MedicalStore.Controllers
 
             User user = (User)this.ViewData["user"];
 
-
-
             user.Name = body.Name;
             user.Phone = body.Phone;
             user.Address = body.Address;
             user.Email = body.Email;
 
-
-
             this.UserRepository.UpdateUserInfoHandler(user);
 
-            res.setMessage(CustomLanguageValidator.MessageKey.MESSAGE_UPDATE_SUCCESS);
+            res.setMessage("Update user infomation success!");
             return new ObjectResult(res.getResponse());
         }
         [HttpPost("password")]
@@ -73,12 +71,12 @@ namespace MedicalStore.Controllers
             bool checkPassword = AuthService.ComparePassword(body.Password, user.Password);
             if (!checkPassword)
             {
-                res.setErrorMessage(CustomLanguageValidator.ErrorMessageKey.ERROR_OLD_PASSWORD_NOT_CORRECT);
+                res.setErrorMessage("Ole Password is not correct!");
                 return new BadRequestObjectResult(res.getResponse());
             }
             if (!(body.NewPassword == body.ConfirmNewPassword))
             {
-                res.setErrorMessage(CustomLanguageValidator.ErrorMessageKey.ERROR_OLD_PASSWORD_NOT_CORRECT);
+                res.setErrorMessage("Confirm password does not match new password");
                 return new BadRequestObjectResult(res.getResponse());
             }
             user.Password = body.NewPassword;
@@ -93,7 +91,7 @@ namespace MedicalStore.Controllers
                 Secure = true
 
             });
-            res.setMessage(CustomLanguageValidator.MessageKey.MESSAGE_UPDATE_SUCCESS);
+            res.setMessage("Change Password success!");
             return new ObjectResult(res.getResponse());
         }
 
@@ -106,14 +104,21 @@ namespace MedicalStore.Controllers
             if (user.Status == UserStatus.ACTIVE)
             {
                 user.Status = UserStatus.INACTIVE;
+                if(user.RoleId == "2") { 
+                var(list, count) = ProductService.GetListProductByShopId(user.UserId, 0, 12);
+                foreach(Product p in list)
+                {
+                    p.Status = ProductStatus.INACTIVE;
+                    ProductService.UpdateProductHandler(p);                        
+                }
+                }
             }
             else
-            {
+            {                
                 user.Status = UserStatus.ACTIVE;
             }
             this.UserService.UpdateUserInfoHandler(user);
-
-            res.setMessage(CustomLanguageValidator.MessageKey.MESSAGE_ADD_SUCCESS);
+            res.setMessage("Ban/Unban user " + user.Name + " success!");
             return new ObjectResult(res.getResponse());
         }
     }

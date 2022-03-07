@@ -47,7 +47,7 @@
                                     @for (int i = 0; i < listProduct.Count; i++)
                                     {
                                         var item = listProduct[i];
-                                        var link = $"{Routers.ProductProfile.Link}?productId={item.ProductId}";
+                                        var link = $"{Routers.ProductDetail.Link}?productId={item.ProductId}";
                                         <tr class="hover:bg-gray-200">
                                             <td class="border">@(i+1)</td>
                                             <td class="border"><img src="@item.ImageUrl" alt="@item.Name" width="70px" height="70px"/></td>

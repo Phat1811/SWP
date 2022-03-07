@@ -15,12 +15,10 @@ namespace MedicalStore.Controllers
     public class CategoryApiController : Controller
     {
         private readonly ICategoryService CategoryService;
-        private readonly ICategoryRepository CategoryRepository;
 
-        public CategoryApiController(ICategoryService categoryService, ICategoryRepository categoryRepository)
+        public CategoryApiController(ICategoryService categoryService)
         {
             this.CategoryService = categoryService;
-            this.CategoryRepository = categoryRepository;
         }
 
         [HttpPost("create")]
@@ -35,7 +33,7 @@ namespace MedicalStore.Controllers
                 return new BadRequestObjectResult(res.getResponse());
             }
 
-            var isExistCategory = this.CategoryRepository.GetCategortByName(body.Name.Trim());
+            var isExistCategory = this.CategoryService.GetCategoryByName(body.Name.Trim());
             if (isExistCategory != null)
             {
                 res.setErrorMessage("Category Name is already exist!!");
@@ -66,9 +64,9 @@ namespace MedicalStore.Controllers
                 res.mapDetails(result);
                 return new BadRequestObjectResult(res.getResponse());
             }
-            var category = CategoryRepository.GetCategoryByID(body.CategoryId);
+            var category = CategoryService.GetCategoryByID(body.CategoryId);
             if (body.Name.Trim() != category.Name) {
-            var isExistCategory = this.CategoryRepository.GetCategortByName(body.Name.Trim());
+            var isExistCategory = this.CategoryService.GetCategoryByName(body.Name.Trim());
             if (isExistCategory != null)
             {
                     res.setErrorMessage("Category Name is already exist!!");
@@ -87,16 +85,9 @@ namespace MedicalStore.Controllers
         public IActionResult HandlerDelete([FromBody] UpdateCategoryDTO body)
         {
             var res = new ServerApiResponse<string>();
-            var category = CategoryRepository.GetCategoryByID(body.CategoryId);
-            category.Status = CategoryStatus.INACTIVE;
+            var category = CategoryService.GetCategoryByID(body.CategoryId);
 
             this.CategoryService.DeleteCategoryHandler(category);
-
-            List<Product> list = CategoryRepository.GetProductByCategoryID(body.CategoryId);
-            foreach (Product p in list)
-            {
-                CategoryRepository.DisableProductByID(p.ProductId);
-            }
 
             res.setMessage("Delete Category success");
             return new ObjectResult(res.getResponse());

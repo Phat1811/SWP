@@ -12,5 +12,6 @@ namespace MedicalStore.DAO.Interface
         public bool DeleteHandler(Product product);
         public (List<Product>, int) GetListProductByShopId(string shopId, int pageIndex, int pageSize);
         public (List<Product>, int) GetProducts(int pageIndex, int pageSize, double min, double max, string name, string categoryId, CategoryStatus categoryStatus);
+        public List<Product> GetListProductByCategoryId(string categoryId);
     }
 }

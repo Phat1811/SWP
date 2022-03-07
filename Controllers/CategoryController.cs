@@ -5,6 +5,7 @@ using MedicalStore.Utils.Common;
 using System.Collections.Generic;
 using MedicalStore.Controllers.DTO;
 using System.Linq;
+using MedicalStore.Service.Interface;
 
 namespace MedicalStore.Controllers
 {
@@ -12,12 +13,11 @@ namespace MedicalStore.Controllers
     public class CategoryController : Controller
     {
         private readonly ICategoryService CategoryService;
-        private readonly ICategoryRepository CategoryRepository;
-
-        public CategoryController(ICategoryService categoryService, ICategoryRepository categoryRepository)
+        private readonly IProductService ProductService;
+        public CategoryController(ICategoryService categoryService, IProductService productService)
         {
             this.CategoryService = categoryService;
-            this.CategoryRepository = categoryRepository;
+            this.ProductService = productService;
         } 
 
         [HttpGet("")]
@@ -49,19 +49,19 @@ namespace MedicalStore.Controllers
         [HttpGet("update")]
         public IActionResult UpdateCategory(string categoryId)
         {
-            var category = CategoryRepository.GetCategoryByID(categoryId);
+            var category = CategoryService.GetCategoryByID(categoryId);
             this.ViewData["category"] = category;
             return View(Routers.CategoryUpdate.Page);
         }
 
-        [HttpGet("profile")]
+        [HttpGet("detail")]
         public IActionResult CategoryProfile(string categoryId)
         {
-            var category = CategoryRepository.GetCategoryByID(categoryId);
-            var listProductByCategoryId = (List<Product>)CategoryRepository.GetProductByCategoryID(categoryId);
+            var category = CategoryService.GetCategoryByID(categoryId);
+            var listProductByCategoryId = (List<Product>)ProductService.GetListProductByCategoryId(categoryId);
             this.ViewData["category"] = category;
             this.ViewData["listProductByCategoryId"] = listProductByCategoryId;
-            return View(Routers.CategoryProfile.Page);
+            return View(Routers.CategoryDetail.Page);
         }
 
         [HttpGet("create")]

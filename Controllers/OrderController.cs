@@ -39,23 +39,35 @@ namespace MedicalStore.Controllers
             return View(Routers.Order.Page);
         }
 
+        [HttpGet("sold")]
+        [RoleGuardAttribute("2")]
+        [ServiceFilter(typeof(AuthGuard))]
+        public IActionResult SoldOrder(int pageIndex = 0, int pageSize = 12)
+        {
+            var user = (User)this.ViewData["user"];
+            List<Order> listOrder = OrderService.GetlistSoldOrder(user.UserId);
+            listOrder.Sort((x, y) => y.CreateDate.CompareTo(x.CreateDate));
+            this.ViewData["listSoldOrder"] = listOrder;
+            return View(Routers.SoldOrder.Page);
+        }
+
         [HttpGet("detail")]
         [ServiceFilter(typeof(AuthGuard))]
         public IActionResult OrderDetail(string orderId, int pageIndex = 0, int pageSize = 1000)
         {
-            List<OrderItemDetail> orderItemDetails = new List<OrderItemDetail>(); 
             var (items, count) = this.OrderService.GetOrderDetail(orderId, pageIndex, pageSize);
+            Order order = this.OrderService.GetOrderByOrderId(orderId);
+            List<Product> listProduct = new List<Product>();
+            List<string> listShopName = new List<string>();
             foreach(OrderItem oi in items)
             {
-                var oit = new OrderItemDetail();
-                oit.Quantity = oi.Quantity;
-                oit.SalePrice = oi.SalePrice;
-                oit.ShopName = UserService.GetUserById(ProductService.GetProductById(oi.ProductId).ShopId).Name;
-                oit.Product = ProductService.GetProductById(oi.ProductId);
-                orderItemDetails.Add(oit);
+                Product p = ProductService.GetProductById(oi.ProductId);
+                listProduct.Add(p);
+                listShopName.Add(UserService.GetUserById(p.ShopId).Name);
             }
-            Order order = this.OrderService.GetOrderByOrderId(orderId);
-            this.ViewData["listOrderDetail"] = orderItemDetails;
+            this.ViewData["listProduct"] = listProduct;
+            this.ViewData["listShopName"] = listShopName;
+            this.ViewData["listOrderItem"] = items;
             this.ViewData["total"] = count;
             this.ViewData["order"] = order;
             this.ViewData["customerName"] = this.UserService.GetUserById(order.CustomerId).Name;

@@ -14,25 +14,21 @@ namespace MedicalStore.Controllers
     [ServiceFilter(typeof(UserFilter))]
     public class ProductController : Controller
     {
-        private readonly ICategoryRepository CategoryRepository;
         private readonly IProductService ProductService;
-        private readonly IProductRepository ProductRepository;
-        private readonly IUserRepository UserRepository;
+        private readonly IUserService UserService;
         private readonly ICategoryService CategoryService;
 
-        public ProductController(IProductRepository productRepository, IProductService productService, ICategoryRepository categoryRepository, IUserRepository userRepository, ICategoryService categoryService)
+        public ProductController(IProductService productService, IUserService userService, ICategoryService categoryService)
         {
             this.ProductService = productService;
-            this.ProductRepository = productRepository;
-            this.CategoryRepository = categoryRepository;
-            this.UserRepository = userRepository;
+            this.UserService = userService;
             this.CategoryService = categoryService;
         }
 
         [HttpGet("create")]
         public IActionResult CreateProduct()
         {
-            var categories = CategoryRepository.GetListCategoriesByStatus(CategoryStatus.INACTIVE);
+            var categories = CategoryService.GetListCategoriesByStatus(CategoryStatus.INACTIVE);
             this.ViewData["listCategory"] = new SelectList(categories);
             var product = (Product)this.ViewData["product"];
             if (product != null)
@@ -45,7 +41,7 @@ namespace MedicalStore.Controllers
         [HttpGet("update")]
         public IActionResult UpdateProduct(string productId)
         {
-            var product = ProductRepository.GetProductById(productId);
+            var product = ProductService.GetProductById(productId);
             this.ViewData["product"] = product;
             return View(Routers.UpdateProduct.Page);
         }
@@ -61,22 +57,22 @@ namespace MedicalStore.Controllers
             return View(Routers.Product.Page);
         }
 
-        [HttpGet("profile")]
+        [HttpGet("detail")]
         public IActionResult ProductProfile(string productId)
         {
-            var product = ProductRepository.GetProductById(productId);
-            string categoryName = CategoryRepository.GetCategoryByID(product.CategoryId).Name;
-            string shopName = UserRepository.GetUserById(product.ShopId).Name;
+            var product = ProductService.GetProductById(productId);
+            string categoryName = CategoryService.GetCategoryByID(product.CategoryId).Name;
+            string shopName = UserService.GetUserById(product.ShopId).Name;
             this.ViewData["shopName"] = shopName;
             this.ViewData["categoryName"] = categoryName;
             this.ViewData["product"] = product;
-            return View(Routers.ProductProfile.Page);
+            return View(Routers.ProductDetail.Page);
         }
 
         [HttpGet("search")]
         public IActionResult SearchProductByName(string name)
         {
-            var product = ProductRepository.GetProductByName(name);
+            var product = ProductService.GetProductByName(name);
             this.ViewData["product"] = product;
             return View(Routers.SearchProduct.Page);
         }
@@ -135,10 +131,10 @@ namespace MedicalStore.Controllers
                     }
                     var (products, count) = this.ProductService.GetProducts(pageIndex, pageSize, min, max, name, categoryId, CategoryStatus.INACTIVE);
 
-                    products.Sort((x, y) => string.Compare(UserRepository.GetUserById(x.ShopId).Name, UserRepository.GetUserById(y.ShopId).Name));
+                    products.Sort((x, y) => string.Compare(UserService.GetUserById(x.ShopId).Name, UserService.GetUserById(y.ShopId).Name));
                     foreach (Product p in products)
                     {
-                        listShopName.Add(UserRepository.GetUserById(p.ShopId).Name);
+                        listShopName.Add(UserService.GetUserById(p.ShopId).Name);
                     }
                     listProduct = products;
                     total = count;

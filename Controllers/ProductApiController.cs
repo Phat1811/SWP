@@ -16,32 +16,36 @@ namespace MedicalStore.Controllers
     public class ProductApiController : Controller
     {
         private readonly IProductService ProductService;
-        private readonly IProductRepository ProductRepository;
-        private readonly ICategoryRepository CategoryRepository;
-        public ProductApiController(IProductRepository productRepository, IProductService productService, ICategoryRepository categoryRepository)
+        private readonly ICategoryService CategoryService;
+        public ProductApiController(IProductRepository productRepository, IProductService productService, ICategoryService categoryService)
         {
             this.ProductService = productService;
-            this.ProductRepository = productRepository;
-            this.CategoryRepository = categoryRepository;
+            this.CategoryService = categoryService;
         }
 
         [HttpPost("create")]
         public IActionResult HandleCreateProduct([FromBody] CreateProductDTO body)
-        
+
         {
-            if(body == null)
+            if (body == null)
             {
                 body = new CreateProductDTO();
             }
             var res = new ServerApiResponse<string>();
             ValidationResult result = new CreateProductDTOValidator().Validate(body);
-            
-            if(!result.IsValid)
+
+            if (!result.IsValid)
             {
                 res.mapDetails(result);
                 return new BadRequestObjectResult(res.getResponse());
             }
+            var isExistProduct = this.ProductService.GetProductByName(body.Name.Trim());
             User user = (User)this.ViewData["user"];
+            if(isExistProduct != null && isExistProduct.ShopId == user.UserId)
+            {
+                res.setErrorMessage("Product " + body.Name + " is already exist in your shop!!");
+                return new BadRequestObjectResult(res.getResponse());
+            }
             var product = new Product();
             product.ProductId = Guid.NewGuid().ToString();
             product.Name = body.Name.Trim();
@@ -57,7 +61,7 @@ namespace MedicalStore.Controllers
 
 
             this.ProductService.CreateProductHandler(product);
-            res.setMessage(CustomLanguageValidator.MessageKey.MESSAGE_REGISTER_SUCCESS);
+            res.setMessage("Create Product Success!");
             return new ObjectResult(res.getResponse());
         }
 
@@ -71,26 +75,26 @@ namespace MedicalStore.Controllers
                 res.mapDetails(result);
                 return new BadRequestObjectResult(res.getResponse());
             }
-            var product = this.ProductRepository.GetProductById(body.ProductId);
-            if(product == null)
+            var product = this.ProductService.GetProductById(body.ProductId);
+            if (product == null)
             {
-                res.setErrorMessage(CustomLanguageValidator.ErrorMessageKey.ERROR_NOT_FOUND, "ProductID");
+                res.setErrorMessage("Cannot find product with Id" + body.ProductId);
                 return new NotFoundObjectResult(res.getResponse());
             }
 
-            var isExistCategory = this.CategoryRepository.GetCategoryByID(body.CategoryId);
+            var isExistCategory = this.CategoryService.GetCategoryByID(body.CategoryId);
             if (isExistCategory == null)
             {
-                res.setErrorMessage(CustomLanguageValidator.ErrorMessageKey.ERROR_NOT_FOUND, "CategoryID");
+                res.setErrorMessage("Cannot find category with Id" + body.CategoryId);
                 return new NotFoundObjectResult(res.getResponse());
             }
 
             if (product.Name != body.ProductName)
             {
-                var isExistProduct = this.ProductRepository.GetProductByName(body.ProductName);
+                var isExistProduct = this.ProductService.GetProductByName(body.ProductName);
                 if (isExistProduct != null)
                 {
-                    res.setErrorMessage(CustomLanguageValidator.ErrorMessageKey.ERROR_EXISTED, "Name");
+                    res.setErrorMessage("Product " + body.ProductName + " already exist in your shop!!");
                     return new BadRequestObjectResult(res.getResponse());
                 }
             }
@@ -105,7 +109,7 @@ namespace MedicalStore.Controllers
             this.ProductService.UpdateProductHandler(product);
 
 
-            res.setMessage(CustomLanguageValidator.MessageKey.MESSAGE_ADD_SUCCESS);
+            res.setMessage("Update Product Success!!");
             return new ObjectResult(res.getResponse());
 
         }
@@ -115,12 +119,12 @@ namespace MedicalStore.Controllers
         {
             var res = new ServerApiResponse<string>();
 
-            var product = ProductRepository.GetProductById(body.ProductId);
+            var product = ProductService.GetProductById(body.ProductId);
             product.Status = ProductStatus.INACTIVE;
 
             this.ProductService.DeleteProductHandler(product);
 
-            res.setMessage(CustomLanguageValidator.MessageKey.MESSAGE_ADD_SUCCESS);
+            res.setMessage("Delete Product Success!");
             return new ObjectResult(res.getResponse());
         }
     }

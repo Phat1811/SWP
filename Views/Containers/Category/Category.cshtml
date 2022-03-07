@@ -15,11 +15,13 @@
                         All Categories
                     </h2>
                 </div>
+                @await Html.PartialAsync("../../Components/Form/FormMessage.cshtml")
                 <form id="formFilter">
                     @await Html.PartialAsync("../../Components/Form/FormHidden.cshtml",
                     new { Name = "pageSize", Value = (string)this.Context.Request.Query["pageSize"] ?? "12" })
                     @await Html.PartialAsync("../../Components/Form/FormHidden.cshtml",
                     new { Name = "pageIndex", Value = (string)this.Context.Request.Query["pageIndex"] ?? "0" })
+
                 </form>
                 <div class="p-5" id="hoverable-table">
                     <div class="preview">
@@ -47,7 +49,7 @@
                                     @for (int i = 0; i < listCategory.Count; i++)
                                     {
                                         var item = listCategory[i];
-                                        var link = $"{Routers.CategoryProfile.Link}?categoryId={item.CategoryId}";
+                                        var link = $"{Routers.CategoryDetail.Link}?categoryId={item.CategoryId}";
                                         <tr class="hover:bg-gray-200">
                                             <td class="border">@(i+1)</td>
                                             <td class="border">@(item.Name.Length >= 30 ? item.Name.Substring(0,30) + " ..." : item.Name)</td>

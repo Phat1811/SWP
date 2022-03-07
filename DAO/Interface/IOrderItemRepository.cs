@@ -7,6 +7,5 @@ namespace MedicalStore.DAO.Interface
     {
         public List<OrderItem> GetAllOrderItemByOrderId(string orderId);
         public List<OrderItem> GetAllOrderItemByProductId(string productId);
-        public List<Product> getAllProductBySellerId(string sellerId);
     }
 }

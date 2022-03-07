@@ -27,11 +27,5 @@ namespace MedicalStore.DAO
             List<OrderItem> listOrderItem = this.DBContext.OrderItem.Where<OrderItem>(item => item.ProductId == productId).ToList<OrderItem>();
             return listOrderItem;
         }
-
-        public List<Product> getAllProductBySellerId(string sellerId)
-        {
-            List<Product> listProductBySellerId = this.DBContext.Product.Where<Product>(item => item.ShopId == sellerId).ToList<Product>();
-            return listProductBySellerId;
-        }
     }
 }

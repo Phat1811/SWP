@@ -12,7 +12,6 @@ namespace MedicalStore.DAO.Interface
         public bool UpdateUserInfoHandler(User user);
         public List<User> GetAllUsers();
         public List<User> GetListUserToManager();
-
         public bool ManageAccountHandler(User user);
     }
 }

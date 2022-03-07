@@ -20,36 +20,10 @@ namespace MedicalStore.DAO
             return this.DBContext.SaveChanges() > 0;
         }
 
-        public bool DeleteCategoryHandler(Category category)
-        {
-            this.DBContext.Category.Update(category);
-            return this.DBContext.SaveChanges() > 0;
-        }
-
-        public Category GetCategortByName(string categoryName)
-        {
-            Category category = this.DBContext.Category.FirstOrDefault(item => item.Name == categoryName);
-            return category;
-        }
-
         public Category GetCategoryByID(string categoryId)
         {
             Category category = this.DBContext.Category.FirstOrDefault(item => item.CategoryId == categoryId);
             return category;
-        }
-
-        public List<Product> GetProductByCategoryID(string categoryID)
-        {
-            List<Product> list = this.DBContext.Product.Where<Product>(item => item.CategoryId == categoryID).ToList<Product>();
-            return list;
-        }
-
-        public bool DisableProductByID(string productID)
-        {
-            Product product = this.DBContext.Product.FirstOrDefault(item => item.ProductId == productID);
-            product.Status = ProductStatus.INACTIVE;
-            this.DBContext.Product.Update(product);
-            return this.DBContext.SaveChanges() > 0;
         }
 
         public bool UpdateCategoryInfoHandler(Category category)
@@ -92,6 +66,11 @@ namespace MedicalStore.DAO
             List<Category> categories = this.DBContext.Category.ToList();
             var result = categories.Take((pageIndex + 1) * pageSize).Skip(pageIndex * pageSize).ToList();
             return (result, categories.Count);
+        }
+
+        public Category GetCategoryByName(string categoryName)
+        {
+            return this.DBContext.Category.FirstOrDefault<Category>(item => item.Name == categoryName);
         }
     }
 }

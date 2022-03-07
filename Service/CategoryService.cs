@@ -11,10 +11,12 @@ namespace MedicalStore.DAO
     {
         private readonly DBContext DBContext;
         private readonly ICategoryRepository CategoryRepository;
-        public CategoryService(DBContext dBContext, ICategoryRepository categoryRepository)
+        private readonly IProductRepository ProductRepository;
+        public CategoryService(DBContext dBContext, ICategoryRepository categoryRepository, IProductRepository productRepository)
         {
             this.DBContext = dBContext;
             this.CategoryRepository = categoryRepository;
+            this.ProductRepository = productRepository;
         }
         public bool CreateCategoryHandler(Category category)
         {
@@ -23,7 +25,14 @@ namespace MedicalStore.DAO
 
         public bool DeleteCategoryHandler(Category category)
         {
-            return this.CategoryRepository.DeleteCategoryHandler(category);
+            List<Product> list = this.ProductRepository.GetListProductByCategoryId(category.CategoryId);
+            foreach(Product p in list)
+            {
+                p.Status = ProductStatus.INACTIVE;
+                this.ProductRepository.UpdateHandler(p);
+            }
+            category.Status = CategoryStatus.INACTIVE;
+            return this.CategoryRepository.UpdateCategoryInfoHandler(category);
         }
 
         public (List<Category>, int) GetAllCategories(int pageIndex, int pageSize)
@@ -39,6 +48,26 @@ namespace MedicalStore.DAO
         public List<SelectListItem> GetCategoryDropListRender(CategoryStatus categoryStatus)
         {
             return this.CategoryRepository.GetListCategoriesByStatus(categoryStatus);
+        }
+
+        public Category GetCategoryByID(string categoryId)
+        {
+            return this.CategoryRepository.GetCategoryByID(categoryId);
+        }
+
+        public List<SelectListItem> GetListCategoriesByStatus(CategoryStatus categoryStatus)
+        {
+            return this.CategoryRepository.GetListCategoriesByStatus(categoryStatus);
+        }
+
+        public List<Category> GetAllCategories()
+        {
+            return this.CategoryRepository.GetAllCategories();
+        }
+
+        public Category GetCategoryByName(string categoryName)
+        {
+            return this.CategoryRepository.GetCategoryByName(categoryName);
         }
     }
 }

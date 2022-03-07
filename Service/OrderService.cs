@@ -13,12 +13,14 @@ namespace MedicalStore.DAO
         private readonly IOrderRepository OrderRepository;
         private readonly ICartService CartService;
         private readonly IProductService ProductService;
-        public OrderService(IProductService productService, ICartService cartService, DBContext dBContext, IOrderRepository orderRepository)
+        private readonly IOrderItemService OrderItemService;
+        public OrderService(IProductService productService, ICartService cartService, DBContext dBContext, IOrderRepository orderRepository, IOrderItemService orderItemService)
         {
             this.DBContext = dBContext;
             this.OrderRepository = orderRepository;
             this.CartService = cartService;
             this.ProductService = productService;
+            this.OrderItemService = orderItemService;
         }
 
         public (List<Order>, int) GetOrders(string userId, int pageIndex, int pageSize)
@@ -51,6 +53,27 @@ namespace MedicalStore.DAO
         public Order GetOrderByOrderId(string orderId)
         {
             return this.OrderRepository.GetOrderByOrderId(orderId);
+        }
+
+        public List<Order> GetlistSoldOrder(string shopId)
+        {
+            List<OrderItem> listOrderItem = new List<OrderItem>();
+            List<Order> listOrder = new List<Order>();
+            var(listProduct, total)  = this.ProductService.GetListProductByShopId(shopId, 0, 12);
+            foreach(Product p in listProduct)
+            {
+                List<OrderItem> items = this.OrderItemService.GetAllOrderItemByProductId(p.ProductId);
+                listOrderItem.AddRange(items);
+            }
+            foreach(OrderItem oi in listOrderItem)
+            {
+                Order order = this.GetOrderByOrderId(oi.OrderId);
+                if (!(listOrder.Contains(order))){
+                    listOrder.Add(order);
+                }
+            }
+
+            return listOrder;
         }
     }
 }

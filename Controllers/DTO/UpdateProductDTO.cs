@@ -21,7 +21,7 @@ namespace MedicalStore.Controllers.DTO
         public UpdateProductDTOValidator()
         {
             RuleFor(x => x.ProductName).NotEmpty().Length(ProductValidator.PRODUCTNAME_MIN, ProductValidator.PRODUCTNAME_MAX);
-            RuleFor(x => x.ProductDescription).NotEmpty().Length(ProductValidator.DESCRIPTION_MIN, ProductValidator.DESCRIPTION_MAX);
+            RuleFor(x => x.ProductDescription).Length(ProductValidator.DESCRIPTION_MIN, ProductValidator.DESCRIPTION_MAX);
             RuleFor(x => x.OriginalPrice).NotEmpty().InclusiveBetween(ProductValidator.ORIGINALPRICE_MIN, ProductValidator.ORIGINALPRICE_MAX);
             RuleFor(x => x.RetailPrice).NotEmpty().InclusiveBetween(ProductValidator.RETAILPRICE_MIN, ProductValidator.RETAILPRICE_MAX);
             RuleFor(x => x.Quantity).NotEmpty().InclusiveBetween(ProductValidator.QUANTITY_MIN, ProductValidator.QUANTITY_MAX);

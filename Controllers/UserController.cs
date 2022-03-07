@@ -22,12 +22,10 @@ namespace MedicalStore.Controllers
     public class UserController : Controller
     {
         private readonly IUserService UserService;
-        private readonly IUserRepository UserRepository;
 
-        public UserController(IUserService userService, IUserRepository userRepository)
+        public UserController(IUserService userService)
         {
             this.UserService = userService;
-            this.UserRepository = userRepository;
         }
 
         [HttpGet("updateinfo")]
@@ -61,7 +59,7 @@ namespace MedicalStore.Controllers
             }
             else
             {
-                userProdile = UserRepository.GetUserById(userId);
+                userProdile = UserService.GetUserById(userId);
                 check = 1;
             }
             this.ViewData["userProfile"] = userProdile;
@@ -71,7 +69,7 @@ namespace MedicalStore.Controllers
         [HttpGet("manage")]
         public IActionResult GetAllUser(string sortBy)
         {
-            var listUser = (List<User>)UserRepository.GetListUserToManager();
+            var listUser = (List<User>)UserService.GetListUserToManager();
 
 
             if (sortBy == "nameIncreasing")

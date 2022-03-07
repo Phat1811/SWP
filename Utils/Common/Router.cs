@@ -41,14 +41,14 @@
         public static readonly RouterItem Category = new RouterItem() { Page = "/Views/Containers/Category/Category.cshtml", Title = "All Category", Link = "/category" };
         public static readonly RouterItem CreateCategory = new RouterItem() { Page = "/Views/Containers/Category/CreateCategory.cshtml", Title = "Create Category", Link = "/category/create" };
         public static readonly RouterItem CategoryUpdate = new RouterItem() { Page = "/Views/Containers/Category/CategoryUpdate.cshtml", Title = "Update Category", Link = "/category/update" };
-        public static readonly RouterItem CategoryProfile = new RouterItem() { Page = "/Views/Containers/Category/CategoryProfile.cshtml", Title = "Category Profile", Link = "/category/profile" };
+        public static readonly RouterItem CategoryDetail = new RouterItem() { Page = "/Views/Containers/Category/CategoryDetail.cshtml", Title = "Category Profile", Link = "/category/detail" };
         //------------------------------------
 
-        //Rroduct
+        //Product
         public static readonly RouterItem Product = new RouterItem() { Page = "/Views/Containers/Product/Product.cshtml", Title = "All Product", Link = "/product/" };
         public static readonly RouterItem CreateProduct = new RouterItem() { Page = "/Views/Containers/Product/CreateProduct.cshtml", Title = "Create Product", Link = "/product/create" };
         public static readonly RouterItem UpdateProduct = new RouterItem() { Page = "/Views/Containers/Product/UpdateProduct.cshtml", Title = "Update Product", Link = "/product/update" };
-        public static readonly RouterItem ProductProfile = new RouterItem() { Page = "/Views/Containers/Product/ProfileProduct.cshtml", Title = "Product Profile", Link = "/product/profile" };
+        public static readonly RouterItem ProductDetail = new RouterItem() { Page = "/Views/Containers/Product/ProductDetail.cshtml", Title = "Product Profile", Link = "/product/detail" };
         public static readonly RouterItem SearchProduct = new RouterItem() { Page = "/Views/Containers/Product/SearchProduct.cshtml", Title = "Search Product", Link = "/product/search" };
         //------------------------------------
 
@@ -57,6 +57,11 @@
         public static readonly RouterItem OrderDetail = new RouterItem() { Page = "/Views/Containers/Order/OrderDetail.cshtml", Title = "Order Detail", Link = "/order/detail" };
         public static readonly RouterItem OrderManager = new RouterItem() { Page = "/Views/Containers/Order/Manager.cshtml", Title = "Users Order", Link = "/order/manager" };
         public static readonly RouterItem SearchOrders = new RouterItem() { Page = "/Views/Containers/Order/Manager.cshtml", Title = "Users Order", Link = "/order/manager" };
+        public static readonly RouterItem SoldOrder = new RouterItem() { Page = "/Views/Containers/Order/SoldOrder.cshtml", Title = "Shop Sold Order", Link = "/order/sold" };
+        //------------------------------------
+        
+        //Report
+        public static readonly RouterItem Report = new RouterItem() { Page = "/Views/Containers/Report/Report.cshtml", Title = "Report", Link = "/report/create" };
         //------------------------------------
     }
 }

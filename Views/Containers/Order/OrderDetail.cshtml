@@ -2,7 +2,10 @@
 @using MedicalStore.DAO.Interface;
 @{
     var order = (Order)this.ViewData["order"];
-    var listOrderDetail = (List<OrderItemDetail>)this.ViewData["listOrderDetail"];
+    var listProduct = (List<Product>)this.ViewData["listProduct"];
+    var listOrderItem = (List<OrderItem>)this.ViewData["listOrderItem"];
+    var listShopName = (List<string>)this.ViewData["listShopName"];
+    int total = (int)this.ViewData["total"];
     var customerName = this.ViewData["customerName"];
 }
 
@@ -20,29 +23,29 @@
                             <section aria-labelledby="order-heading" class="mt-10 border-t border-gray-200">
                                 <h2 id="order-heading" class="sr-only">Your order</h2>
                                 <h3 class="sr-only">Items</h3>
-                                @foreach (OrderItemDetail oid in listOrderDetail)
+                                @for(int i = 0; i < total; i++)
                                 {
                                     <div class="py-10 border-b border-gray-200 flex space-x-6">
-                                        <img src="@oid.Product.ImageUrl" alt="@oid.Product.Name" class="flex-none w-20 h-20 object-center object-cover bg-gray-100 rounded-lg sm:w-40 sm:h-40">
+                                        <img src="@listProduct[i].ImageUrl" alt="@listProduct[i].Name" class="flex-none w-20 h-20 object-center object-cover bg-gray-100 rounded-lg sm:w-40 sm:h-40">
 
                                         <div class="flex-auto flex flex-col">
                                             <div>
                                                 <h4 class="font-medium text-gray-900">
-                                                    <a href="/product/profile?productId=@oid.Product.ProductId">@oid.Product.Name</a>
+                                                    <a href="/product/detail?productId=@listProduct[i].ProductId">@listProduct[i].Name</a>
                                                 </h4>
-                                                <p class="mt-2 text-sm text-gray-600">Description: @oid.Product.Description</p>
-                                                <p class="mt-2 text-sm text-gray-600">Shop Name: @oid.ShopName</p>
-                                                <p class="mt-2 text-sm text-gray-600">Retail Price: $@oid.Product.RetailPrice</p>
+                                                <p class="mt-2 text-sm text-gray-600">Description: @listProduct[i].Description</p>
+                                                <p class="mt-2 text-sm text-gray-600">Shop Name: @listShopName[i]</p>
+                                                <p class="mt-2 text-sm text-gray-600">Retail Price: $@listProduct[i].RetailPrice</p>
                                             </div>
                                             <div class="mt-6 flex-1 flex items-end">
                                                 <dl class="flex text-sm divide-x divide-gray-200 space-x-4 sm:space-x-6">
                                                     <div class="flex">
                                                     <dt class="font-medium text-gray-900">Quantity</dt>
-                                                    <dd class="ml-2 text-gray-700">@oid.Quantity</dd>
+                                                    <dd class="ml-2 text-gray-700">@listOrderItem[i].Quantity</dd>
                                             </div>
                                             <div class="flex">
                                                 <dt class="font-medium text-gray-900">Sale Price</dt>
-                                                <dd class="ml-2 text-gray-700">$@(oid.SalePrice * @oid.Quantity)</dd>
+                                                <dd class="ml-2 text-gray-700">$@listOrderItem[i].SalePrice</dd>
                                             </div>
                                             </dl>
                                         </div>

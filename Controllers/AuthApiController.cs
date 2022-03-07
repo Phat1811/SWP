@@ -14,13 +14,13 @@ namespace MedicalStore.Controllers
     public class AuthApiController : Controller
     {
         private readonly IAuthService AuthService;
-        private readonly IUserRepository UserRepository;
+        private readonly IUserService UserService;
         private readonly IRoleRepository RoleRepository;
 
-        public AuthApiController(IAuthService authService, IUserRepository userRepository, IRoleRepository roleRepository)
+        public AuthApiController(IAuthService authService, IUserService userService, IRoleRepository roleRepository)
         {
             this.AuthService = authService;
-            this.UserRepository = userRepository;
+            this.UserService = userService;
             this.RoleRepository = roleRepository;
         }
 
@@ -35,7 +35,7 @@ namespace MedicalStore.Controllers
                 return new BadRequestObjectResult(res.getResponse());
             }
 
-            var user = this.UserRepository.GetUserByUsername(body.Username);
+            var user = this.UserService.GetUserByUsername(body.Username);
             if (user == null)
             {
                 res.setErrorMessage("username or password is wrong");
@@ -82,7 +82,7 @@ namespace MedicalStore.Controllers
                 return new BadRequestObjectResult(res.getResponse());
             }
 
-            var isExistUser = this.UserRepository.GetUserByUsername(body.Username);
+            var isExistUser = this.UserService.GetUserByUsername(body.Username);
             if (isExistUser != null)
             {
                 res.setErrorMessage("is already exist", "username");
@@ -121,7 +121,7 @@ namespace MedicalStore.Controllers
                 return new BadRequestObjectResult(res.getResponse());
             }
 
-            var isExistUser = this.UserRepository.GetUserByUsername(body.Username);
+            var isExistUser = this.UserService.GetUserByUsername(body.Username);
             if (isExistUser != null)
             {
                 res.setErrorMessage("is already exist", "shop name");

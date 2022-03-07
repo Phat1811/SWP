@@ -74,5 +74,11 @@ namespace MedicalStore.DAO
             var pagelist = (List<Product>)products.Take((pageIndex + 1) * pageSize).Skip(pageIndex * pageSize).ToList();
             return (pagelist, products.Count);
         }
+
+        public List<Product> GetListProductByCategoryId(string categoryId)
+        {
+            List<Product> list = this.DBContext.Product.Where(item => item.CategoryId == categoryId).ToList();
+            return list;
+        }
     }
 }

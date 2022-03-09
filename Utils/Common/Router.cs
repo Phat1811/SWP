@@ -62,6 +62,7 @@
         
         //Report
         public static readonly RouterItem Report = new RouterItem() { Page = "/Views/Containers/Report/Report.cshtml", Title = "Report", Link = "/report/create" };
+        public static readonly RouterItem ReportList = new RouterItem() { Page = "/Views/Containers/Report/ReportDetail.cshtml", Title = "Report Detail", Link = "/report/detail" };
         //------------------------------------
     }
 }

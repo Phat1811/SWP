@@ -14,7 +14,7 @@ createForm?.addEventListener("submit", function (event) {
         };
 
         http.post('/api/report/create', input)
-            .then(() => window.location.assign('/product'))
+            .then(() => window.location.assign('/order'))
             .catch(function (error) {
                 console.log(error);
             });

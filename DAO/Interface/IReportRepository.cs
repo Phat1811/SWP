@@ -11,6 +11,7 @@ namespace MedicalStore.DAO.Interface
         public bool DeleteReportHandler(ReportTicket report);
         List<ReportTicket> GetAllReprot();
         public ReportTicket GetReportByProductID(string categoryID);
+        public List<ReportTicket> GetListReportByProductId(string productId);
 
     }
 }

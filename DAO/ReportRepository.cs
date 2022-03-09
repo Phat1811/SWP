@@ -50,5 +50,11 @@ namespace MedicalStore.DAO
             this.DBContext.SaveChanges();
             return true;
         }
+
+        public List<ReportTicket> GetListReportByProductId(string productId)
+        {
+            List<ReportTicket> list = this.DBContext.ReportTicket.Where(item => item.ProductId == productId).ToList();
+            return list;
+        }
     }
 }

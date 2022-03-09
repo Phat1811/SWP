@@ -1,7 +1,9 @@
 ﻿using MedicalStore.DAO.Interface;
+using MedicalStore.Models;
 using MedicalStore.Service.Interface;
 using MedicalStore.Utils.Common;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace MedicalStore.Controllers
 {
@@ -19,13 +21,23 @@ namespace MedicalStore.Controllers
         }
 
         [HttpGet("create")]
-        public IActionResult CreateReport(string ProductId)
+        public IActionResult CreateReport(string productId)
         {
-            var report = ReportService.GetReportByProductID(ProductId);
-            var product = ProductService.GetProductById(ProductId);
+            var report = ReportService.GetReportByProductID(productId);
+            var product = ProductService.GetProductById(productId);
             this.ViewData["product"] = product;
             this.ViewData["report"] = report;
             return View(Routers.Report.Page);
+        }
+
+        [HttpGet("detail")]
+        public IActionResult ReportDetail(string productId)
+        {
+            var listReportByProductId = (List<ReportTicket>)ReportService.GetListReportByProductId(productId);
+            var product = ProductService.GetProductById(productId);
+            this.ViewData["product"] = product;
+            this.ViewData["listReportByProductId"] = listReportByProductId;
+            return View(Routers.ReportList.Page);
         }
     }
 }

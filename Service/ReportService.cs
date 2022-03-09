@@ -32,6 +32,11 @@ namespace MedicalStore.Service
             return this.ReportRepository.GetAllReprot();
         }
 
+        public List<ReportTicket> GetListReportByProductId(string productId)
+        {
+            return this.ReportRepository.GetListReportByProductId(productId);
+        }
+
         public ReportTicket GetReportById(string id)
         {
             return this.ReportRepository.GetReportById(id);

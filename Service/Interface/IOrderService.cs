@@ -13,5 +13,6 @@ namespace MedicalStore.Service.Interface
         public bool CreateOrderItemHandler(OrderItem orderItem);
         public Order GetOrderByOrderId(string orderId);
         public List<Order> GetlistSoldOrder(string shopId);
+        public float CalculateProfitHandler(string shopId);
     }
 }

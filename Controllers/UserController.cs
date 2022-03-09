@@ -66,23 +66,5 @@ namespace MedicalStore.Controllers
             this.ViewData["check"] = check;
             return View(Routers.UserProfile.Page);
         }
-        [HttpGet("manage")]
-        public IActionResult GetAllUser(string sortBy)
-        {
-            var listUser = (List<User>)UserService.GetListUserToManager();
-
-
-            if (sortBy == "nameIncreasing")
-            {
-                listUser.Sort((x, y) => string.Compare(y.Name, x.Name));
-            }
-            if (sortBy == "nameDescending")
-            {
-                listUser.Sort((x, y) => string.Compare(x.Name, y.Name));
-            }
-
-            this.ViewData["listUser"] = listUser;
-            return View(Routers.ManageAccount.Page);
-        }
     }
 }

@@ -3,6 +3,7 @@
     this.ViewData["Title"] = Routers.ReportList.Title;
     var listReport = (List<ReportTicket>)this.ViewData["listReportByProductId"];
     var product = (Product)this.ViewData["product"];
+    var user = (User)this.ViewData["user"];
     
 }
 
@@ -33,6 +34,7 @@
                         </dl>
                    </div>
                 }
+                @if(user.RoleId == "1"){
                 <div class="min-h-full flex ">
                     <div class="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
                         <div class="mx-auto w-full max-w-sm lg:w-96">
@@ -42,6 +44,7 @@
                         </div>
                     </div>
                 </div>
+                }
             </div>
 
         </div>

@@ -75,5 +75,23 @@ namespace MedicalStore.DAO
 
             return listOrder;
         }
+
+        public float CalculateProfitHandler(string shopId)
+        {
+            var (listProducts, t) = this.ProductService.GetListProductByShopId(shopId, 0, 12);
+            float profit = 0;
+            foreach (Product p in listProducts)
+            {
+                List<OrderItem> orderItems = this.OrderItemService.GetAllOrderItemByProductId(p.ProductId);                
+                foreach (OrderItem oi in orderItems)
+                {
+                    Order order = this.OrderRepository.GetOrderByOrderId(oi.OrderId);
+                    if(order.Status != OrderStatus.INACTIVE) { 
+                    profit += (p.RetailPrice - p.OriginalPrice) * oi.Quantity;
+                    }
+                }
+            }
+            return profit;
+        }
     }
 }

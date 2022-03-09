@@ -10,11 +10,13 @@ namespace MedicalStore.Service
     {
         private readonly DBContext DBContext;
         private readonly IReportRepository ReportRepository;
+        private readonly IProductRepository ProductRepository;
 
-        public ReportService(DBContext dBContext, IReportRepository reportRepository)
+        public ReportService(DBContext dBContext, IReportRepository reportRepository, IProductRepository productRepository)
         {
             this.DBContext = dBContext;
             ReportRepository = reportRepository;
+            ProductRepository = productRepository;
         }
 
         public bool CreateReportHandler(ReportTicket report)
@@ -37,6 +39,17 @@ namespace MedicalStore.Service
             return this.ReportRepository.GetListReportByProductId(productId);
         }
 
+        public List<ReportTicket> GetListReportByShopId(string shopId)
+        {
+            var (listProduct, t) = this.ProductRepository.GetListProductByShopId(shopId, 0, 12);
+            List<ReportTicket> result = new List<ReportTicket>();
+            foreach (Product p in listProduct)
+            {
+                result.AddRange(this.ReportRepository.GetListReportByProductId(p.ProductId));
+            }
+            return result;
+        }
+
         public ReportTicket GetReportById(string id)
         {
             return this.ReportRepository.GetReportById(id);
@@ -50,6 +63,11 @@ namespace MedicalStore.Service
         public bool UpdateReportInfoHandler(ReportTicket report)
         {
             return this.ReportRepository.UpdateReportInfoHandler(report);
+        }
+
+        public List<ReportTicket> GetListReportByCustomerId(string customerId)
+        {
+            return this.ReportRepository.GetListReportByCustomerId(customerId);
         }
     }
 }

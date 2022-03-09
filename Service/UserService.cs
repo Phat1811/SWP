@@ -19,14 +19,14 @@ namespace MedicalStore.Service
             this.AuthService = authService;
         }
 
+        public List<User> GetAllUserByRoleId(string roleId)
+        {
+            return this.UserRepository.GetListUserByRoleId(roleId);
+        }
+
         public List<User> GetAllUsers()
         {
             return this.UserRepository.GetAllUsers();
-        }
-
-        public List<User> GetListUserToManager()
-        {
-            return this.UserRepository.GetListUserToManager();
         }
 
         public User GetUserById(string id)

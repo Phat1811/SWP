@@ -56,5 +56,11 @@ namespace MedicalStore.DAO
             List<ReportTicket> list = this.DBContext.ReportTicket.Where(item => item.ProductId == productId).ToList();
             return list;
         }
+
+        public List<ReportTicket> GetListReportByCustomerId(string customerId)
+        {
+            List<ReportTicket> list = this.DBContext.ReportTicket.Where(item => item.CustomerId == customerId).ToList();
+            return list;
+        }
     }
 }

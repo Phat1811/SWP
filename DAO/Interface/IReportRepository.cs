@@ -12,6 +12,6 @@ namespace MedicalStore.DAO.Interface
         List<ReportTicket> GetAllReprot();
         public ReportTicket GetReportByProductID(string categoryID);
         public List<ReportTicket> GetListReportByProductId(string productId);
-
+        public List<ReportTicket> GetListReportByCustomerId(string customerId);
     }
 }

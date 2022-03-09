@@ -28,7 +28,6 @@
         public static readonly RouterItem UpdatePassword = new RouterItem() { Page = "/Views/Containers/User/UpdatePassword.cshtml", Title = "Update Password", Link = "/user/password" };
         public static readonly RouterItem UpdateUserInfo = new RouterItem() { Page = "/Views/Containers/User/UpdateUserInfo.cshtml", Title = "Update User Info", Link = "/user/updateinfo" };
         public static readonly RouterItem UserProfile = new RouterItem() { Page = "/Views/Containers/User/UserProfile.cshtml", Title = "Update User Profile", Link = "/user/profile" };
-        public static readonly RouterItem ManageAccount = new RouterItem() { Page = "/Views/Containers/User/Manage.cshtml", Title = "Manage Account", Link = "/user/manage" };
         //------------------------------------
 
         public static readonly RouterItem Home = new RouterItem() { Page = "/Views/Containers/Home.cshtml", Title = "Home", Link = "/" };
@@ -61,8 +60,14 @@
         //------------------------------------
         
         //Report
-        public static readonly RouterItem Report = new RouterItem() { Page = "/Views/Containers/Report/Report.cshtml", Title = "Report", Link = "/report/create" };
+        public static readonly RouterItem CreateReport = new RouterItem() { Page = "/Views/Containers/Report/CreateReport.cshtml", Title = "Report", Link = "/report/create" };
+        public static readonly RouterItem Report = new RouterItem() { Page = "/Views/Containers/Report/Report.cshtml", Title = "Report", Link = "/report" };
         public static readonly RouterItem ReportList = new RouterItem() { Page = "/Views/Containers/Report/ReportDetail.cshtml", Title = "Report Detail", Link = "/report/detail" };
+        //------------------------------------
+
+        //Admin
+        public static readonly RouterItem CustomerManage = new RouterItem() { Page = "/Views/Containers/Admin/CustomerManage.cshtml", Title = "Manage Customer", Link = "/admin/customer" };
+        public static readonly RouterItem SellerManage = new RouterItem() { Page = "/Views/Containers/Admin/SellerManage.cshtml", Title = "Manage Seller", Link = "/admin/seller" };
         //------------------------------------
     }
 }

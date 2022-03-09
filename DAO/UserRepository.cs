@@ -56,11 +56,9 @@ namespace MedicalStore.DAO
             return listUser;
         }
 
-
-        public List<User> GetListUserToManager()
-        {
-            List<User> list = this.DBContext.User.Where<User>(item => item.RoleId != "0").ToList<User>();
-            return list;
+        public List<User> GetListUserByRoleId(string roleId)        {
+            List<User> listUser = this.DBContext.User.Where(item => item.RoleId == roleId).ToList();
+            return listUser;
         }
     }
 }

@@ -74,7 +74,7 @@ namespace MedicalStore.Controllers
                     {
                         if(rt.ProductId == p.ProductId)
                         {
-                            reportNum++;
+                            reportNum += 1;
                         }
                     }
                     reportNums.Add(reportNum);
@@ -88,18 +88,31 @@ namespace MedicalStore.Controllers
                 foreach (Product p in products)
                 {
                     List<ReportTicket> list = this.ReportService.GetListReportByProductId(p.ProductId);
+                    foreach(ReportTicket rt in list)
+                    {
+                        if(rt.ProductId == p.ProductId)
+                        {
+                            if (!(listProduct.Contains(p)))
+                            {
+                                listProduct.Add(p);
+                            }
+                        }
+                    }
+                }
+                foreach (Product p in listProduct)
+                {
+                    List<ReportTicket> list = this.ReportService.GetListReportByProductId(p.ProductId);
                     foreach (ReportTicket rt in list)
                     {
                         if (rt.ProductId == p.ProductId)
                         {
-                            reportNum++;
-                            listProduct.Add(p);
+                            reportNum += 1;
                         }
-                        
                     }
                     reportNums.Add(reportNum);
                     reportNum = 0;
                 }
+                
             }
             this.ViewData["userSearch"] = userSearch;
             this.ViewData["reportNums"] = reportNums;

@@ -5,6 +5,7 @@ using MedicalStore.DAO.Interface;
 using MedicalStore.Models;
 using MedicalStore.Service.Interface;
 using MedicalStore.Utils.Common;
+using MedicalStore.Utils.Interface;
 using MedicalStore.Utils.Locale;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -17,10 +18,13 @@ namespace MedicalStore.Controllers
     {
         private readonly IProductService ProductService;
         private readonly ICategoryService CategoryService;
-        public ProductApiController(IProductRepository productRepository, IProductService productService, ICategoryService categoryService)
+
+        private readonly IUploadFileService UploadFileService;
+        public ProductApiController(IProductRepository productRepository, IProductService productService, ICategoryService categoryService, IUploadFileService uploadFileService)
         {
             this.ProductService = productService;
             this.CategoryService = categoryService;
+            this.UploadFileService = uploadFileService;
         }
 
         [HttpPost("create")]
@@ -41,11 +45,19 @@ namespace MedicalStore.Controllers
             }
             var isExistProduct = this.ProductService.GetProductByName(body.Name.Trim());
             User user = (User)this.ViewData["user"];
-            if(isExistProduct != null && isExistProduct.ShopId == user.UserId)
+            if (isExistProduct != null && isExistProduct.ShopId == user.UserId)
             {
                 res.setErrorMessage("Product " + body.Name + " is already exist in your shop!!");
                 return new BadRequestObjectResult(res.getResponse());
             }
+
+            var imageUrl = this.UploadFileService.Upload(body.File);
+            if (imageUrl == null)
+            {
+                res.setErrorMessage(CustomLanguageValidator.ErrorMessageKey.ERROR_UPLOAD_FILE_FAILED, "File");
+                return new BadRequestObjectResult(res.getResponse());
+            }
+
             var product = new Product();
             product.ProductId = Guid.NewGuid().ToString();
             product.Name = body.Name.Trim();
@@ -53,12 +65,11 @@ namespace MedicalStore.Controllers
             product.OriginalPrice = body.OriginalPrice;
             product.RetailPrice = body.RetailPrice;
             product.Quantity = body.Quantity;
-            product.ImageUrl = body.ImageUrl.Trim();
+            product.ImageUrl = imageUrl;
             product.CategoryId = body.CategoryId;
             product.ShopId = user.UserId;
             product.CreateDate = DateTime.Now.ToShortDateString();
             product.Status = ProductStatus.ACTIVE;
-
 
             this.ProductService.CreateProductHandler(product);
             res.setMessage("Create Product Success!");
@@ -99,12 +110,30 @@ namespace MedicalStore.Controllers
                 }
             }
 
+            if (body.File != null)
+            {
+                var validFile = this.UploadFileService.CheckFileExtension(body.File) && this.UploadFileService.CheckFileSize(body.File, 5);
+                if (!validFile)
+                {
+                    res.setErrorMessage(CustomLanguageValidator.ErrorMessageKey.ERROR_INVALID_FILE, "File");
+                    return new BadRequestObjectResult(res.getResponse());
+                }
+
+                var imageUrl = this.UploadFileService.Upload(body.File);
+                if (imageUrl == null)
+                {
+                    res.setErrorMessage(CustomLanguageValidator.ErrorMessageKey.ERROR_UPLOAD_FILE_FAILED, "File");
+                    return new BadRequestObjectResult(res.getResponse());
+                }
+
+                product.ImageUrl = imageUrl;
+            }
+
             product.Name = body.ProductName.Trim();
             product.Description = body.ProductDescription.Trim();
             product.OriginalPrice = body.OriginalPrice;
             product.RetailPrice = body.RetailPrice;
             product.Quantity = body.Quantity;
-            product.ImageUrl = body.ImageUrl.Trim();
 
             this.ProductService.UpdateProductHandler(product);
 
@@ -129,5 +158,5 @@ namespace MedicalStore.Controllers
         }
     }
 
-    
+
 }

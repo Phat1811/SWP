@@ -6,10 +6,13 @@ using System.Collections.Generic;
 using MedicalStore.Controllers.DTO;
 using System.Linq;
 using MedicalStore.Service.Interface;
+using MedicalStore.Auth;
 
 namespace MedicalStore.Controllers
 {
     [Route("category")]
+    [RoleGuardAttribute("0")]
+    [ServiceFilter(typeof(AuthGuard))]
     public class CategoryController : Controller
     {
         private readonly ICategoryService CategoryService;
@@ -18,7 +21,7 @@ namespace MedicalStore.Controllers
         {
             this.CategoryService = categoryService;
             this.ProductService = productService;
-        } 
+        }
 
         [HttpGet("")]
         public IActionResult GetAllCategory(string sortBy, int pageIndex = 0, int pageSize = 12)

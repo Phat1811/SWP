@@ -8,10 +8,13 @@ using MedicalStore.Utils.Locale;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using MedicalStore.Auth;
 
 namespace MedicalStore.Controllers
 {
     [Route("/api/category")]
+    [RoleGuardAttribute("0")]
+    [ServiceFilter(typeof(AuthGuard))]
     public class CategoryApiController : Controller
     {
         private readonly ICategoryService CategoryService;
@@ -65,13 +68,14 @@ namespace MedicalStore.Controllers
                 return new BadRequestObjectResult(res.getResponse());
             }
             var category = CategoryService.GetCategoryByID(body.CategoryId);
-            if (body.Name.Trim() != category.Name) {
-            var isExistCategory = this.CategoryService.GetCategoryByName(body.Name.Trim());
-            if (isExistCategory != null)
+            if (body.Name.Trim() != category.Name)
             {
+                var isExistCategory = this.CategoryService.GetCategoryByName(body.Name.Trim());
+                if (isExistCategory != null)
+                {
                     res.setErrorMessage("Category Name is already exist!!");
                     return new BadRequestObjectResult(res.getResponse());
-            }
+                }
             }
             category.Name = body.Name.Trim();
             category.Description = body.Description.Trim();

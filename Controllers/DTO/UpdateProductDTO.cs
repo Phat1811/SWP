@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using MedicalStore.Utils.Validator;
+using Microsoft.AspNetCore.Http;
 
 namespace MedicalStore.Controllers.DTO
 {
@@ -11,7 +12,7 @@ namespace MedicalStore.Controllers.DTO
         public float OriginalPrice { set; get; }
         public float RetailPrice { get; set; }
         public int Quantity { get; set; }
-        public string ImageUrl { set; get; }
+        public IFormFile File { get; set; }
         public string CategoryId { set; get; }
 
     }
@@ -25,7 +26,7 @@ namespace MedicalStore.Controllers.DTO
             RuleFor(x => x.OriginalPrice).NotEmpty().InclusiveBetween(ProductValidator.ORIGINALPRICE_MIN, ProductValidator.ORIGINALPRICE_MAX);
             RuleFor(x => x.RetailPrice).NotEmpty().InclusiveBetween(ProductValidator.RETAILPRICE_MIN, ProductValidator.RETAILPRICE_MAX);
             RuleFor(x => x.Quantity).NotEmpty().InclusiveBetween(ProductValidator.QUANTITY_MIN, ProductValidator.QUANTITY_MAX);
-            RuleFor(x => x.ImageUrl).NotEmpty();
+            RuleFor(x => x.File).NotNull();
             RuleFor(x => x.CategoryId).NotEmpty();
         }
     }

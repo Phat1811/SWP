@@ -18,6 +18,9 @@ namespace MedicalStore.Models
         public float SalePrice { set; get; }
 
         [Required]
+        public double Profit { get; set; }
+
+        [Required]
         [StringLength(50)]
         public string CreateDate { set; get; }
 

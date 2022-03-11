@@ -5908,7 +5908,6 @@ F:\Trả Nợ\SWP391\Code\Deverlop\bin\Debug\net5.0\MedicalStore.deps.json
 F:\Trả Nợ\SWP391\Code\Deverlop\bin\Debug\net5.0\MedicalStore.runtimeconfig.json
 F:\Trả Nợ\SWP391\Code\Deverlop\bin\Debug\net5.0\MedicalStore.runtimeconfig.dev.json
 F:\Trả Nợ\SWP391\Code\Deverlop\bin\Debug\net5.0\MedicalStore.dll
-F:\Trả Nợ\SWP391\Code\Deverlop\bin\Debug\net5.0\ref\MedicalStore.dll
 F:\Trả Nợ\SWP391\Code\Deverlop\bin\Debug\net5.0\MedicalStore.pdb
 F:\Trả Nợ\SWP391\Code\Deverlop\bin\Debug\net5.0\refs\Microsoft.AspNetCore.Antiforgery.dll
 F:\Trả Nợ\SWP391\Code\Deverlop\bin\Debug\net5.0\refs\Microsoft.AspNetCore.Authentication.Abstractions.dll
@@ -6325,7 +6324,6 @@ F:\Trả Nợ\SWP391\Code\Deverlop\obj\Debug\net5.0\MedicalStore.MvcApplicationP
 F:\Trả Nợ\SWP391\Code\Deverlop\obj\Debug\net5.0\MedicalStore.RazorAssemblyInfo.cache
 F:\Trả Nợ\SWP391\Code\Deverlop\obj\Debug\net5.0\MedicalStore.RazorAssemblyInfo.cs
 F:\Trả Nợ\SWP391\Code\Deverlop\obj\Debug\net5.0\staticwebassets\MedicalStore.StaticWebAssets.Manifest.cache
-F:\Trả Nợ\SWP391\Code\Deverlop\obj\Debug\net5.0\staticwebassets\MedicalStore.StaticWebAssets.xml
 F:\Trả Nợ\SWP391\Code\Deverlop\obj\Debug\net5.0\scopedcss\bundle\MedicalStore.styles.css
 F:\Trả Nợ\SWP391\Code\Deverlop\obj\Debug\net5.0\MedicalStore.TagHelpers.input.cache
 F:\Trả Nợ\SWP391\Code\Deverlop\obj\Debug\net5.0\MedicalStore.TagHelpers.output.cache
@@ -6363,7 +6361,6 @@ F:\Trả Nợ\SWP391\Code\Deverlop\obj\Debug\net5.0\MedicalStore.dll
 F:\Trả Nợ\SWP391\Code\Deverlop\obj\Debug\net5.0\ref\MedicalStore.dll
 F:\Trả Nợ\SWP391\Code\Deverlop\obj\Debug\net5.0\MedicalStore.pdb
 F:\Trả Nợ\SWP391\Code\Deverlop\obj\Debug\net5.0\MedicalStore.genruntimeconfig.cache
-F:\Trả Nợ\SWP391\Code\Deverlop\obj\Debug\net5.0\Razor\Views\Containers\Product\SearchProduct.cshtml.g.cs
 C:\Users\LENOVO-PC\Desktop\SWP\iteration3\SWP\bin\Debug\net5.0\appsettings.Development.json
 C:\Users\LENOVO-PC\Desktop\SWP\iteration3\SWP\bin\Debug\net5.0\appsettings.json
 C:\Users\LENOVO-PC\Desktop\SWP\iteration3\SWP\bin\Debug\net5.0\config\env.development.json
@@ -7783,11 +7780,9 @@ F:\Trả Nợ\SWP391\Code\Deverlop\obj\Debug\net5.0\Razor\Views\Components\Commo
 F:\Trả Nợ\SWP391\Code\Deverlop\obj\Debug\net5.0\Razor\Views\Components\Table\Status.cshtml.g.cs
 F:\Trả Nợ\SWP391\Code\Deverlop\obj\Debug\net5.0\Razor\Views\Containers\Auth\RegisterShop.cshtml.g.cs
 F:\Trả Nợ\SWP391\Code\Deverlop\obj\Debug\net5.0\Razor\Views\Containers\Product\Product.cshtml.g.cs
-F:\Trả Nợ\SWP391\Code\Deverlop\obj\Debug\net5.0\Razor\Views\Containers\User\Manage.cshtml.g.cs
 F:\Trả Nợ\SWP391\Code\Deverlop\obj\Debug\net5.0\Razor\Views\Containers\Product\ProductDetail.cshtml.g.cs
 F:\Trả Nợ\SWP391\Code\Deverlop\obj\Debug\net5.0\Razor\Views\Containers\Report\Report.cshtml.g.cs
 F:\Trả Nợ\SWP391\Code\Deverlop\obj\Debug\net5.0\Razor\Views\Containers\Category\CategoryDetail.cshtml.g.cs
-F:\Trả Nợ\SWP391\Code\Deverlop\obj\Debug\net5.0\Razor\Views\Containers\Order\SoldOrder.cshtml.g.cs
 D:\swp_last_ver\bin\Debug\net5.0\appsettings.Development.json
 D:\swp_last_ver\bin\Debug\net5.0\appsettings.json
 D:\swp_last_ver\bin\Debug\net5.0\config\env.development.json
@@ -9213,3 +9208,8 @@ C:\Users\LENOVO-PC\Desktop\SWP\Fix\SWP\obj\Debug\net5.0\MedicalStore.RazorTarget
 C:\Users\LENOVO-PC\Desktop\SWP\Fix\SWP\obj\Debug\net5.0\MedicalStore.Views.pdb
 C:\Users\LENOVO-PC\Desktop\SWP\Fix\SWP\obj\Debug\net5.0\MedicalStore.csproj.CopyComplete
 C:\Users\LENOVO-PC\Desktop\SWP\Fix\SWP\obj\Debug\net5.0\MedicalStore.genruntimeconfig.cache
+F:\Trả Nợ\SWP391\Code\Deverlop\obj\Debug\net5.0\Razor\Views\Containers\Admin\CustomerManage.cshtml.g.cs
+F:\Trả Nợ\SWP391\Code\Deverlop\obj\Debug\net5.0\Razor\Views\Containers\Admin\SellerManage.cshtml.g.cs
+F:\Trả Nợ\SWP391\Code\Deverlop\obj\Debug\net5.0\Razor\Views\Containers\Report\CreateReport.cshtml.g.cs
+F:\Trả Nợ\SWP391\Code\Deverlop\obj\Debug\net5.0\Razor\Views\Containers\Report\ReportDetail.cshtml.g.cs
+F:\Trả Nợ\SWP391\Code\Deverlop\obj\Debug\net5.0\refint\MedicalStore.dll

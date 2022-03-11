@@ -61,10 +61,18 @@ namespace MedicalStore.Controllers
             {
                 List<Order> listSoldOrder = OrderService.GetlistSoldOrder(u.UserId);
                 orderNums.Add(listSoldOrder.Count);
-                float profit = OrderService.CalculateProfitHandler(u.UserId);
-                profits.Add(profit);
                 var (products, t) = this.ProductService.GetListProductByShopId(u.UserId, 0, 12);
                 productNums.Add(products.Count);
+                float profit = 0;
+                foreach(Product p in products)
+                {
+                    List<OrderItem> orderItems = this.OrderItemService.GetAllOrderItemByProductId(p.ProductId);
+                    foreach(OrderItem oi in orderItems)
+                    {
+                        profit = profit + (float)oi.Profit;
+                    }
+                }
+                profits.Add(profit);
                 int reportNum = ReportService.GetListReportByShopId(u.UserId).Count;                
                 reportNums.Add(reportNum);
             }
@@ -80,7 +88,33 @@ namespace MedicalStore.Controllers
                 list.Add(sellerList);
                 list.Sort((x, y) => y.money.CompareTo(x.money));
             }
-            for(int i = 0; i < list.Count; i++)
+
+            if(sortBy == "orderIncreasing")
+            {
+                list.Sort((x, y) => x.orderNums.CompareTo(y.orderNums));
+            }
+            if (sortBy == "orderDecreasing")
+            {
+                list.Sort((x, y) => y.orderNums.CompareTo(x.orderNums));
+            }
+            if (sortBy == "reportIncreasing")
+            {
+                list.Sort((x, y) => x.reportNums.CompareTo(y.reportNums));
+            }
+            if (sortBy == "reportDecreasing")
+            {
+                list.Sort((x, y) => y.reportNums.CompareTo(x.reportNums));
+            }
+            if (sortBy == "profitIncreasing")
+            {
+                list.Sort((x, y) => x.money.CompareTo(y.money));
+            }
+            if (sortBy == "profitDecreasing")
+            {
+                list.Sort((x, y) => y.money.CompareTo(x.money));
+            }
+
+            for (int i = 0; i < list.Count; i++)
             {
                 orderNums[i] = list[i].orderNums;
                 productNums[i] = list[i].productNums;
@@ -97,7 +131,7 @@ namespace MedicalStore.Controllers
             return View(Routers.SellerManage.Page);
         }
         [HttpGet("customer")]
-        public IActionResult GetAllCustomer()
+        public IActionResult GetAllCustomer(string sortBy)
         {
             var user = (User)this.ViewData["user"];
             if (user == null || user.RoleId != "0")
@@ -111,7 +145,7 @@ namespace MedicalStore.Controllers
             foreach(User u in listCustomer)
             {
                 float t = 0;
-                var (orders, total) = this.OrderService.GetOrders(u.UserId, 0, 12);
+                List<Order> orders = this.OrderService.GetOrdersHistory(u.UserId);
                 orderNums.Add(orders.Count);
                 foreach(Order order in orders)
                 {
@@ -134,6 +168,24 @@ namespace MedicalStore.Controllers
                 list.Add(sellerList);
                 list.Sort((x, y) => y.money.CompareTo(x.money));
             }
+
+            if (sortBy == "buyIncreasing")
+            {
+                list.Sort((x, y) => x.money.CompareTo(y.money));
+            }
+            if (sortBy == "buyDecreasing")
+            {
+                list.Sort((x, y) => y.money.CompareTo(x.money));
+            }
+            if (sortBy == "reportIncreasing")
+            {
+                list.Sort((x, y) => x.reportNums.CompareTo(y.reportNums));
+            }
+            if (sortBy == "reportDecreasing")
+            {
+                list.Sort((x, y) => y.reportNums.CompareTo(x.reportNums));
+            }
+
             for (int i = 0; i < list.Count; i++)
             {
                 orderNums[i] = list[i].orderNums;

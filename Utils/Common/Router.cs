@@ -56,7 +56,6 @@
         public static readonly RouterItem OrderDetail = new RouterItem() { Page = "/Views/Containers/Order/OrderDetail.cshtml", Title = "Order Detail", Link = "/order/detail" };
         public static readonly RouterItem OrderManager = new RouterItem() { Page = "/Views/Containers/Order/Manager.cshtml", Title = "Users Order", Link = "/order/manager" };
         public static readonly RouterItem SearchOrders = new RouterItem() { Page = "/Views/Containers/Order/Manager.cshtml", Title = "Users Order", Link = "/order/manager" };
-        public static readonly RouterItem SoldOrder = new RouterItem() { Page = "/Views/Containers/Order/SoldOrder.cshtml", Title = "Shop Sold Order", Link = "/order/sold" };
         //------------------------------------
         
         //Report

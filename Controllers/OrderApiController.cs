@@ -51,7 +51,6 @@ namespace MedicalStore.Controllers
             {
                 Product product = this.ProductService.GetProductById(cartItem.Key);
                 total += product.RetailPrice * cartItem.Value.Quantity;
-                profit += (product.RetailPrice - product.OriginalPrice);
                 if (cartItem.Value.Quantity > product.Quantity)
                 {
                     System.Collections.Generic.Dictionary<string, object> context = new System.Collections.Generic.Dictionary<string, object>();
@@ -67,7 +66,6 @@ namespace MedicalStore.Controllers
             order.OrderId = Guid.NewGuid().ToString();
             order.Status = OrderStatus.ACTIVE;
             order.Total = total;
-            order.Profit = profit;
             order.CreateDate = DateTime.Now.ToShortDateString();
             order.PaymentMethod = body.PaymentMethod;
             order.CustomerId = customer.UserId;
@@ -84,6 +82,7 @@ namespace MedicalStore.Controllers
                 orderItem.CreateDate = DateTime.Now.ToShortDateString();
                 orderItem.SalePrice = product.RetailPrice;
                 orderItem.OrderId = order.OrderId;
+                orderItem.Profit = (product.RetailPrice - product.OriginalPrice) * cartItem.Value.Quantity;
                 orderItem.ProductId = product.ProductId;
                 product.Quantity -= orderItem.Quantity;
                 this.OrderService.CreateOrderItemHandler(orderItem);

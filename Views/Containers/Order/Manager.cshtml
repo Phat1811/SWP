@@ -7,9 +7,7 @@
     var search = (string)this.Context.Request.Query["search"];
     var endDate = (string)this.Context.Request.Query["endDate"];
     var startDate = (string)this.Context.Request.Query["startDate"];
-    double totalOri = 0;
-    double totalPro = 0;
-
+    float profit = (float)this.ViewData["profit"];
 }
 
 <div class="flex-1 min-h-screen px-2 py-2 xl:px-8 xl:py-6 ">
@@ -64,10 +62,6 @@
                                         </th>
                                         <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Customer Name
                                         </th>
-                                        <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Total
-                                        </th>
-                                        <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Profit
-                                        </th>
                                         <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Create Date
                                         </th>
                                         <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Payment
@@ -82,13 +76,9 @@
                                     {   
                                         var item = orders[i];
                                         var link = $"{Routers.OrderDetail.Link}?orderId={item.OrderId}";
-                                        totalOri += item.Total;
-                                        totalPro += item.Profit;
                                         <tr class="hover:bg-gray-200">
                                             <td class="border">@(i+1)</td>
                                             <td class="border">@item.Customer.Name</td>
-                                            <td class="border">$@item.Total</td>
-                                            <td class="border">$@item.Profit</td>
                                             <td class="border">@item.CreateDate</td>
                                             <td class="border">@item.PaymentMethod</td>
                                             <td class="border">
@@ -106,10 +96,8 @@
 
                                       <tr class="hover:bg-gray-200">
                                             <td class="border"></td>
-                                            <td class="border">Total</td>
-                                            <td class="border">$@totalOri</td>
-                                            <td class="border">$@totalPro</td>
-                                            <td class="border"></td>
+                                            <td class="border">Profit</td>
+                                            <td class="border">$@profit</td>
                                             <td class="border"></td>
                                             <td class="border">
                              

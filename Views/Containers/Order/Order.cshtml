@@ -2,7 +2,10 @@
 @{
     this.ViewData["Title"] = Routers.Category.Title;
     var orders = (List<Order>)this.ViewData["orders"];
-    var total = (int)this.ViewData["total"];
+    var total = (int)this.ViewData["total"];    
+    var search = (string)this.Context.Request.Query["search"];
+    var endDate = (string)this.Context.Request.Query["endDate"];
+    var startDate = (string)this.Context.Request.Query["startDate"];
 }
 
 <div class="flex-1 min-h-screen px-2 py-2 xl:px-8 xl:py-6">
@@ -14,14 +17,31 @@
                     <h2 class="mr-auto text-base font-medium">
                         My Order
                     </h2>
-
                 </div>
-                <form id="formFilter">
-                    @await Html.PartialAsync("../../Components/Form/FormHidden.cshtml",
-                    new { Name = "pageSize", Value = (string) this.Context.Request.Query["pageSize"] ?? "12" })
-                    @await Html.PartialAsync("../../Components/Form/FormHidden.cshtml",
-                    new { Name = "pageIndex",Value = (string) this.Context.Request.Query["pageIndex"] ?? "0" })
-                </form>
+                <div class="flex flex-col items-center p-5 border-b border-gray-200 sm:flex-row">
+                    <form id="formFilter">
+                        <div class="flex items-end space-x-2">
+                            <div class="space-y-2">
+                                <label>Start Date</label>
+                                @await Html.PartialAsync("../../Components/Form/TextField.cshtml", new {Label="Start Date",Field="startDate", Type="date", Value=startDate})
+                            </div>
+                            <div class="space-y-2">
+                                <label>End Date</label>
+                                @await Html.PartialAsync("../../Components/Form/TextField.cshtml", new {Label="End Date", Field="endDate",Type="date", Value=endDate})
+                            </div>
+                            <div class="flex items-end">
+                                <button class="mb-2 btn btn-primary">
+                                    <i data-feather="search" class="w-5 h-5"></i>
+                                </button>
+
+                            </div>
+                        </div>
+                        @await Html.PartialAsync("../../Components/Form/FormHidden.cshtml",
+                        new { Name = "pageSize", Value = (string) this.Context.Request.Query["pageSize"] ?? "12" })
+                        @await Html.PartialAsync("../../Components/Form/FormHidden.cshtml",
+                        new { Name = "pageIndex",Value = (string) this.Context.Request.Query["pageIndex"] ?? "0" })
+                    </form>
+                </div>
                 <div class="p-5" id="hoverable-table">
                     <div class="preview">
                         <div class="overflow-x-auto">

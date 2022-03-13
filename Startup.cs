@@ -50,6 +50,8 @@ namespace MedicalStore
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IOrderItemRepository, OrderItemRepository>();
 
+            services.AddScoped<IUploadFileService, UploadFileService>();
+
             services.AddScoped<AuthGuard>();
             services.AddScoped<AuthGuardGuest>();
             services.AddScoped<UserFilter>();

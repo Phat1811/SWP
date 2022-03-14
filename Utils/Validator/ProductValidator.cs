@@ -3,7 +3,7 @@
     public class ProductValidator
     {
         public static readonly int PRODUCTID_MAX = 50;
-        public static readonly int PRODUCTID_MIN = 0;
+        public static readonly int PRODUCTID_MIN = 1;
         public static readonly int PRODUCTNAME_MAX = 50;
         public static readonly int PRODUCTNAME_MIN = 5;
         public static readonly int DESCRIPTION_MAX = 500;

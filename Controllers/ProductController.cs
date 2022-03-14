@@ -28,7 +28,7 @@ namespace MedicalStore.Controllers
         [HttpGet("create")]
         public IActionResult CreateProduct()
         {
-            var categories = CategoryService.GetListCategoriesByStatus(CategoryStatus.INACTIVE);
+            var categories = CategoryService.GetListCategoriesByStatus(CategoryStatus.ACTIVE);
             this.ViewData["listCategory"] = new SelectList(categories);
             var product = (Product)this.ViewData["product"];
             if (product != null)
@@ -42,6 +42,8 @@ namespace MedicalStore.Controllers
         public IActionResult UpdateProduct(string productId)
         {
             var product = ProductService.GetProductById(productId);
+            var category = CategoryService.GetCategoryByID(product.CategoryId);
+            this.ViewData["category"] = category;
             this.ViewData["product"] = product;
             return View(Routers.UpdateProduct.Page);
         }
@@ -78,7 +80,7 @@ namespace MedicalStore.Controllers
         }
 
         [HttpGet("")]
-        public IActionResult GetProductsByUserRole(double min, double max, string name, string categoryId, int pageIndex = 0, int pageSize = 12)
+        public IActionResult GetProductsByUserRole(string shopName, string productName, string categoryId, int pageIndex = 0, int pageSize = 12)
         {
             var user = (User)this.ViewData["user"];
             List<Product> listProduct = new List<Product>();
@@ -95,49 +97,14 @@ namespace MedicalStore.Controllers
                 }
                 if (user.RoleId == "0")
                 {
-                    var categories = this.CategoryService.GetCategoryDropListRender(CategoryStatus.INACTIVE);
-                    var allCategory = new SelectListItem()
-                    {
-                        Value = "",
-                        Text = "All"
-                    };
-
-                    categories.Add(allCategory);
-                    this.ViewData["categories"] = new SelectList(categories);
-
-                    if (name == null) name = "";
-                    if (categoryId == null) categoryId = "";
-                    if (max < 0)
-                    {
-                        ServerResponse.SetFieldErrorMessage("max", CustomLanguageValidator.ErrorMessageKey.ERROR_GREATER_ZERO, this.ViewData);
-                        max = 9999999;
-                    }
-                    if (max == 0)
-                    {
-                        max = 9999999;
-                        var query = $"?min={min}&max={max}&name={name}&CategoryId={categoryId}";
-                        return Redirect(Routers.Product.Link + query);
-                    }
-
-                    if (min < 0)
-                    {
-                        ServerResponse.SetFieldErrorMessage("min", CustomLanguageValidator.ErrorMessageKey.ERROR_GREATER_ZERO, this.ViewData);
-                        min = 0;
-                    }
-
-                    if (min > max)
-                    {
-                        ServerResponse.SetErrorMessage(CustomLanguageValidator.ErrorMessageKey.ERROR_MIN_GREATER_MAX, this.ViewData);
-                    }
-                    var (products, count) = this.ProductService.GetProducts(pageIndex, pageSize, min, max, name, categoryId, CategoryStatus.INACTIVE);
-
-                    products.Sort((x, y) => string.Compare(UserService.GetUserById(x.ShopId).Name, UserService.GetUserById(y.ShopId).Name));
-                    foreach (Product p in products)
+                    List<Product> list = ProductService.GetAllProduct();
+                    list.Sort((x, y) => string.Compare(UserService.GetUserById(x.ShopId).Name, UserService.GetUserById(y.ShopId).Name));
+                    foreach (Product p in list)
                     {
                         listShopName.Add(UserService.GetUserById(p.ShopId).Name);
                     }
-                    listProduct = products;
-                    total = count;
+                    listProduct.AddRange(list);
+                    total = listProduct.Count;
                 }
             }
 

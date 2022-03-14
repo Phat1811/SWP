@@ -47,7 +47,7 @@ namespace MedicalStore.Controllers
             var cart = this.HttpContext.Session.GetString(CartSession) ?? "";
 
             var list = this.CartService.convertStringToCartItem(cart);
-
+            
             var getCart = this.CartService.GetCartItems(list);
             this.ViewData["cartItems"] = getCart;
 
@@ -59,8 +59,7 @@ namespace MedicalStore.Controllers
             };
 
             categories.Add(allCategory);
-            this.ViewData["categories"] = new SelectList(categories);
-
+            
             if (name == null) name = "";
             if (categoryId == null) categoryId = "";
             if (max < 0)
@@ -74,7 +73,16 @@ namespace MedicalStore.Controllers
                 var query = $"?min={min}&max={max}&name={name}&CategoryId={categoryId}&message={message}&errorMessage={errorMessage}";
                 return Redirect(Routers.Home.Link + query);
             }
-
+            this.ViewData["categories"] = new SelectList(categories);
+            var (products, count) = this.ProductService.GetProducts(pageIndex, pageSize, min, max, name, categoryId, CategoryStatus.ACTIVE);
+            foreach (var product in products)
+            {
+                if (product.Quantity == 0)
+                {
+                    product.Status = ProductStatus.INACTIVE;
+                    ProductService.UpdateProductHandler(product);
+                }
+            }
             if (min < 0)
             {
                 ServerResponse.SetFieldErrorMessage("min", CustomLanguageValidator.ErrorMessageKey.ERROR_GREATER_ZERO, this.ViewData);
@@ -85,10 +93,6 @@ namespace MedicalStore.Controllers
             {
                 ServerResponse.SetErrorMessage(CustomLanguageValidator.ErrorMessageKey.ERROR_MIN_GREATER_MAX, this.ViewData);
             }
-
-
-            Console.WriteLine(this.ViewData["user"]);
-            var (products, count) = this.ProductService.GetProducts(pageIndex, pageSize, min, max, name, categoryId, CategoryStatus.ACTIVE);
             this.ViewData["products"] = products;
             this.ViewData["total"] = count;
             return View(Routers.Home.Page);

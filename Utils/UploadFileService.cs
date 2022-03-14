@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using MedicalStore.Utils.Interface;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.IO;
 
 namespace MedicalStore.Utils
 {
-    public class UploadFileService
+    public class UploadFileService : IUploadFileService
     {
         readonly string FolderUrl = "/wwwroot/public/images/";
         readonly string ImageUrl = "/public/images/";

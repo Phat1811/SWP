@@ -3,6 +3,7 @@
 @{
     var product = (Product)this.ViewData["product"];
     this.ViewData["Title"] = Routers.UpdateProduct.Title;
+    var category = (Category)this.ViewData["category"];
 }
 <div class="flex-1 min-h-screen px-2 py-2 xl:px-8 xl:py-6">
     <div class="flex">
@@ -77,9 +78,9 @@
                             <dt class="text-sm font-medium text-gray-500">Category</dt>
                             <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                                 <input class="block px-4 py-3 w-full border-gray-300 intro-x login__input form-control"
-                                    type="text" name="category" id="categoryId" value="@product.CategoryId"
+                                    type="text" name="category" value="@category.Name"
                                     placeholder="Category" readonly />
-                                <div id="CATEGORYIDERROR" data-label="Category" class="text-red-500 "></div>
+                                <input type="hidden" id="categoryId" value="@category.CategoryId"/>
                             </dd>
                         </div>
                         <div>

@@ -26,8 +26,8 @@ namespace MedicalStore.Controllers.DTO
             RuleFor(x => x.OriginalPrice).NotEmpty().InclusiveBetween(ProductValidator.ORIGINALPRICE_MIN, ProductValidator.ORIGINALPRICE_MAX);
             RuleFor(x => x.RetailPrice).NotEmpty().InclusiveBetween(ProductValidator.RETAILPRICE_MIN, ProductValidator.RETAILPRICE_MAX);
             RuleFor(x => x.Quantity).NotEmpty().InclusiveBetween(ProductValidator.QUANTITY_MIN, ProductValidator.QUANTITY_MAX);
-            RuleFor(x => x.File).NotNull();
             RuleFor(x => x.CategoryId).NotEmpty();
+            RuleFor(x => x.ProductId).NotEmpty();
         }
     }
 }

@@ -75,7 +75,13 @@ namespace MedicalStore.DAO
             for (int i = orders.Count - 1; i >= 0; i--)
             {
                 DateTime date = Convert.ToDateTime(orders[i].CreateDate);
-                if (DateTime.Compare(date, eDate) > 0 || DateTime.Compare(date, sDate) < 0 || (!orders[i].Customer.Name.ToLower().Contains(search) && !orders[i].Customer.Email.Contains(search) && !orders[i].Customer.Phone.Contains(search)))
+                if (DateTime.Compare(date, eDate) > 0 )
+                {
+                    orders.RemoveAt(i);
+                }else if(DateTime.Compare(date, sDate) < 0)
+                {
+                    orders.RemoveAt(i);
+                }else if((!orders[i].Customer.Name.ToLower().Contains(search) && !orders[i].Customer.Email.Contains(search) && !orders[i].Customer.Phone.Contains(search)))
                 {
                     orders.RemoveAt(i);
                 }

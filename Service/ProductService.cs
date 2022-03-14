@@ -28,11 +28,6 @@ namespace MedicalStore.Service
             return this.ProductRepository.InsertHandler(product);
         }
 
-        public bool DeleteProductHandler(Product product)
-        {
-            return this.ProductRepository.DeleteHandler(product);
-        }
-
         public bool UpdateProductHandler(Product product)
         {
             return this.ProductRepository.UpdateHandler(product);
@@ -56,6 +51,16 @@ namespace MedicalStore.Service
         public List<Product> GetListProductByCategoryId(string categoryId)
         {
             return this.ProductRepository.GetListProductByCategoryId(categoryId);
+        }
+
+        public List<Product> GetAllProduct()
+        {
+            return this.ProductRepository.GetAllProduct();
+        }
+
+        public (List<Product>, int) GetProductForManage(string shopName, string productName, string categoryId, int pageIndex, int pageSize)
+        {
+            return this.ProductRepository.GetProductForManage(shopName, productName, categoryId, pageIndex, pageSize);
         }
     }
 }

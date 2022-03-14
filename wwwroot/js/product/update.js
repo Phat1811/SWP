@@ -1,4 +1,24 @@
-﻿const updateForm = document.getElementById("updateForm");
+﻿var imageFile
+
+const image = document.getElementById("image");
+image?.addEventListener("change", function () {
+        const reader = new FileReader();
+        reader.onload = function () {
+                const dataURL = reader.result;
+                const output = document.getElementById("image-preview");
+                if (output) {
+                        output.src = dataURL;
+                }
+        };
+        const input = this;
+        if (input && input.files) {
+                imageFile = input.files[0];
+                console.log(imageFile);
+                reader.readAsDataURL(imageFile);
+        }
+}); 
+
+const updateForm = document.getElementById("updateForm");
 updateForm?.addEventListener("submit", function (event) {
     event.preventDefault();
     const productId = document.getElementById("productId")
@@ -7,7 +27,6 @@ updateForm?.addEventListener("submit", function (event) {
     const originalPrice = document.getElementById("originalPrice");
     const retailPrice = document.getElementById("retailPrice");
     const quantity = document.getElementById("quantity");
-    const imageUrl = document.getElementById("imageUrl");
     const categoryId = document.getElementById("categoryId");
 
 
@@ -18,21 +37,20 @@ updateForm?.addEventListener("submit", function (event) {
         originalPrice !== null &&
         retailPrice !== null &&
         quantity !== null &&
-        imageUrl !== null &&
         categoryId !== null
     ) {
-        let input = {
-            productId: productId.value,
-            productName: productName.value,
-            productDescription: productDescription.value,
-            originalPrice: originalPrice.value,
-            retailPrice: retailPrice.value,
-            quantity: quantity.value,
-            imageUrl: imageUrl.value,
-            categoryId: categoryId.value,
-        };
+        
+        const formData = new FormData();
+        formData.append("productId", productId.value);
+        formData.append("productName", productName.value);
+        formData.append("productDescription", productDescription.value);
+        formData.append("originalPrice", originalPrice.value);
+        formData.append("retailPrice", retailPrice.value);
+        formData.append("quantity", quantity.value);
+        formData.append("file", imageFile);
+        formData.append("categoryId", categoryId.value);
 
-        http.post('/api/product/update', input)
+        http.post('/api/product/update', formData, { headers: { Accept: 'application/x-www-form-urlencoded' } })
             .then(() => window.location.assign("/product/"))
             .catch(function (error) {
                 console.log(error);

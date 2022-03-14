@@ -28,7 +28,7 @@ namespace MedicalStore.Controllers
         }
 
         [HttpPost("create")]
-        public IActionResult HandleCreateProduct([FromBody] CreateProductDTO body)
+        public IActionResult HandleCreateProduct([FromForm] CreateProductDTO body)
 
         {
             if (body == null)
@@ -50,8 +50,9 @@ namespace MedicalStore.Controllers
                 res.setErrorMessage("Product " + body.Name + " is already exist in your shop!!");
                 return new BadRequestObjectResult(res.getResponse());
             }
-
+            Console.WriteLine(body.File);
             var imageUrl = this.UploadFileService.Upload(body.File);
+            Console.WriteLine(imageUrl);
             if (imageUrl == null)
             {
                 res.setErrorMessage(CustomLanguageValidator.ErrorMessageKey.ERROR_UPLOAD_FILE_FAILED, "File");
@@ -69,16 +70,26 @@ namespace MedicalStore.Controllers
             product.CategoryId = body.CategoryId;
             product.ShopId = user.UserId;
             product.CreateDate = DateTime.Now.ToShortDateString();
+            if(product.Quantity <= 0)
+            {
+                product.Status = ProductStatus.INACTIVE;
+            }
+            else 
+            { 
             product.Status = ProductStatus.ACTIVE;
-
+            }
             this.ProductService.CreateProductHandler(product);
             res.setMessage("Create Product Success!");
             return new ObjectResult(res.getResponse());
         }
 
         [HttpPost("update")]
-        public IActionResult HandleUpdateProduct([FromBody] UpdateProductDTO body)
+        public IActionResult HandleUpdateProduct([FromForm] UpdateProductDTO body)
         {
+            if (body == null)
+            {
+                body = new UpdateProductDTO();
+            }
             var res = new ServerApiResponse<string>();
             ValidationResult result = new UpdateProductDTOValidator().Validate(body);
             if (!result.IsValid)
@@ -93,13 +104,6 @@ namespace MedicalStore.Controllers
                 return new NotFoundObjectResult(res.getResponse());
             }
 
-            var isExistCategory = this.CategoryService.GetCategoryByID(body.CategoryId);
-            if (isExistCategory == null)
-            {
-                res.setErrorMessage("Cannot find category with Id" + body.CategoryId);
-                return new NotFoundObjectResult(res.getResponse());
-            }
-
             if (product.Name != body.ProductName)
             {
                 var isExistProduct = this.ProductService.GetProductByName(body.ProductName);
@@ -109,23 +113,9 @@ namespace MedicalStore.Controllers
                     return new BadRequestObjectResult(res.getResponse());
                 }
             }
-
             if (body.File != null)
             {
-                var validFile = this.UploadFileService.CheckFileExtension(body.File) && this.UploadFileService.CheckFileSize(body.File, 5);
-                if (!validFile)
-                {
-                    res.setErrorMessage(CustomLanguageValidator.ErrorMessageKey.ERROR_INVALID_FILE, "File");
-                    return new BadRequestObjectResult(res.getResponse());
-                }
-
                 var imageUrl = this.UploadFileService.Upload(body.File);
-                if (imageUrl == null)
-                {
-                    res.setErrorMessage(CustomLanguageValidator.ErrorMessageKey.ERROR_UPLOAD_FILE_FAILED, "File");
-                    return new BadRequestObjectResult(res.getResponse());
-                }
-
                 product.ImageUrl = imageUrl;
             }
 
@@ -133,26 +123,42 @@ namespace MedicalStore.Controllers
             product.Description = body.ProductDescription.Trim();
             product.OriginalPrice = body.OriginalPrice;
             product.RetailPrice = body.RetailPrice;
-            product.Quantity = body.Quantity;
+            if(product.Quantity != 0 && product.Status == ProductStatus.INACTIVE)
+            {
+                product.Quantity = body.Quantity;
+                product.Status = ProductStatus.INACTIVE;
+            }
+            else
+            {
+                product.Quantity = body.Quantity;
+                product.Status = ProductStatus.ACTIVE;
+            }
+            
+            
 
             this.ProductService.UpdateProductHandler(product);
-
-
             res.setMessage("Update Product Success!!");
             return new ObjectResult(res.getResponse());
 
         }
 
         [HttpPost("delete")]
-        public IActionResult HandleDeleteProduct([FromBody] CreateProductDTO body)
+        public IActionResult HandleDeleteProduct([FromForm] UpdateProductDTO body)
         {
             var res = new ServerApiResponse<string>();
-
             var product = ProductService.GetProductById(body.ProductId);
-            product.Status = ProductStatus.INACTIVE;
-
-            this.ProductService.DeleteProductHandler(product);
-
+            if (product != null)
+            {
+                if(product.Status == ProductStatus.ACTIVE)
+                {
+                    product.Status = ProductStatus.INACTIVE;
+                }
+                else
+                {
+                    product.Status = ProductStatus.ACTIVE;                   
+                }
+                ProductService.UpdateProductHandler(product);
+            }            
             res.setMessage("Delete Product Success!");
             return new ObjectResult(res.getResponse());
         }

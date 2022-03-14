@@ -82,7 +82,7 @@ namespace MedicalStore.Controllers
                 orderItem.CreateDate = DateTime.Now.ToShortDateString();
                 orderItem.SalePrice = product.RetailPrice;
                 orderItem.OrderId = order.OrderId;
-                orderItem.Profit = (product.RetailPrice - product.OriginalPrice) * cartItem.Value.Quantity;
+                orderItem.Profit = (orderItem.SalePrice - product.OriginalPrice) * cartItem.Value.Quantity;
                 orderItem.ProductId = product.ProductId;
                 product.Quantity -= orderItem.Quantity;
                 this.OrderService.CreateOrderItemHandler(orderItem);

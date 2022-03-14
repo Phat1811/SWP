@@ -36,7 +36,23 @@ namespace MedicalStore.Controllers
         public IActionResult ReportDetail(string productId)
         {
             var listReportByProductId = (List<ReportTicket>)ReportService.GetListReportByProductId(productId);
+            List<User> listCustomer = new List<User>();
+            List<Product> listProduct = new List<Product>();
+            foreach (var reportTicket in listReportByProductId)
+            {
+                User user = UserService.GetUserById(reportTicket.CustomerId);
+                Product product1 = ProductService.GetProductById(reportTicket.ProductId);
+                if (listCustomer != null)
+                {
+                    listCustomer.Add(user);
+                    listProduct.Add(product1);
+                }
+            }
             var product = ProductService.GetProductById(productId);
+            string shopName = UserService.GetUserById(product.ShopId).Name;
+            this.ViewData["shopName"] = shopName;
+            this.ViewData["listCustomer"] = listCustomer;
+            this.ViewData["listProduct"] = listProduct;
             this.ViewData["product"] = product;
             this.ViewData["listReportByProductId"] = listReportByProductId;
             return View(Routers.ReportList.Page);

@@ -159,7 +159,7 @@ namespace MedicalStore.Controllers
                 }
                 ProductService.UpdateProductHandler(product);
             }            
-            res.setMessage("Delete Product Success!");
+            res.setMessage("Update Product Success!");
             return new ObjectResult(res.getResponse());
         }
     }

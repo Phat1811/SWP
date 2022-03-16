@@ -92,7 +92,7 @@ namespace MedicalStore.Controllers
                 {
                     var (products, t) = this.ProductService.GetListProductByShopId(user.UserId, pageIndex, pageSize);
                     listProduct = products;
-                    listProduct.Sort((x, y) => x.CreateDate.CompareTo(y.CreateDate));
+                    listProduct.Sort((x, y) => y.CreateDate.CompareTo(x.CreateDate));
                     total = t;
                 }
                 if (user.RoleId == "0")

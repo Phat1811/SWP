@@ -38,6 +38,14 @@ namespace MedicalStore.Controllers
             var listReportByProductId = (List<ReportTicket>)ReportService.GetListReportByProductId(productId);
             var product = ProductService.GetProductById(productId);
             this.ViewData["product"] = product;
+            this.ViewData["shop"] = UserService.GetUserById(product.ShopId);
+            var listCustomer = new List<User>();
+            foreach(ReportTicket item in listReportByProductId)
+            {
+                User user = UserService.GetUserById(item.CustomerId);
+                listCustomer.Add(user);
+            }
+            this.ViewData["listCustomer"] = listCustomer;
             this.ViewData["listReportByProductId"] = listReportByProductId;
             return View(Routers.ReportList.Page);
         }

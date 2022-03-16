@@ -50,6 +50,11 @@ namespace MedicalStore.Controllers
                 res.setErrorMessage("Product " + body.Name + " is already exist in your shop!!");
                 return new BadRequestObjectResult(res.getResponse());
             }
+            if(body.OriginalPrice > body.RetailPrice) 
+            {
+                res.setErrorMessage("Product's Retail Price must be greater than Origina lPrice!!");
+                return new BadRequestObjectResult(res.getResponse());
+            }
             Console.WriteLine(body.File);
             var imageUrl = this.UploadFileService.Upload(body.File);
             Console.WriteLine(imageUrl);
@@ -112,6 +117,11 @@ namespace MedicalStore.Controllers
                     res.setErrorMessage("Product " + body.ProductName + " already exist in your shop!!");
                     return new BadRequestObjectResult(res.getResponse());
                 }
+            }
+            if (body.OriginalPrice > body.RetailPrice)
+            {
+                res.setErrorMessage("Product's Retail Price must be greater than Origina lPrice!!");
+                return new BadRequestObjectResult(res.getResponse());
             }
             if (body.File != null)
             {

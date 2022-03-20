@@ -35,13 +35,13 @@ namespace MedicalStore.Controllers
             string cart = this.HttpContext.Session.GetString(CartSession);
             if (cart == null || cart == "")
             {
-                res.setErrorMessage(CustomLanguageValidator.ErrorMessageKey.ERROR_CART_EMPTY);
+                res.setErrorMessage("Cart is empty");
                 return new BadRequestObjectResult(res.getResponse());
             }
             ValidationResult result = new CreateOrderDTOValidator().Validate(body);
             if (!result.IsValid)
             {
-                res.setErrorMessage(CustomLanguageValidator.ErrorMessageKey.ERROR_INVALID_ORDER);
+                res.setErrorMessage("Order is invalid");
                 return new BadRequestObjectResult(res.getResponse());
             }
             float total = 0;
@@ -56,7 +56,7 @@ namespace MedicalStore.Controllers
                     System.Collections.Generic.Dictionary<string, object> context = new System.Collections.Generic.Dictionary<string, object>();
                     context.Add("Name", product.Name);
                     context.Add("Quantity", product.Quantity);
-                    res.setErrorMessage(CustomLanguageValidator.ErrorMessageKey.ERROR_NOT_ENOUGH, context);
+                    res.setErrorMessage("{Name} has {Quantity} left", context);
                     return new BadRequestObjectResult(res.getResponse());
                 }
             }
@@ -91,7 +91,7 @@ namespace MedicalStore.Controllers
 
 
             this.HttpContext.Session.Remove(CartSession);
-            res.setMessage(CustomLanguageValidator.MessageKey.MESSAGE_ORDER_SUCCESS);
+            res.setMessage("Order success");
             return new ObjectResult(res.getResponse());
         }
     }

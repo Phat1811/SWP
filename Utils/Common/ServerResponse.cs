@@ -8,8 +8,7 @@ namespace MedicalStore.Utils.Common
     {
         public static void SetFieldErrorMessage(string field, string key, ViewDataDictionary dataView)
         {
-            string value = ValidatorOptions.Global.LanguageManager.GetString(key);
-            dataView[$"{field}Error"] = value;
+            dataView[$"{field}Error"] = key;
         }
 
         public static void SetMessage(string key, ViewDataDictionary dataView)
@@ -20,8 +19,7 @@ namespace MedicalStore.Utils.Common
 
         public static void SetErrorMessage(string errorKey, ViewDataDictionary dataView)
         {
-            string value = ValidatorOptions.Global.LanguageManager.GetString(errorKey);
-            dataView["errorMessage"] = value;
+            dataView["errorMessage"] = errorKey;
         }
 
         public string getRedirectWithMessage(string link, string message, string errorMessage)

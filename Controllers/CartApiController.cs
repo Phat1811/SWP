@@ -54,7 +54,7 @@ namespace MedicalStore.Controllers
             {
                 Dictionary<string, object> context = new Dictionary<string, object>();
                 context.Add("Name", product.Name);
-                res.setErrorMessage(CustomLanguageValidator.ErrorMessageKey.ERROR_OUT_OF_STOCK, context);
+                res.setErrorMessage("Out of stock");
                 return new BadRequestObjectResult(res.getResponse());
             }
 
@@ -70,7 +70,7 @@ namespace MedicalStore.Controllers
                         Dictionary<string, object> context = new Dictionary<string, object>();
                         context.Add("Name", product.Name);
                         context.Add("Quantity", product.Quantity);
-                        res.setErrorMessage(CustomLanguageValidator.ErrorMessageKey.ERROR_OUT_OF_STOCK, context);
+                        res.setErrorMessage("Out of stock");
                         return new BadRequestObjectResult(res.getResponse());
                     }
                     else
@@ -83,7 +83,7 @@ namespace MedicalStore.Controllers
                     }
                     this.HttpContext.Session.SetString(CartSession, this.CartService.convertCartItemToString(list));
                     res.data = this.CartService.GetCartItems(list);
-                    res.setMessage(CustomLanguageValidator.MessageKey.MESSAGE_ADD_CART_SUCCESS);
+                    res.setMessage("Add to cart success");
                     return new ObjectResult(res.getResponse());
                 }
             }
@@ -94,7 +94,7 @@ namespace MedicalStore.Controllers
             list.Add(body.productId, cartItem);
             this.HttpContext.Session.SetString(CartSession, this.CartService.convertCartItemToString(list));
             res.data = this.CartService.GetCartItems(list);
-            res.setMessage(CustomLanguageValidator.MessageKey.MESSAGE_ADD_CART_SUCCESS);
+            res.setMessage("Add to cart success");
             return new ObjectResult(res.getResponse());
         }
         [HttpGet("")]

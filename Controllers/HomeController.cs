@@ -47,7 +47,7 @@ namespace MedicalStore.Controllers
             var cart = this.HttpContext.Session.GetString(CartSession) ?? "";
 
             var list = this.CartService.convertStringToCartItem(cart);
-            
+
             var getCart = this.CartService.GetCartItems(list);
             this.ViewData["cartItems"] = getCart;
 
@@ -59,12 +59,12 @@ namespace MedicalStore.Controllers
             };
 
             categories.Add(allCategory);
-            
+
             if (name == null) name = "";
             if (categoryId == null) categoryId = "";
             if (max < 0)
             {
-                ServerResponse.SetFieldErrorMessage("max", CustomLanguageValidator.ErrorMessageKey.ERROR_GREATER_ZERO, this.ViewData);
+                ServerResponse.SetFieldErrorMessage("max", "Min must be greater than zero", this.ViewData);
                 max = 9999999;
             }
             if (max == 0)
@@ -85,13 +85,13 @@ namespace MedicalStore.Controllers
             }
             if (min < 0)
             {
-                ServerResponse.SetFieldErrorMessage("min", CustomLanguageValidator.ErrorMessageKey.ERROR_GREATER_ZERO, this.ViewData);
+                ServerResponse.SetFieldErrorMessage("min", "Min must be greater than zero", this.ViewData);
                 min = 0;
             }
 
             if (min > max)
             {
-                ServerResponse.SetErrorMessage(CustomLanguageValidator.ErrorMessageKey.ERROR_MIN_GREATER_MAX, this.ViewData);
+                ServerResponse.SetErrorMessage("Max must be greater than min", this.ViewData);
             }
             this.ViewData["products"] = products;
             this.ViewData["total"] = count;

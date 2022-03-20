@@ -63,7 +63,6 @@ namespace MedicalStore.Controllers
                 Secure = true
 
             });
-            Console.WriteLine("--------------");
             res.setMessage("login success");
 
             return new ObjectResult(res.getResponse());
@@ -85,7 +84,7 @@ namespace MedicalStore.Controllers
             var isExistUser = this.UserService.GetUserByUsername(body.Username);
             if (isExistUser != null)
             {
-                res.setErrorMessage("is already exist", "username");
+                res.setErrorMessage("username is already exist");
                 return new BadRequestObjectResult(res.getResponse());
             }
 
@@ -124,7 +123,7 @@ namespace MedicalStore.Controllers
             var isExistUser = this.UserService.GetUserByUsername(body.Username);
             if (isExistUser != null)
             {
-                res.setErrorMessage("is already exist", "shop name");
+                res.setErrorMessage("username is already exist");
                 return new BadRequestObjectResult(res.getResponse());
             }
 

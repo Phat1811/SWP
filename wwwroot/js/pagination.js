@@ -2,7 +2,8 @@
 const pageChange = () => {
         const paginationSize = document.getElementById("pagination-size");
         const paginationBtn = document.getElementById("pagination-btn");
-
+        console.log(paginationSize);
+        console.log(paginationBtn);
         paginationSize?.addEventListener("change", function (_) {
                 var option = paginationSize.options[paginationSize.selectedIndex];
 
@@ -22,6 +23,7 @@ const pageChange = () => {
                 for (let index = 0; index < pageBtn.length; index++) {
                         const element = pageBtn[index];
                         element.addEventListener("click", function (_) {
+                                console.log("------------------Page")
                                 const pageIndexInput = document.getElementById("pageIndex");
 
                                 const value = element.getAttribute("data-index");
@@ -34,3 +36,4 @@ const pageChange = () => {
                 }
         }
 };
+pageChange();

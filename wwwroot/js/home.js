@@ -5,8 +5,6 @@ const btnList = store?.querySelectorAll('button[type="button"]');
 let total = 0;
 
 const update = (data) => {
-        console.log(store);
-        console.log(btnList);
         const wrapper = document.createElement("div");
         total = 0;
         data.forEach((item) => {

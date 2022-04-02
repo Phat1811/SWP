@@ -85,6 +85,11 @@ namespace MedicalStore.Controllers
                 orderItem.Profit = (orderItem.SalePrice - product.OriginalPrice) * cartItem.Value.Quantity;
                 orderItem.ProductId = product.ProductId;
                 product.Quantity -= orderItem.Quantity;
+                if(product.Quantity <=0)
+                {
+                    product.Status = ProductStatus.INACTIVE;
+                    ProductService.UpdateProductHandler(product);
+                }
                 this.OrderService.CreateOrderItemHandler(orderItem);
 
             }

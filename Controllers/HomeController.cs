@@ -75,14 +75,6 @@ namespace MedicalStore.Controllers
             }
             this.ViewData["categories"] = new SelectList(categories);
             var (products, count) = this.ProductService.GetProducts(pageIndex, pageSize, min, max, name, categoryId, CategoryStatus.ACTIVE);
-            foreach (var product in products)
-            {
-                if (product.Quantity == 0)
-                {
-                    product.Status = ProductStatus.INACTIVE;
-                    ProductService.UpdateProductHandler(product);
-                }
-            }
             if (min < 0)
             {
                 ServerResponse.SetFieldErrorMessage("min", "Min must be greater than zero", this.ViewData);

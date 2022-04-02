@@ -13,6 +13,14 @@
 
     <div class="my-6 side-nav__devider"></div>
     <ul>
+        @if(user != null && (user.RoleId == "2" || user.RoleId == "0"))
+        {
+            <a href="@Routers.Product.Link" ><img src="~/images/logo.png"/></a>
+        }
+        else
+        {
+            <a href="@Routers.Home.Link" ><img src="~/images/logo.png"/></a>
+        }
         @if (user == null)
         {
             <li>

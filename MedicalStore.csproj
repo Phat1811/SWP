@@ -28,10 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\images\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="Views\Containers\Report\CreateReport.cshtml" />
     <None Include="Views\Containers\Report\Report.cshtml" />
     <None Include="Views\Containers\Report\ReportDetail.cshtml" />

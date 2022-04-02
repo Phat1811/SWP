@@ -8,7 +8,7 @@ banForm?.addEventListener("submit", function (event) {
         };
 
         http.post('/api/user/banUnban', input)
-            .then(() => window.location.assign('/user/manage'))
+            .then(() => window.location.assign('/'))
             .catch(function (error) {
                 console.log(error);
             });
